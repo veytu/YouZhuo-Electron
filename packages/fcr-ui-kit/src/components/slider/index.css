@@ -1,0 +1,100 @@
+.fcr-vertical-slider {
+  height: 100%;
+  position: relative;
+  display: inline-block;
+}
+
+.fcr-vertical-slider .rc-slider-vertical {
+  padding: 0;
+  width: 10px;
+}
+
+.fcr-vertical-slider .rc-slider-vertical .rc-slider-handle {
+  height: 16px;
+  width: 16px;
+  margin-left: -3px;
+  box-shadow: none;
+  border-color: theme(colors.white);
+}
+
+.fcr-vertical-slider .rc-slider-vertical .rc-slider-rail {
+  background: linear-gradient(0deg, #00000066, #00000066),
+    linear-gradient(0deg, #4a4c5f66, #4a4c5f66);
+  width: 10px;
+}
+
+.fcr-vertical-slider .rc-slider-vertical .rc-slider-track {
+  left: 0;
+  width: 10px;
+  background: theme(colors.brand.6);
+}
+
+.fcr-vertical-slider .rc-slider-vertical .rc-slider-handle::after {
+  @apply fcr-rounded-full;
+  content: '';
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  opacity: 0;
+  left: -7px;
+  top: -7px;
+  transition: all 0.3s;
+  background: theme(colors.white);
+}
+
+.fcr-vertical-slider .rc-slider-handle:hover::after {
+  opacity: 0.4;
+}
+
+.fcr-horizontal-slider {
+  width: 100%;
+  position: relative;
+  display: inline-block;
+}
+
+.fcr-horizontal-slider .rc-slider {
+  padding: 0;
+  height: 8px;
+}
+
+.fcr-horizontal-slider .rc-slider .rc-slider-handle {
+  height: 24px;
+  width: 24px;
+  margin-top: -7px;
+  box-shadow: none;
+  transform: unset !important;
+  border-color: theme(colors.white);
+}
+
+.fcr-horizontal-slider .rc-slider .rc-slider-handle::after {
+  @apply fcr-bg-brand-6 fcr-rounded-full;
+  content: '';
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.fcr-horizontal-slider .rc-slider .rc-slider-rail {
+  height: 8px;
+  width: calc(100% + 24px);
+}
+
+.fcr-horizontal-slider .rc-slider .rc-slider-track {
+  left: 0;
+  height: 8px;
+  background: theme(colors.brand.6);
+}
+
+.fcr-horizontal-slider .rc-slider-tooltip-inner {
+  @apply fcr-bg-1;
+  border-width: 1;
+  border-style: 1;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.fcr-horizontal-slider .rc-slider-tooltip-placement-top .rc-slider-tooltip-arrow {
+  border-top-color: theme(colors.block-1);
+}

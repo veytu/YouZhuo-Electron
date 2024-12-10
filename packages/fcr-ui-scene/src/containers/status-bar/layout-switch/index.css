@@ -1,0 +1,81 @@
+.fcr-status-bar-layout:hover .fcr-status-bar-layout-dropdown {
+  transform: translateY(2px);
+  transition: all 0.2s;
+}
+.fcr-layout-switch {
+  max-width: 328px;
+  padding: 10px 19px 18px;
+}
+.fcr-layout-switch-speaker-view {
+  padding-bottom: 14px;
+}
+.fcr-layout-switch-title {
+  @apply fcr-font-title fcr-text-1;
+  font-size: 14px;
+  line-height: 30px;
+}
+.fcr-layout-switch-card {
+  @apply fcr-rounded-12 fcr-bg-4;
+  width: 130px;
+  height: 114px;
+  position: relative;
+  padding: 8px;
+  padding-top: 0;
+}
+.fcr-layout-switch-card::after {
+  @apply fcr-border-brand-5 fcr-rounded-16;
+  content: '';
+  width: 140px;
+  height: 124px;
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  border-width: 3px;
+  border-style: solid;
+  opacity: 0;
+}
+.fcr-layout-switch-card:hover.fcr-layout-switch-card:not(.fcr-layout-switch-card-disabled)::after {
+  opacity: 1;
+}
+.fcr-layout-switch-card-active {
+  @apply fcr-bg-brand-6;
+}
+.fcr-layout-switch-card-disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.fcr-layout-switch-view-wrap {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-top: 6px;
+}
+.fcr-layout-switch-card-icon {
+  @apply fcr-bg-2 fcr-rounded-8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 116px;
+  height: 72px;
+}
+.fcr-layout-switch-card-checkbox {
+  padding-top: 7px;
+  padding-left: 4px;
+  padding-bottom: 7px;
+}
+.fcr-layout-switch-card-checkbox .fcr-radio {
+  width: 100%;
+}
+.fcr-layout-switch-card-checkbox .fcr-radio-label {
+  padding-left: 2px;
+  padding-right: 8px;
+  flex: 1;
+  text-align: center;
+}
+.fcr-layout-switch-desc {
+  @apply fcr-text-3;
+  font-size: 12px;
+  line-height: 14px;
+  padding-bottom: 6px;
+}

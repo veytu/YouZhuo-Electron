@@ -1,0 +1,36 @@
+.classtalk-enter-wrapper{
+    background-image: url(@app/assets/classtalk/bg.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+.classtalk-content{
+    margin-top: 2rem;
+    height: 58vh;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap:1.5rem;
+}
+
+
+.regular-class{
+    border-radius: 10px;
+    box-shadow: 0 0 10px #8fb5d8
+}
+
+.inter-item{
+    box-shadow: 0 0 5px #ccc;
+    margin: 15px 20px;
+    height: 5rem;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr;
+}
+
+.fcr-text-base {
+    font-size: 1rem; /* 或根据需要定义 */
+}
+
+.fcr-text-sm {
+    font-size: 0.875rem; /* 比较小的字体尺寸 */
+}

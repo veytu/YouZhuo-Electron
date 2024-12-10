@@ -1,0 +1,69 @@
+.fcr-tabs {
+  @apply fcr-bg-2 fcr-text-2 fcr-rounded-8;
+  padding: 4px;
+  font-size: 16px;
+  line-height: 1;
+  display: inline-block;
+  cursor: pointer;
+  --fcr-tabs__nav-item__width: 110px;
+}
+
+.fcr-simple-tabs {
+  font-size: 14px;
+  @apply fcr-bg-transparent;
+}
+.fcr-simple-tabs .fcr-tabs__nav-indicator {
+  @apply fcr-bg-transparent;
+}
+
+.fcr-tabs__nav-list {
+  display: flex;
+  position: relative;
+}
+
+.fcr-tabs__nav-item {
+  padding: 4px 0;
+  width: var(--fcr-tabs__nav-item__width);
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  transition: 0.3s all;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.fcr-tabs__nav-item.fcr-tabs__nav-item--active {
+  @apply fcr-text-1;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.fcr-tabs__nav-indicator {
+  @apply fcr-bg-brand fcr-text-1 fcr-rounded-4;
+  position: absolute;
+  height: 100%;
+  transition: 0.3s all;
+}
+
+.fcr-tabs.fcr-fashion-tabs {
+  @apply fcr-border-1 fcr-rounded-none;
+  font-size: 14px;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  background: unset;
+}
+
+.fcr-fashion-tabs .fcr-tabs__nav-item {
+  text-align: left;
+  padding: 0 10px 0 0;
+  width: unset;
+}
+.fcr-fashion-tabs .fcr-tabs__nav-item:not(:first-child) {
+  padding-left: 40px;
+}
+
+.fcr-fashion-tabs__nav-indicator {
+  position: absolute;
+  height: 100%;
+  transition: 0.3s all;
+}

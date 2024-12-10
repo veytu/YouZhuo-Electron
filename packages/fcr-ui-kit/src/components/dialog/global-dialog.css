@@ -1,0 +1,55 @@
+.fcr-global-dialog .fcr-dialog-body {
+  padding: 0;
+}
+.fcr-global-dialog-wrapper {
+  width: 490px;
+  height: 530px;
+  display: flex;
+  flex-direction: column;
+}
+.fcr-global-dialog-header {
+  @apply fcr-bg-brand-6 fcr-rounded-16 fcr-border-brand-6 fcr-font-title;
+  height: 32px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-style: solid;
+  border-width: 1px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  color: theme(colors.white);
+}
+
+.fcr-global-dialog-body {
+  @apply fcr-bg-2 fcr-rounded-16 fcr-border-1;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-style: solid;
+  border-width: 1px;
+  border-top: none;
+  flex: 1;
+  overflow: hidden;
+}
+
+.fcr-global-dialog-header-close {
+  @apply fcr-rounded-full fcr-bg-white fcr-border-transparent;
+  position: absolute;
+  right: -11px;
+  top: -11px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-width: 3px;
+  border-style: solid;
+  box-sizing: content-box;
+  background-clip: padding-box;
+  color: theme(colors.black);
+}
+.fcr-global-dialog-header-close:hover {
+  @apply fcr-border-brand-6;
+}

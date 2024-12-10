@@ -1,0 +1,212 @@
+.fcr-device-settings__dialog .fcr-dialog-body {
+  padding: 0;
+}
+.fcr-device-settings__dialog-wrapper {
+  width: 490px;
+  height: 530px;
+  display: flex;
+  flex-direction: column;
+}
+.fcr-device-settings__dialog-title {
+  padding-left: 20px;
+}
+.fcr-device-settings__header {
+  @apply fcr-bg-brand-6 fcr-rounded-16 fcr-border-brand-6 fcr-font-title;
+  height: 32px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-style: solid;
+  border-width: 1px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  font-size: 14px;
+  flex-shrink: 0;
+  color: theme(colors.white);
+}
+
+.fcr-device-settings__body {
+  @apply fcr-bg-2 fcr-rounded-16 fcr-border-1;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-style: solid;
+  border-width: 1px;
+  border-top: none;
+  flex: 1;
+  overflow: hidden;
+}
+
+.fcr-device-settings__close {
+  @apply fcr-rounded-full fcr-bg-white fcr-border-transparent;
+  position: absolute;
+  right: -11px;
+  top: -11px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-width: 3px;
+  border-style: solid;
+  box-sizing: content-box;
+  background-clip: padding-box;
+  color: theme(colors.black);
+}
+.fcr-device-settings__close:hover {
+  @apply fcr-border-brand-6;
+}
+.fcr-device-settings {
+  display: flex;
+  height: 100%;
+}
+
+.fcr-device-settings__nav {
+  @apply fcr-border-1;
+  border-style: solid;
+  border-right-width: 1px;
+  width: 100px;
+  font-size: 14px;
+  flex-shrink: 0;
+  padding: 10px 0;
+  color: theme(colors.white);
+}
+
+.fcr-device-settings__nav li {
+  display: flex;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+li.fcr-device-settings__nav-list-item--active {
+  @apply fcr-bg-brand-6;
+}
+
+.fcr-device-settings__surrounding--green,
+.fcr-device-settings__surrounding--purple {
+  @apply fcr-rounded-6;
+  width: 22px;
+  height: 22px;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fcr-device-settings__surrounding--green {
+  background: #83bc53;
+}
+.fcr-device-settings__surrounding--purple {
+  background: #7c79ff;
+}
+
+.fcr-device-settings__preview {
+  padding: 0 15px 0;
+  flex-grow: 1;
+  display: flex;
+  overflow: hidden;
+}
+.fcr-device-settings__video {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.fcr-device-settings__video-preview {
+  @apply fcr-rounded-8;
+  width: 360px;
+  height: 200px;
+  position: relative;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.fcr-device-settings__preview .fcr-video-player-wrapper {
+  @apply fcr-rounded-8;
+  overflow: hidden;
+}
+.fcr-device-settings__video-preview__device-select {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 240px;
+  z-index: 20;
+}
+.fcr-device-settings__video-preview__device-select .fcr-dropdown {
+  @apply fcr-bg-8-a90 fcr-border-1-a50;
+}
+.fcr-device-settings__video-preview-title {
+  @apply fcr-font-title;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 36px;
+  font-size: 14px;
+  flex-shrink: 0;
+  color: theme(colors.white);
+}
+.fcr-device-settings__video-preview-title .fcr-clickabel-icon {
+  @apply fcr-rounded-6 fcr-bg-4;
+  width: 24px;
+  height: 24px;
+}
+.fcr-device-settings__video-preview__sidebar {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 16px 10px 0;
+}
+
+.fcr-device-settings__video-preview .fcr-video-player {
+  overflow: hidden;
+}
+.fcr-device-settings__video-tabs {
+  flex: 1;
+}
+.fcr-device-settings__video-tabs .fcr-tabs {
+  width: 100%;
+}
+
+.fcr-device-settings__microphone,
+.fcr-device-settings__speaker {
+  @apply fcr-text-1 fcr-font-title fcr-rounded-8;
+  padding: 0 10px 20px;
+}
+
+.fcr-device-settings__microphone {
+  @apply fcr-bg-4;
+  margin-bottom: 15px;
+}
+
+.fcr-device-settings__speaker {
+  @apply fcr-bg-4;
+}
+.fcr-device-settings__speaker .fcr-checkbox-label {
+  font-size: 12px;
+}
+.fcr-device-settings__label {
+  padding-left: 12px;
+  line-height: 36px;
+  font-size: 13px;
+}
+
+.fcr-pretest__settings__volume {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0 20px;
+}
+.fcr-device-settings__microphone .fcr-pretest__settings__volume {
+  margin-bottom: 0;
+}
+.fcr-device-settings__audio {
+  padding-top: 15px;
+  overflow: hidden;
+  width: 100%;
+}

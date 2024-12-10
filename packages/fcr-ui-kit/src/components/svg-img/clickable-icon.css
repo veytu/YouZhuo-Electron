@@ -1,0 +1,72 @@
+.fcr-clickabel-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid;
+  outline: none;
+  position: relative;
+}
+.fcr-clickable-icon-large {
+  @apply fcr-rounded-12;
+  width: 40px;
+  height: 40px;
+}
+.fcr-clickable-icon-small {
+  @apply fcr-rounded-10;
+  width: 30px;
+  height: 30px;
+}
+.fcr-clickable-icon-mini {
+  @apply fcr-rounded-6;
+  width: 24px;
+  height: 24px;
+}
+.fcr-clickabel-icon:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.fcr-clickabel-icon:active,
+.fcr-clickabel-icon:focus {
+  outline: none;
+}
+
+.fcr-clickabel-icon {
+  @apply fcr-bg-brand-6 fcr-border-brand-6;
+  --effect-color: theme(colors.brand.4);
+}
+.fcr-clickabel-icon:not(:disabled):active {
+  @apply fcr-bg-brand-8 fcr-border-brand-8;
+}
+
+.fcr-pretest-device-icon-active {
+  @apply fcr-bg-purple-6 fcr-border-purple-6;
+  --effect-color: theme(colors.purple.4);
+}
+.fcr-pretest-device-icon-active:not(.fcr-pretest-device-icon-disabled):active {
+  @apply fcr-bg-purple-8 fcr-border-purple-8;
+}
+
+.fcr-pretest-device-icon-inactive {
+  @apply fcr-bg-red-6 fcr-border-red-6;
+  --effect-color: theme(colors.red.4);
+}
+.fcr-pretest-device-icon-inactive:not(.fcr-pretest-device-icon-disabled):active {
+  @apply fcr-bg-red-8 fcr-border-red-8;
+}
+
+.fcr-pretest-device-icon-idle {
+  @apply fcr-bg-transparent fcr-border-1;
+  --effect-color: theme(colors.block-6);
+}
+.fcr-pretest-device-icon-idle:not(.fcr-pretest-device-icon-disabled):active {
+  @apply fcr-bg-transparent fcr-border-1;
+}
+
+.fcr-clickabel-icon.fcr-pretest-device-icon-disabled,
+.fcr-clickabel-icon.fcr-pretest-device-icon-disabled:active {
+  @apply fcr-bg-transparent fcr-border-1;
+  cursor: not-allowed;
+  opacity: 0.4;
+}

@@ -1,0 +1,78 @@
+.fcr-status-bar-widget-slot {
+  display: flex;
+  gap: 5px;
+}
+.fcr-minimized-widget-icon {
+  @apply fcr-bg-2  fcr-rounded-4 fcr-shadow-line-1-.5;
+  height: 28px;
+  width: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.fcr-minimized-widget-icon:hover {
+  @apply fcr-bg-brand;
+}
+.fcr-minimized-widget-item {
+  @apply fcr-rounded-4  fcr-text-1;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 0 6px;
+}
+
+.fcr-minimized-widget-item:hover {
+  @apply fcr-bg-brand;
+}
+.fcr-minimized-widget-item div {
+  flex: 1;
+  padding: 8px 0;
+}
+.fcr-minimized-widget-item span {
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-height: 15px;
+}
+.fcr-minimized-widget-container {
+  padding: 0 10px 20px;
+}
+.fcr-minimized-widget-icon.fcr-minimized-widget-icon-collapsed {
+  @apply fcr-text-1;
+  padding: 0 8px 0 2px;
+  font-size: 14px;
+  gap: 3px;
+  width: auto;
+}
+.fcr-minimized-widget-container-title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 14px;
+  padding: 16px 16px 13px 16px;
+}
+
+.fcr-minimized-widget-countdown {
+  @apply fcr-text-1;
+  width: auto;
+  display: flex;
+  font-size: 12px;
+  font-weight: 700;
+  padding-right: 12px;
+  padding-left: 4px;
+}
+.fcr-minimized-widget-countdown-danger {
+  @apply fcr-bg-red-6;
+}
+.fcr-minimized-widget-countdown-danger:hover {
+  @apply fcr-bg-red-7;
+}

@@ -1,0 +1,17 @@
+.fcr-double-deck-popover-overlay {
+  min-height: 40px;
+  border-radius: inherit;
+}
+.fcr-double-deck-popover-top {
+  @apply fcr-bg-4;
+  width: 100%;
+  min-height: 20px;
+  border-radius: inherit;
+}
+.fcr-popover-trigger-opened {
+  @apply fcr-bg-brand-6;
+}
+
+.fcr-popover .fcr-tooltip-inner {
+  backdrop-filter: blur(25px);
+}

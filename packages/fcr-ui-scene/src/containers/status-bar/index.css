@@ -1,0 +1,75 @@
+.fcr-status-bar {
+  @apply fcr-bg-2;
+  width: 100%;
+  height: var(--fcr-status-bar-height);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  transition: all 0.2s;
+  pointer-events: all;
+  position: relative;
+  --fcr-status-bar-item-height: 28px;
+}
+.fcr-status-bar-hide {
+  transform: translateY(calc(-1 * var(--fcr-status-bar-height)));
+}
+.fcr-status-bar-left,
+.fcr-status-bar-right {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+.fcr-status-bar-logo img {
+  height: var(--fcr-status-bar-item-height);
+}
+.fcr-status-bar-item-wrapper {
+  @apply fcr-bg-2 fcr-shadow-line-1-.5 fcr-rounded-4;
+  height: var(--fcr-status-bar-item-height);
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+.fcr-status-bar-layout:hover {
+  @apply fcr-bg-brand-6;
+}
+
+.fcr-status-bar-layout {
+  height: var(--fcr-status-bar-item-height);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 4px;
+}
+.fcr-status-bar-layout > span {
+  @apply fcr-text-1;
+  font-size: 12px;
+  font-weight: 300;
+}
+.fcr-status-bar-collapse-button {
+  @apply fcr-rounded-8 fcr-border-1;
+  width: 77px;
+  height: 24px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-color: transparent;
+  border-width: 1px;
+  border-style: solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  cursor: pointer;
+}
+.fcr-status-bar-collapse-button svg {
+  transform: rotate(180deg);
+}

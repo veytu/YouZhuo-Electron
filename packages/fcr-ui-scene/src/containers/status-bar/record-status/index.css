@@ -1,0 +1,26 @@
+.fcr-status-bar-record {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.fcr-status-bar-record-status {
+  display: flex;
+  flex-direction: row;
+  padding-left: 4px;
+  padding-right: 8px;
+}
+.fcr-status-bar-record-status > span {
+  @apply fcr-text-1;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 20px;
+}
+.fcr-status-bar-record-action {
+  height: 32px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+}
+.fcr-status-bar-record-action:hover {
+  @apply fcr-bg-brand-6;
+}

@@ -1,0 +1,242 @@
+/** list-on-top **/
+.fcr-layout-content-list-on-top {
+  @apply fcr-bg-1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.fcr-layout-content-main-view {
+  position: relative;
+  user-select: none;
+}
+.fcr-layout-content-list-on-top .fcr-layout-content-main-view {
+  flex: 1;
+  overflow: hidden;
+}
+.fcr-layout-content-list-view {
+  @apply fcr-bg-3;
+  position: relative;
+  backdrop-filter: blur(6px);
+  z-index: 0;
+}
+.fcr-layout-content-list-on-top .fcr-layout-content-list-view {
+  width: 100%;
+  height: calc(135px + var(--fcr-status-bar-height));
+  padding-top: var(--fcr-status-bar-height);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.fcr-layout-content-list-on-top .fcr-layout-content-list-view-without-status-bar {
+  height: 135px;
+  padding-top: 0;
+}
+.fcr-layout-content-list-view.fcr-layout-content-list-view-hide {
+  height: 0;
+  padding: 0;
+}
+/** list-on-rigth **/
+.fcr-layout-content-list-on-right {
+  @apply fcr-bg-1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  position: relative;
+  gap: 2px;
+}
+.fcr-layout-content-list-on-right .fcr-layout-content-main-view {
+  flex: 1;
+  overflow: hidden;
+}
+.fcr-layout-content-list-on-right .fcr-layout-content-list-view {
+  width: 210px;
+  padding-top: var(--fcr-status-bar-height);
+  padding-bottom: var(--fcr-action-bar-height);
+  display: flex;
+  height: 100%;
+}
+/** grid **/
+
+.fcr-layout-content-grid {
+  @apply fcr-bg-1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.fcr-layout-content-grid .fcr-layout-content-main-view {
+  @apply fcr-bg-1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.fcr-layout-content-video-list {
+  flex: 1;
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.fcr-layout-content-video-list-row {
+  flex-direction: row;
+  align-items: flex-end;
+  padding-bottom: 2px;
+}
+
+.fcr-layout-content-video-list-col {
+  flex-direction: column;
+  align-items: center;
+}
+
+.fcr-gallery-view-container {
+  width: 100%;
+  height: 100%;
+  padding: calc(20px + var(--fcr-status-bar-height)) 20px
+    calc((20px + var(--fcr-action-bar-height)));
+  position: relative;
+}
+.fcr-gallery-view-stream-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.fcr-gallery-view-stream-wrapper > div {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.fcr-gallery-view-stream-wrapper-row {
+  width: 100%;
+  display: flex;
+  gap: 5px;
+}
+.fcr-gallery-view-pager {
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.fcr-layout-board-view {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: all 0.2s;
+  z-index: 10;
+}
+.fcr-layout-content-list-view-collapse-button-row {
+  height: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.fcr-layout-content-list-view-collapse-button-row svg {
+  transform: rotate(-90deg);
+}
+.fcr-layout-content-list-view-collapse-button-row:hover {
+  @apply fcr-bg-1;
+}
+.fcr-layout-content-list-view-collapse-button-col {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  /* transform: translateX(-210px); */
+  right: 210px;
+  margin: auto 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.fcr-layout-content-list-view-collapse-button-col .fcr-layout-content-list-view-collapse-button {
+  @apply fcr-bg-2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 60px;
+
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  background: #35374180;
+  opacity: 0;
+}
+.fcr-layout-content-list-view-collapse-button-col.fcr-layout-content-list-view-collapse-button-collapsed {
+  /* transform: translateX(0); */
+  right: 0;
+}
+.fcr-layout-content-list-view-collapse-button-col svg {
+  position: relative;
+  left: 2px;
+}
+.fcr-layout-content-list-view-collapse-button-col.fcr-layout-content-list-view-collapse-button-collapsed
+  svg {
+  transform: rotate(180deg);
+}
+/** listview transition **/
+.fcr-layout-content-list-on-top .fcr-layout-content-list-view-enter-active,
+.fcr-layout-content-list-on-top .fcr-layout-content-list-view-exit-active {
+  transition: height 0.2s;
+}
+.fcr-layout-content-list-on-right .fcr-layout-content-list-view-enter-active,
+.fcr-layout-content-list-on-right .fcr-layout-content-list-view-exit-active {
+  transition: width 0.2s;
+}
+.fcr-layout-content-list-on-top .fcr-layout-content-list-view-enter,
+.fcr-layout-content-list-on-top .fcr-layout-content-list-view-exit-active,
+.fcr-layout-content-list-on-top .fcr-layout-content-list-view-exit-done {
+  height: 0;
+  padding: 0;
+}
+.fcr-layout-content-list-on-top .fcr-layout-content-list-view-enter-active,
+.fcr-layout-content-list-on-top .fcr-layout-content-list-view-enter-done {
+  height: calc(135px + var(--fcr-status-bar-height));
+  padding-top: var(--fcr-status-bar-height);
+}
+.fcr-layout-content-list-on-right .fcr-layout-content-list-view-enter,
+.fcr-layout-content-list-on-right .fcr-layout-content-list-view-exit-active,
+.fcr-layout-content-list-on-right .fcr-layout-content-list-view-exit-done {
+  width: 0;
+  padding: 0;
+}
+
+.fcr-layout-content-list-on-right .fcr-layout-content-list-view-enter-active,
+.fcr-layout-content-list-on-right .fcr-layout-content-list-view-enter-done {
+  width: 210px;
+}
+.fcr-layout-board-container {
+  /* transition: all 0.2s; */
+  width: 100%;
+  height: 100%;
+}
+.fcr-layout-board-viewport {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fcr-layout-board-container-with-action-bar {
+  padding-bottom: var(--fcr-action-bar-height);
+}
+.fcr-layout-board-container-with-status-bar {
+  padding-top: var(--fcr-status-bar-height);
+}

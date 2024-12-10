@@ -1,0 +1,73 @@
+.fcr-checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  width: fit-content;
+}
+.fcr-checkbox-input-wrapper {
+  @apply fcr-border-1-a50 fcr-rounded-8;
+  width: 24px;
+  height: 24px;
+  border-width: 4px;
+  border-style: solid;
+  position: relative;
+}
+
+.fcr-checkbox-s .fcr-checkbox-input-wrapper {
+  width: 20px;
+  height: 20px;
+  border-width: 3px;
+}
+.fcr-checkbox-s .fcr-checkbox-input-wrapper > input {
+  width: 14px;
+  height: 14px;
+}
+.fcr-checkbox-s .fcr-checkbox-input-wrapper .fcr-checkbox-inner {
+  width: 14px;
+  height: 14px;
+}
+
+.fcr-checkbox-input-wrapper > input {
+  @apply fcr-rounded-8;
+  width: 16px;
+  height: 16px;
+  opacity: 0;
+}
+.fcr-checkbox-inner {
+  @apply fcr-rounded-4 fcr-bg-white;
+  width: 16px;
+  height: 16px;
+  position: absolute !important;
+  left: 0;
+  top: 0;
+  --effect-color: theme(colors.brand.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fcr-checkbox-inner svg:not(.fcr-checkbox-input-indeterminate) {
+  display: none;
+}
+
+.fcr-checkbox-input-wrapper > input:checked ~ .fcr-checkbox-inner svg {
+  display: block;
+}
+.fcr-checkbox-label {
+  @apply fcr-text-2 fcr-font-regular;
+  font-size: 12px;
+  line-height: 12px;
+  padding: 0 7px;
+  user-select: none;
+}
+
+.fcr-checkbox-brand .fcr-checkbox-input-wrapper > input:checked ~ .fcr-checkbox-inner,
+.fcr-checkbox-brand .fcr-checkbox-input-wrapper .fcr-checkbox-inner-indeterminate {
+  @apply fcr-bg-brand-6;
+}
+
+.fcr-checkbox-input-wrapper > input:active ~ .fcr-btn-click-effect::after {
+  box-shadow: none;
+  opacity: 0.5;
+  transition: 0s;
+}

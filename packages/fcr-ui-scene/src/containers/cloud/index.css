@@ -1,0 +1,317 @@
+.fcr-cloud-personal-tab-content,
+.fcr-cloud-public-tab-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+.fcr-cloud-personal-tab-search,
+.fcr-cloud-public-tab-search {
+  padding: 8px 15px 10px;
+  height: 50px;
+}
+.fcr-cloud-personal-tab-table,
+.fcr-cloud-public-tab-table {
+  flex: 1;
+}
+.fcr-cloud-personal-tab-footer,
+.fcr-cloud-public-tab-footer {
+  @apply fcr-bg-2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  height: 50px;
+  position: relative;
+}
+
+.fcr-cloud-personal-tab-footer-upload {
+  padding: 16px 10px 13px;
+  position: relative;
+}
+.fcr-cloud-personal-tab-footer-upload-title {
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+  line-height: 17px;
+  padding-bottom: 23px;
+}
+.fcr-cloud-personal-tab-footer-upload-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.fcr-cloud-personal-tab-footer-upload-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.fcr-cloud-personal-tab-footer-upload-item > div {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 12px;
+}
+.fcr-cloud-personal-tab-footer-upload-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 12px;
+}
+
+.fcr-cloud-public-tab-table-filename,
+.fcr-cloud-personal-tab-table-filename {
+  display: flex;
+  align-items: center;
+}
+.fcr-cloud-personal-tab-table-filename svg {
+  flex-shrink: 0;
+}
+.fcr-cloud-public-tab-table-filename span,
+.fcr-cloud-personal-tab-table-filename span {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fcr-cloud-public-tab-table-header-filename {
+  padding-left: 20px;
+}
+.fcr-cloud-personal-tab-table-header-filename {
+  padding-left: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.fcr-cloud-public-tab-table-filename,
+.fcr-cloud-personal-tab-table-filename {
+  padding-left: 18px;
+  padding-right: 20px;
+  cursor: pointer;
+}
+.fcr-cloud-personal-tab-table-filename .fcr-checkbox {
+  margin-right: 3px;
+}
+.fcr-cloud-personal-tab-table-filename {
+  padding-left: 15px;
+}
+.fcr-cloud-public-tab-table-header-update-time,
+.fcr-cloud-public-tab-table-update-time,
+.fcr-cloud-personal-tab-table-header-update-time,
+.fcr-cloud-personal-tab-table-update-time {
+  padding-right: 20px;
+}
+
+.fcr-cloud-personal-tab-float-btn {
+  @apply fcr-rounded-full fcr-bg-2 fcr-shadow-line-1-.5;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  cursor: pointer;
+}
+.fcr-cloud-personal-tab-float-btn::after {
+  @apply fcr-rounded-full;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+}
+.fcr-cloud-personal-tab-float-btn:hover {
+  @apply fcr-bg-brand-6;
+}
+.fcr-cloud-personal-tab-refresh {
+  right: 17px;
+  bottom: 66px;
+}
+.fcr-cloud-personal-tab-open-upload {
+  right: 17px;
+  bottom: 113px;
+}
+.fcr-cloud-personal-tab-upload-list {
+  position: absolute;
+  bottom: -270px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  height: 270px;
+  flex-direction: column;
+  z-index: 1;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+}
+.fcr-cloud-personal-tab-upload-list-header {
+  @apply fcr-text-1 fcr-rounded-12 fcr-bg-brand-6;
+
+  height: 36px;
+  line-height: 36px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  position: relative;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.fcr-cloud-personal-tab-upload-list-header-collapsed {
+  @apply fcr-rounded-full fcr-bg-white;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fcr-cloud-personal-tab-upload-list-content {
+  @apply fcr-bg-2;
+  flex: 1;
+  overflow: auto;
+}
+.fcr-cloud-personal-tab-upload-list-content::-webkit-scrollbar {
+  width: 0;
+}
+.fcr-cloud-personal-tab-upload-list-item {
+  display: flex;
+  height: 36px;
+  align-items: center;
+  padding: 0 16px;
+}
+.fcr-cloud-personal-tab-upload-list-item-filename {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+}
+.fcr-cloud-personal-tab-upload-list-item-filename span {
+  @apply fcr-text-1;
+  font-size: 12px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fcr-cloud-personal-tab-upload-list-item-size {
+  @apply fcr-text-1;
+  width: 60px;
+  font-size: 12px;
+  font-weight: 300;
+}
+.fcr-cloud-personal-tab-upload-list-item-status {
+  @apply fcr-text-1;
+  width: 150px;
+  font-weight: 300;
+  font-size: 12px;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+}
+.fcr-cloud-personal-tab-upload-list-item-status-failed {
+  @apply fcr-text-red-6;
+  padding-right: 10px;
+}
+.fcr-cloud-personal-tab-table-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.fcr-cloud-personal-tab-table-row-actions .fcr-button {
+  @apply fcr-shadow-line-1-.3-white;
+  background: transparent;
+}
+.fcr-cloud-personal-tab-table-row-actions .fcr-button,
+.fcr-cloud-personal-tab-table-row-rename .fcr-clickabel-icon {
+  flex-shrink: 0;
+}
+.fcr-cloud-personal-tab-table-row-rename .fcr-clickabel-icon {
+  @apply fcr-bg-purple-6 fcr-border-purple-6;
+  --effect-color: theme(colors.purple.4);
+}
+.fcr-cloud-personal-tab-table-row-rename .fcr-clickabel-icon:hover {
+  @apply fcr-bg-purple-7 fcr-border-purple-7;
+}
+.fcr-cloud-personal-tab-table-row-rename .fcr-clickabel-icon:active {
+  @apply fcr-bg-purple-8 fcr-border-purple-8;
+}
+
+.fcr-cloud-personal-tab-table-row-rename {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.fcr-cloud-personal-tab-table-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding-top: 10px;
+}
+
+.fcr-cloud-personal-tab-table-convert-failed {
+  color: rgba(251, 88, 78, 1) !important;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-end;
+  padding-right: 20px
+}
+
+.fcr-cloud-personal-tab-table-convert-progress {
+  @apply fcr-text-3;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 12px;
+  justify-content: flex-end;
+  padding-right: 12px;
+}
+.fcr-cloud-personal-tab-table-convert-progress svg {
+  animation: loadingCircle 1s infinite linear;
+  margin-right: 5px;
+}
+@keyframes loadingCircle {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.fcr-cloud-personal-tab-footer-upload-close {
+  @apply fcr-rounded-full fcr-bg-3;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 9px;
+  top: 9px;
+  z-index: 1;
+}
+.fcr-cloud-personal-tab-footer-upload-close:hover {
+  @apply fcr-bg-brand-6;
+}
+
+.fcr-cloud-personal-tab-upload-list-transition-enter {
+  transform: translate3d(0, 0, 0);
+}
+.fcr-cloud-personal-tab-upload-list-transition-enter-active {
+  transform: translate3d(0, -270px, 0);
+  transition: all 0.5s;
+}
+.fcr-cloud-personal-tab-upload-list-transition-enter-done {
+  transform: translate3d(0, -270px, 0);
+}
+.fcr-cloud-personal-tab-upload-list-transition-exit {
+  transform: translate3d(0, -270px, 0);
+}
+.fcr-cloud-personal-tab-upload-list-transition-exit-active {
+  transform: translate3d(0, 0, 0);
+  transition: all 0.5s;
+}
+.fcr-cloud-personal-tab-upload-list-transition-exit-done {
+  transform: translate3d(0, 0, 0);
+}

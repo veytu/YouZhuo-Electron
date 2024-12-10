@@ -1,0 +1,27 @@
+:root {
+  --fcr-status-bar-height: 36px;
+  --fcr-action-bar-height: 58px;
+  --fcr-top-list-view-height: 135px;
+  --fcr-right-list-view-width: 210px;
+}
+
+.fcr-classroom-viewport {
+  width: 100%;
+  height: 100%;
+  min-width: 826px;
+  min-height: 655px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  /* transition: all 0.2s; */
+  overflow: hidden;
+}
+.fcr-bg-background {
+  background: linear-gradient(108.16deg, #3c495f 0%, #353740 97.33%) !important;
+}
+#app {
+  background: linear-gradient(108.16deg, #3c495f 0%, #353740 97.33%) !important;
+}

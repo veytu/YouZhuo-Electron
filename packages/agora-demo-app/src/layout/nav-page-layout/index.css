@@ -1,0 +1,44 @@
+.nav-page-layout {
+  font-family: 'Montserrat Roboto';
+  position: relative;
+  height: 100%;
+  background-color: #fff;
+}
+
+.nav-page-layout > header {
+  @apply fcr-absolute fcr-top-0 fcr-left-0 fcr-z-10 fcr-w-full;
+  padding-top: 53px;
+  padding-bottom: 17px;
+  /* fcr- light-white trans90% */
+  background: rgba(255, 255, 255, 0.9);
+  /* fcr- card trans */
+  backdrop-filter: blur(50px);
+}
+
+.nav-page-layout > .content {
+  @apply fcr-h-full fcr-w-full;
+  padding: 0 114px;
+  position: relative;
+  overflow-y: auto;
+}
+
+.nav-page-layout > footer {
+  @apply fcr-absolute fcr-bottom-0 fcr-left-0 fcr-w-full fcr-pointer-events-none;
+  padding: 0 114px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 58.33%);
+  filter: drop-shadow(0px 4px 4px rgba(255, 255, 255, 0.25));
+}
+
+.header-blank::before {
+  content: '';
+  height: calc(40px + 53px + 17px);
+  width: 100%;
+  display: block;
+}
+
+.footer-blank::after {
+  content: '';
+  height: 128px;
+  width: 100%;
+  display: block;
+}

@@ -1,0 +1,113 @@
+.fcr-input-number {
+  @apply fcr-bg-8 fcr-border-1;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  border-width: 1px;
+  border-style: solid;
+  cursor: text;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-left: 12px;
+  overflow: hidden;
+}
+
+.fcr-input-number.fcr-input-number-l {
+  @apply fcr-rounded-12;
+  height: 48px;
+}
+.fcr-input-number.fcr-input-number-m {
+  @apply fcr-rounded-10;
+  height: 36px;
+}
+.fcr-input-number.fcr-input-number-s {
+  @apply fcr-rounded-8;
+  height: 24px;
+  padding-left: 6px;
+}
+
+.fcr-input-number input {
+  @apply fcr-text-1;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: 12px;
+  background: transparent;
+}
+
+.fcr-input input::placeholder {
+  @apply fcr-text-3;
+}
+
+.fcr-input-number:hover:not(.fcr-input-number--disabled) {
+  @apply fcr-border-notsb-inverse;
+}
+
+.fcr-input-number.fcr-input-number--focused:not(.fcr-input-number--disabled) {
+  @apply fcr-border-brand;
+  box-shadow: 0 0 0 3px theme(colors.brand-a50);
+}
+
+.fcr-input-number.fcr-input-number--disabled {
+  cursor: not-allowed;
+  opacity: 50%;
+}
+
+.fcr-input-number.fcr-input-number--disabled input {
+  @apply fcr-text-2;
+  cursor: not-allowed;
+}
+
+.fcr-input-number.fcr-input-number--disabled input::placeholder {
+  @apply fcr-text-2;
+}
+
+.fcr-input-number__button-group {
+  @apply fcr-border-1;
+  border-left-width: 1px;
+  border-left-style: solid;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+.fcr-input-number__divider {
+  @apply fcr-border-1;
+  border-top-width: 1px;
+  border-top-style: solid;
+}
+
+.fcr-input-number__button {
+  padding: 0 13px;
+  cursor: pointer;
+  height: 50%;
+  transition: all 0.3s;
+  flex-shrink: 1;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  color: theme(colors.icon-1);
+}
+
+.fcr-input-number__button:hover {
+  @apply fcr-text-brand-6;
+  height: 61%;
+}
+
+.fcr-input-number__button--disabled {
+  cursor: not-allowed;
+}
+
+.fcr-input-number:hover:not(.fcr-input-number--disabled) .fcr-input-number__button-group {
+  opacity: 1;
+}
+
+.fcr-input-number.fcr-input-number-s .fcr-input-number__divider,
+.fcr-input-number.fcr-input-number-s .fcr-input-number__button-group {
+  border: none;
+}
+.fcr-input-number.fcr-input-number-s .fcr-input-number__button {
+  padding: 0 4px;
+}

@@ -1,0 +1,64 @@
+.fcr-cloud-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  padding: 0 40px 0 21px;
+}
+.fcr-cloud-dialog-header-tips-wrapper {
+  @apply fcr-rounded-full;
+
+  padding: 2px;
+  border: 3px solid transparent;
+  cursor: pointer;
+}
+.fcr-cloud-dialog-header-tips-wrapper-active {
+  border: 3px solid #ffffff80;
+}
+
+.fcr-cloud-dialog-header-tips {
+  @apply fcr-rounded-full fcr-bg-1;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.fcr-cloud-dialog-header-tips-active {
+  @apply fcr-bg-notsb-inverse;
+}
+.fcr-cloud-dialog-header-tips-content {
+  padding: 25px 12px 20px;
+}
+.fcr-cloud-dialog-header-tips-content-desc {
+  @apply fcr-text-1 fcr-font-medium;
+  line-height: 130%;
+  font-size: 12px;
+}
+.fcr-cloud-dialog-header-tips-content-file-type-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  padding-top: 12px;
+}
+.fcr-cloud-dialog-header-tips-content-file-type-item {
+  display: flex;
+  gap: 10px;
+}
+.fcr-cloud-dialog-header-tips-content-file-type-item-desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.fcr-cloud-dialog-header-tips-content-file-type-item-desc-text,
+.fcr-cloud-dialog-header-tips-content-file-type-item-desc-format {
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+}
+.fcr-cloud-dialog-header-tips-content-file-type-item-desc-text {
+  font-weight: 600;
+}

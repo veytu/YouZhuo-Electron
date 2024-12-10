@@ -1,0 +1,81 @@
+.fcr-stream-window-student-interact-group {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.fcr-stream-window-student-interact-item {
+  @apply fcr-rounded-4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.fcr-stream-window-student-interact-item > span {
+  text-align: center;
+}
+.fcr-stream-window-student-interact-group-large
+  .fcr-stream-window-student-interact-item.fcr-stream-window-student-interact-item-remove-pin {
+  @apply fcr-text-1;
+  font-size: 12px;
+  font-weight: 400;
+  padding-right: 10px;
+  cursor: pointer;
+  pointer-events: all;
+}
+.fcr-stream-window-student-interact-group-large svg {
+  width: 20px;
+  height: 20px;
+}
+.fcr-stream-window-student-interact-group-large .fcr-stream-window-student-interact-item {
+  @apply fcr-rounded-4;
+  gap: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.fcr-stream-window-student-interact-group-large .fcr-stream-window-student-interact-item > span {
+  @apply fcr-text-white;
+  font-size: 14px;
+  line-height: 20px;
+  padding-right: 5px;
+  font-weight: 400;
+}
+.fcr-stream-window-student-interact-group-normal {
+  gap: 4px;
+}
+.fcr-stream-window-student-interact-group-normal svg {
+  width: 20px;
+  height: 20px;
+}
+.fcr-stream-window-student-interact-group-normal .fcr-stream-window-student-interact-item {
+  @apply fcr-rounded-4;
+  gap: 3px;
+  padding: 0 4px;
+}
+.fcr-stream-window-student-interact-group-normal .fcr-stream-window-student-interact-item > span {
+  @apply fcr-text-white;
+  font-size: 14px;
+  line-height: 14px;
+  padding-right: 9px;
+  font-weight: 400;
+}
+.fcr-stream-window-student-interact-group-small svg {
+  width: 24px;
+  height: 24px;
+}
+
+.fcr-stream-window-student-interact-group-small .fcr-stream-window-student-interact-item {
+  @apply fcr-rounded-4;
+  gap: 4px;
+}
+.fcr-stream-window-student-interact-group-small .fcr-stream-window-student-interact-item > span {
+  @apply fcr-text-white;
+  font-size: 14px;
+  line-height: 12px;
+  padding-right: 8px;
+  font-weight: 600;
+}

@@ -1,0 +1,60 @@
+.fcr-switch {
+  @apply fcr-border-1 fcr-rounded-full;
+  position: relative;
+  border-width: 1px;
+  border-style: solid;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1;
+  padding: 6px 6px 6px 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s;
+  transform: scale(0.7);
+  transform-origin: top left;
+}
+
+.fcr-switch.fcr-switch--on {
+  color: theme(colors.white);
+  background: theme(colors.brand.DEFAULT);
+}
+
+.fcr-switch.fcr-switch--off {
+  @apply fcr-text-2 fcr-border-1 fcr-bg-3;
+}
+
+.fcr-switch__slider {
+  @apply fcr-rounded-full;
+  top: 3px;
+  position: absolute;
+  width: 24px;
+  height: 18px;
+  box-shadow: -1px 0px 2px rgba(40, 34, 111, 0.295629);
+  transition: all 0.3s;
+  background: theme(colors.white);
+}
+
+.fcr-switch--on .fcr-switch__slider {
+  left: 3px;
+}
+
+.fcr-switch--off .fcr-switch__slider {
+  left: calc(100% - 24px - 3px);
+}
+
+.fcr-switch__labels span {
+  display: inline-block;
+  width: 23px;
+  opacity: 1;
+}
+.fcr-switch .fcr-switch__labels span:first-child {
+  text-align: left;
+}
+.fcr-switch .fcr-switch__labels span:last-child {
+  text-align: right;
+}
+.fcr-switch.fcr-switch--on .fcr-switch__labels span:first-child,
+.fcr-switch.fcr-switch--off .fcr-switch__labels span:last-child {
+  opacity: 0;
+}

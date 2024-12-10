@@ -1,0 +1,108 @@
+.fcr-btn {
+  @apply fcr-cursor-pointer fcr-text-base fcr-rounded-full fcr-relative fcr-overflow-hidden;
+}
+
+.fcr-btn-primary {
+  @apply fcr-text-white fcr-bg-brand fcr-bg-brand;
+}
+
+.fcr-btn-danger {
+  @apply fcr-text-error fcr-bg-white fcr-border;
+}
+
+.fcr-btn-danger:hover {
+  @apply fcr-text-error;
+}
+
+.fcr-btn-danger:active {
+  @apply fcr-text-error;
+}
+
+.fcr-btn-secondary {
+  @apply fcr-bg-white fcr-border-divider fcr-border fcr-text-brand;
+}
+
+.fcr-btn-secondary:hover {
+  @apply fcr-bg-white fcr-border-divider fcr-border fcr-text-brand;
+}
+
+.fcr-btn-secondary:active {
+  @apply fcr-text-brand fcr-bg-white fcr-border-divider fcr-border;
+}
+
+.fcr-btn-ghost {
+  @apply fcr-text-brand fcr-bg-white fcr-border-divider fcr-border;
+}
+
+.fcr-btn-ghost:hover {
+  @apply fcr-text-brand fcr-bg-white fcr-border-divider fcr-border;
+}
+
+.fcr-btn-ghost:active {
+  @apply fcr-text-brand fcr-bg-white fcr-border-divider fcr-border;
+}
+
+.fcr-btn-xs {
+  min-width: 80px;
+  height: 24px;
+  font-size: 12px;
+}
+
+.fcr-btn-sm {
+  min-width: 80px;
+  height: 30px;
+  font-size: 14px;
+}
+
+.fcr-btn-lg {
+  min-width: 280px;
+  height: 40px;
+  font-size: 16px;
+}
+
+.fcr-btn:focus {
+  @apply fcr-outline-none;
+}
+
+.fcr-btn[disabled] {
+  @apply fcr-opacity-50 fcr-pointer-events-none;
+  
+}
+
+.fcr-btn.fcr-btn-xs[disabled],
+.fcr-btn.fcr-btn-sm[disabled] {
+  background-color: #ffffff;
+  border: 1px solid #c2c2c8;
+  color: #c2c2c8;
+}
+
+.fcr-btn-ripple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+@keyframes fcr-btn-ripple {
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: scale(250);
+  }
+}
+
+.fcr-btn .fcr-btn-ripple-circle {
+  position: absolute;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: fcr-btn-ripple 0.75s 1;
+  top: 50%;
+  left: 50%;
+}

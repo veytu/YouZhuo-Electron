@@ -1,0 +1,13 @@
+.fcr-action-bar-participants-wrapper {
+  position: relative;
+}
+.fcr-action-bar-participants-user-count {
+  @apply fcr-text-1;
+  position: absolute;
+  font-weight: 600;
+  line-height: 21px;
+  font-size: 14px;
+  top: 0;
+  left: 50px;
+  pointer-events: none;
+}

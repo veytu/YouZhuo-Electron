@@ -1,0 +1,43 @@
+.fcr-status-bar-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.fcr-status-bar-info-network,
+.fcr-status-bar-info-share {
+  height: 32px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.fcr-status-bar-info-network:hover,
+.fcr-status-bar-info-share:hover {
+  @apply fcr-bg-brand-6;
+}
+.fcr-status-bar-info-id {
+  @apply fcr-text-1;
+  font-size: 12px;
+  padding-left: 10px;
+  padding-right: 8px;
+  font-size: 300;
+}
+.fcr-status-bar-info-id > span:first-child {
+  padding-right: 2px;
+}
+
+.fcr-status-bar-room-name {
+  @apply fcr-text-1;
+  max-width: 114px;
+  padding: 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s;
+  font-size: 12px;
+  font-weight: 300;
+}
+.fcr-status-bar-room-name:hover {
+  max-width: 500px;
+}

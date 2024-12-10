@@ -1,0 +1,10 @@
+.fcr-status-bar-fullscreen {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fcr-status-bar-fullscreen:hover {
+  @apply fcr-bg-brand-6;
+}

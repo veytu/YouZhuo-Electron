@@ -1,0 +1,14 @@
+.fcr-status-bar-record-starting {
+  animation: breath 1.5s linear infinite;
+}
+@keyframes breath {
+  from {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

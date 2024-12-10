@@ -1,0 +1,26 @@
+.fcr-progress {
+  @apply fcr-rounded-full fcr-bg-4;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.fcr-progress-inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: inherit;
+  background: linear-gradient(270.13deg, #4262ff 0.14%, #ecefff 99.92%);
+  transition: all 0.3s;
+}
+.fcr-progress-percent-text {
+  @apply fcr-text-1;
+  position: absolute;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 12px;
+  height: 12px;
+  right: 8px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+}

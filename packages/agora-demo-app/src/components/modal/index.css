@@ -1,0 +1,131 @@
+.modal {
+  box-shadow: 0px 2px 8px 0px rgba(47, 65, 146, 0.15);
+  border-radius: 8px;
+  border: 1px solid;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+  min-width: 280px;
+  background-color: var(--fcr_system_component_color);
+  border-color: var(--fcr_system_divider_color);
+}
+
+.top-level-modal {
+  position: fixed;
+  z-index: 2;
+  left: 50% !important;
+}
+
+.radio-container {
+  flex-direction: column;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  height: 75px;
+}
+
+.customize-radio {
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  color: var(--fcr_system_text_level1_color);
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.customize-radio {
+  margin-top: 13px;
+}
+
+.customize-radio input[type='radio'] {
+  color: var(--fcr_system_text_level1_color) !important;
+  height: 14px;
+}
+
+.customize-radio input[type='radio'] ~ span {
+  color: var(--fcr_system_text_level1_color) !important;
+}
+
+.customize-radio input[type='radio']:checked ~ span {
+  color: var(--fcr_system_text_level1_color) !important;
+}
+
+.rc-notification-mask {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.modal-title {
+  height: 28px;
+  line-height: 28px;
+  padding: 0 10px 0 15px;
+  border-radius: 8px 8px 0 0;
+  z-index: 1;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  border-style: solid;
+  border-bottom-width: 1px;
+  position: relative;
+  border-color: var(--fcr_system_divider_color);
+  background-color: var(--fcr_system_icon_selected_color);
+}
+
+.modal-title-text {
+  color: var(--fcr_system_text_level1_color);
+  font-size: 12px;
+}
+
+.modal-title-action {
+  cursor: pointer;
+}
+
+.modal-title-action:not(:last-child) {
+  margin-right: 10px;
+}
+
+.modal-content {
+  padding: 30px 20px;
+  box-sizing: border-box;
+  display: flex;
+  color: var(--fcr_system_text_level1_color);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.modal-content p {
+  margin-bottom: 0;
+  color: var(--fcr_system_text_level1_color);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-div {
+  margin: 0 7px;
+}
+
+.back-title {
+  font-size: 14px;
+  font-weight: 400;
+  color: #191919;
+}
+
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}

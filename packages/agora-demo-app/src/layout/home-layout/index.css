@@ -1,0 +1,117 @@
+.home {
+  @apply fcr-bg-cover fcr-flex  fcr-w-screen fcr-h-screen;
+  min-width: 1300px;
+  overflow-x: auto;
+  background-image: url('@app/assets/home-background.jpg');
+}
+
+/* --- left --- */
+.home-left {
+  color: #fff;
+  width: 41vw;
+  height: 100%;
+  overflow: hidden;
+  padding: 25px 47px;
+  font-family: 'Montserrat Roboto';
+  font-style: normal;
+  position: relative;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-color: rgb(248 248 248 / 98%);
+  opacity: 0.98;
+  backdrop-filter: blur(50px);
+}
+
+.home-left.en {
+  background-image: url('@app/assets/home-background-en.png');
+}
+.home-left.zh {
+  background-image: url('@app/assets/home-background-zh.png');
+}
+
+.home-left::before {
+  @apply fcr-block fcr-left-0 fcr-top-0 fcr-w-full fcr-h-full fcr-absolute;
+  content: '';
+}
+
+.home-left header {
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.home-left .logo {
+  @apply fcr-flex fcr-items-center;
+  width: 250px;
+  height: 30px;
+  margin-right: 20px;
+  background-size: auto 30px;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.home-left .logo.en {
+  background-image: url('@app/assets/fcr-welcome-left-text-en.png');
+}
+
+.home-left .logo.zh {
+  background-image: url('@app/assets/fcr-welcome-left-text-zh.png');
+}
+
+.home-left .text {
+  margin-top: 19vh;
+  margin-left: 13px;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 36px;
+  line-height: 2.14;
+  /* fcr-white */
+  color: #ffffff;
+}
+
+.home-left .text-img {
+  margin-left: 6vw;
+}
+
+.home-left .text-img.zh {
+  margin-top: 21vh;
+  height: 17.3vh;
+}
+
+.home-left .text-img.en {
+  margin-top: 19vh;
+  height: 25.4vh;
+}
+/* --- right --- */
+.home-right {
+  font-family: 'Montserrat Roboto';
+  position: relative;
+  /* overflow: hidden; */
+}
+
+.home-right::before {
+  @apply fcr-absolute fcr-top-0 fcr-left-0 fcr-w-full fcr-h-full;
+  content: '';
+  background: rgb(248 248 248 / 98%);
+  opacity: 0.98;
+  backdrop-filter: blur(50px);
+}
+.ant-spin-nested-loading > div > .ant-spin.home-loading-container {
+  max-height: 100%;
+}
+
+.home-left .fcr-quick-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.home-left .fcr-quick-header .fcr-logo {
+  font-weight: 800;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.home-left .fcr-quick-header .fcr-logo img {
+  margin-right: 12px;
+}

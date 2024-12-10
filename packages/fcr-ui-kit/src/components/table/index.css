@@ -1,0 +1,43 @@
+.fcr-table {
+  width: 100%;
+}
+.fcr-table table {
+  width: 100%;
+}
+.fcr-table .fcr-table-thead {
+  @apply fcr-bg-4;
+}
+.fcr-table .fcr-table-cell {
+  @apply fcr-text-1 fcr-font-regular;
+  font-size: 12px;
+  height: 36px;
+  user-select: none;
+  text-align: center;
+}
+.fcr-table .fcr-table-cell-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.fcr-table tbody .fcr-table-row:nth-child(2n + 1) {
+  @apply fcr-bg-3;
+}
+.fcr-table tbody .fcr-table-row:hover {
+  @apply fcr-bg-brand-6;
+}
+.fcr-table-empty {
+  @apply fcr-text-2;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 120px;
+}
+.fcr-table-empty img {
+  height: 100px;
+}
+.fcr-table .fcr-table-body::-webkit-scrollbar {
+  background: transparent;
+  width: 0;
+}

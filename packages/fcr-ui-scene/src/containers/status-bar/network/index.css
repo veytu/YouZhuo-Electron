@@ -1,0 +1,54 @@
+.fcr-network-connection {
+  padding: 10px 15px 15px;
+}
+.fcr-network-connection-title {
+  @apply fcr-text-1 fcr-font-medium;
+  font-size: 14px;
+  line-height: 30px;
+  padding-bottom: 6px;
+}
+.fcr-network-connection-status {
+  @apply fcr-text-1 fcr-font-medium;
+  font-size: 22px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.fcr-network-connection-status img {
+  width: 24px;
+  height: 24px;
+}
+.fcr-network-connection-detail {
+  padding: 0 15px 10px;
+  display: flex;
+  flex-direction: row;
+}
+.fcr-network-connection-detail-key {
+  padding-right: 17px;
+}
+.fcr-network-connection-detail-key,
+.fcr-network-connection-detail-value {
+  display: flex;
+  flex-direction: column;
+}
+.fcr-network-connection-detail-key > div {
+  @apply fcr-text-2 fcr-font-regular;
+  font-size: 12px;
+  line-height: 32px;
+}
+.fcr-network-connection-detail-value > div {
+  display: flex;
+  flex-direction: column;
+}
+.fcr-network-connection-detail-value > div > span {
+  @apply fcr-font-medium fcr-text-1;
+  font-size: 12px;
+  line-height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.fcr-network-connection-detail-value > div > span:last-child svg {
+  transform: rotate(180deg);
+}

@@ -1,0 +1,45 @@
+.fcr-toolbox-popover-content {
+  padding: 20px 15px;
+}
+.fcr-toolbox-popover-title {
+  @apply fcr-font-title fcr-text-1;
+  font-size: 14px;
+  line-height: 14px;
+  padding-bottom: 20px;
+}
+.fcr-toolbox-popover-item-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 120px);
+  gap: 10px;
+}
+.fcr-toolbox-popover-item {
+  @apply fcr-bg-4 fcr-rounded-8;
+  padding: 10px 5px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+}
+.fcr-toolbox-popover-item svg {
+  flex-shrink: 0;
+}
+.fcr-toolbox-popover-item:hover {
+  @apply fcr-bg-brand-6;
+}
+.fcr-toolbox-popover-item-label {
+  @apply fcr-font-title fcr-text-1;
+  padding-left: 4px;
+  font-size: 12px;
+  line-height: 12px;
+}
+.fcr-toolbox-popover-item-active {
+  @apply fcr-rounded-4 fcr-bg-notsb-inverse;
+  width: 12px;
+  height: 6px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}

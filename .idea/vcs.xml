@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/packages/agora-classroom-sdk" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/packages/agora-plugin-gallery" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/packages/agora-proctor-sdk" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/packages/fcr-ui-kit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/packages/fcr-ui-scene" vcs="Git" />
+  </component>
+</project>

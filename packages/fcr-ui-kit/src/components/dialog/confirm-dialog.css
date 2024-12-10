@@ -1,0 +1,37 @@
+.fcr-dialog-root .fcr-confirm-dialog-wrap.fcr-dialog-wrap,
+.fcr-dialog-root:has(.fcr-confirm-dialog-wrap) .fcr-dialog-mask {
+  z-index: 2000;
+}
+.fcr-confirm-dialog-title {
+  @apply fcr-font-title fcr-text-1;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.fcr-confirm-dialog-inner-wrap {
+  display: flex;
+  flex-direction: row;
+}
+.fcr-confirm-dialog-inner-icon {
+  padding-right: 20px;
+}
+.fcr-confirm-dialog-inner {
+  @apply fcr-text-1;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 150%;
+  word-break: break-all;
+  padding: 12px 0 24px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.fcr-confirm-dialog-footer {
+  display: flex;
+  justify-content: space-between;
+}
+.fcr-confirm-dialog-footer-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: auto;
+}

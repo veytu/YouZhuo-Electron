@@ -1,0 +1,15 @@
+.fcr-volume-indicator {
+  display: flex;
+}
+.fcr-volume-indicator .fcr-volume-indicator__point {
+  @apply fcr-bg-brand-6 fcr-rounded-24;
+  width: 17px;
+  height: 10px;
+  margin-right: 4px;
+  opacity: 0.3;
+  transition: opacity 0.3s;
+}
+
+.fcr-volume-indicator .fcr-volume-indicator__point.fcr-volume-indicator__point--active {
+  opacity: 1;
+}

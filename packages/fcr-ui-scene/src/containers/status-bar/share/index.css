@@ -1,0 +1,62 @@
+.fcr-share {
+  padding: 10px 15px 10px;
+  width: 207px;
+}
+.fcr-share-title {
+  @apply fcr-text-1 fcr-font-title;
+  font-size: 14px;
+  line-height: 30px;
+  padding-bottom: 6px;
+}
+.fcr-share-room-name {
+  @apply fcr-text-1 fcr-font-regular;
+  font-size: 12px;
+  line-height: 32px;
+}
+.fcr-share-room-id {
+  @apply fcr-text-1 fcr-font-regular;
+  font-size: 12px;
+  line-height: 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 9px;
+  align-items: center;
+}
+.fcr-share-room-id > span:first-child {
+  flex-shrink: 0;
+  font-weight: 300;
+}
+.fcr-share-room-id > span:nth-child(2) {
+  @apply fcr-font-medium;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+.fcr-share-room-link {
+  @apply fcr-text-2;
+  font-size: 13px;
+  line-height: 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 9px;
+  font-weight: 300;
+  padding-bottom: 5px;
+}
+.fcr-share-room-link > span:last-child {
+  @apply fcr-text-2;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fcr-share-room-id-copy {
+  @apply fcr-shadow-line-1-.5 fcr-rounded-full;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

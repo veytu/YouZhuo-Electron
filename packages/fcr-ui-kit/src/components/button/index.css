@@ -1,0 +1,500 @@
+.fcr-button {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+  position: relative;
+  width: fit-content;
+}
+.fcr-button-block {
+  width: 100%;
+}
+
+.fcr-button:focus {
+  outline: none;
+}
+.fcr-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.fcr-button-extra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fcr-button-extra-active {
+  pointer-events: none;
+}
+.fcr-button-extra-inner {
+  pointer-events: all;
+}
+/** primary button **/
+.fcr-button-primary {
+  @apply fcr-bg-brand-6 fcr-text-1;
+  --effect-color: theme(colors.brand.4);
+}
+
+.fcr-button-primary:not(:disabled, .fcr-button-extra-active):hover {
+  @apply fcr-bg-brand-7;
+}
+.fcr-button-primary:not(:disabled, .fcr-button-extra-active):active {
+  @apply fcr-bg-brand-8;
+}
+.fcr-button-primary:not(:disabled) .fcr-button-extra-inner-active {
+  @apply fcr-bg-brand-7;
+}
+/** primary danger **/
+.fcr-button-primary.fcr-button-danger {
+  @apply fcr-bg-red-6 fcr-text-1;
+  --effect-color: theme(colors.red.4);
+}
+
+.fcr-button-primary.fcr-button-danger:not(:disabled, .fcr-button-extra-active):hover {
+  @apply fcr-bg-red-7;
+}
+.fcr-button-primary.fcr-button-danger:not(:disabled, .fcr-button-extra-active):active {
+  @apply fcr-bg-red-8;
+}
+.fcr-button-primary.fcr-button-danger:not(:disabled) .fcr-button-extra-inner-active {
+  @apply fcr-bg-red-7;
+}
+/** primary gray **/
+.fcr-button-primary.fcr-button-gray {
+  @apply fcr-bg-btn-gray-5  fcr-text-2;
+  --effect-color: theme(colors.btn-gray.4);
+}
+
+.fcr-button-primary.fcr-button-gray:not(:disabled, .fcr-button-extra-active):hover {
+  @apply fcr-bg-btn-gray-6;
+}
+.fcr-button-primary.fcr-button-gray:not(:disabled, .fcr-button-extra-active):active {
+  @apply fcr-bg-btn-gray-7;
+}
+.fcr-button-primary.fcr-button-gray:not(:disabled) .fcr-button-extra-inner-active {
+  @apply fcr-bg-btn-gray-6;
+}
+/** primary white **/
+.fcr-button-primary.fcr-button-white {
+  @apply fcr-bg-white  fcr-text-black;
+  --effect-color: theme(colors.brand.7);
+}
+.fcr-button-primary.fcr-button-white:not(:disabled, .fcr-button-extra-active):hover {
+  @apply fcr-bg-brand-6 fcr-text-white;
+}
+.fcr-button-primary.fcr-button-white:not(:disabled, .fcr-button-extra-active):active {
+  @apply fcr-bg-brand-7 fcr-text-white;
+}
+.fcr-button-primary.fcr-button-white:not(:disabled) .fcr-button-extra-inner-active {
+  @apply fcr-bg-brand-6;
+}
+/** secondary button **/
+
+.fcr-button-secondary {
+  @apply fcr-text-notsb-inverse fcr-shadow-line-1-.3-white;
+  background: transparent;
+  --effect-color: theme(colors.brand.4);
+}
+.fcr-button-secondary:not(:disabled):hover {
+  @apply fcr-bg-brand-7;
+}
+.fcr-button-secondary:not(:disabled):active {
+  @apply fcr-bg-brand-8;
+}
+/** secondary danger **/
+
+.fcr-button-secondary.fcr-button-danger {
+  @apply fcr-shadow-line-1-.3-red fcr-text-red-6;
+
+  background: transparent;
+  --effect-color: theme(colors.red.4);
+}
+.fcr-button-secondary.fcr-button-danger:not(:disabled):hover {
+  @apply fcr-bg-red-6 fcr-shadow-line-1-.3-red fcr-text-1;
+}
+.fcr-button-secondary.fcr-button-danger:not(:disabled):active {
+  @apply fcr-bg-red-8 fcr-shadow-line-1-.3-red-active fcr-text-1;
+}
+
+/** secondary gray **/
+
+.fcr-button-secondary.fcr-button-gray {
+  @apply fcr-shadow-line-1-.3-gray fcr-text-2;
+
+  background: transparent;
+  --effect-color: theme(colors.btn-gray.7);
+}
+.fcr-button-secondary.fcr-button-gray:not(:disabled):hover {
+  @apply fcr-bg-btn-gray-6 fcr-shadow-line-1-.3-gray fcr-text-2;
+}
+.fcr-button-secondary.fcr-button-gray:not(:disabled):active {
+  @apply fcr-bg-btn-gray-7 fcr-shadow-line-1-.3-gray-active fcr-text-2;
+}
+
+/** secondary white **/
+
+.fcr-button-secondary.fcr-button-gray {
+  @apply fcr-shadow-line-1-.3-white fcr-text-white;
+
+  background: transparent;
+  --effect-color: theme(colors.brand.7);
+}
+.fcr-button-secondary.fcr-button-gray:not(:disabled):hover {
+  @apply fcr-bg-brand-6 fcr-shadow-line-1-.3-brand fcr-text-white;
+}
+.fcr-button-secondary.fcr-button-gray:not(:disabled):active {
+  @apply fcr-bg-brand-7 fcr-shadow-line-1-.3-brand-active fcr-text-white;
+}
+
+/** text button **/
+.fcr-button-text {
+  @apply fcr-text-notsb-inverse;
+}
+.fcr-button-text:not(:disabled):hover {
+  @apply fcr-bg-2;
+}
+.fcr-button-text.fcr-button-danger {
+  @apply fcr-text-red-6;
+}
+.fcr-button-text.fcr-button-danger:not(:disabled):hover {
+  @apply fcr-bg-red-6 fcr-text-1;
+}
+.fcr-button-text.fcr-button-gray {
+  @apply fcr-text-2;
+}
+.fcr-button-text.fcr-button-gray:not(:disabled):hover {
+  @apply fcr-bg-btn-gray-6 fcr-text-2;
+}
+/** link button **/
+.fcr-button-link {
+  @apply fcr-text-brand-6;
+  min-width: auto;
+}
+.fcr-button-link.fcr-button-danger {
+  @apply fcr-text-red-6;
+  min-width: auto;
+}
+.fcr-button-link.fcr-button-gray {
+  @apply fcr-text-2;
+  min-width: auto;
+}
+.fcr-button-link.fcr-button-white {
+  @apply fcr-text-white;
+  min-width: auto;
+}
+.fcr-button-link:not(:disabled):hover {
+  text-decoration: underline;
+}
+
+/** Size **/
+
+.fcr-button-XL > p {
+  @apply fcr-font-title;
+  line-height: 30px;
+  font-size: 20px;
+}
+
+.fcr-button-XL:not(.fcr-button-link) {
+  min-width: 200px;
+  height: 56px;
+  padding: 0 24px;
+}
+.fcr-button-XL:not(.fcr-button-link).fcr-button-with-extra {
+  padding-right: 60px;
+}
+.fcr-button-XL:not(.fcr-button-icon-only) > div:first-child {
+  padding-right: 10px;
+}
+.fcr-button-XL:not(.fcr-button-icon-only) > div:last-child:not(.fcr-button-extra) {
+  padding-left: 10px;
+}
+.fcr-button-XL:not(.fcr-button-icon-only) .fcr-button-icon svg {
+  width: 30px;
+  height: 30px;
+}
+.fcr-button-XL.fcr-button-icon-only .fcr-button-icon svg {
+  width: 56px;
+  height: 56px;
+}
+.fcr-button-XL .fcr-button-extra {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  right: 5px;
+  height: 40px;
+  padding-left: 5px;
+}
+.fcr-button-XL .fcr-button-extra-inner {
+  @apply fcr-rounded-full;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fcr-button-L > p {
+  @apply fcr-font-title;
+  font-size: 16px;
+  line-height: 30px;
+}
+.fcr-button-L:not(.fcr-button-link) {
+  min-width: 100px;
+  height: 48px;
+  padding: 0 24px;
+}
+.fcr-button-L:not(.fcr-button-icon-only) > div:first-child {
+  padding-right: 10px;
+}
+.fcr-button-L:not(.fcr-button-icon-only, .fcr-button-with-extra) > div:last-child {
+  padding-left: 10px;
+}
+.fcr-button-L:not(.fcr-button-icon-only) .fcr-button-icon svg {
+  width: 30px;
+  height: 30px;
+}
+.fcr-button-L.fcr-button-icon-only .fcr-button-icon svg {
+  width: 48px;
+  height: 48px;
+}
+.fcr-button-L:not(.fcr-button-link).fcr-button-with-extra {
+  min-width: 160px;
+  padding-right: 40px;
+}
+.fcr-button-L .fcr-button-extra {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  right: 5px;
+  height: 40px;
+  padding-left: 5px;
+}
+.fcr-button-L .fcr-button-extra-inner {
+  @apply fcr-rounded-full;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fcr-button-M > p {
+  @apply fcr-font-regular;
+  line-height: 24px;
+  font-size: 16px;
+}
+.fcr-button-M:not(.fcr-button-link) {
+  min-width: 100px;
+  height: 42px;
+  padding: 0 24px;
+}
+.fcr-button-M:not(.fcr-button-icon-only) > div:first-child {
+  padding-right: 10px;
+}
+.fcr-button-M:not(.fcr-button-icon-only) > div:last-child {
+  padding-left: 10px;
+}
+.fcr-button-M:not(.fcr-button-icon-only) .fcr-button-icon svg {
+  width: 24px;
+  height: 24px;
+}
+.fcr-button-M.fcr-button-icon-only .fcr-button-icon svg {
+  width: 42px;
+  height: 42px;
+}
+.fcr-button-M:not(.fcr-button-link).fcr-button-with-extra {
+  min-width: 160px;
+  padding-right: 40px;
+}
+.fcr-button-M .fcr-button-extra {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  right: 5px;
+  height: 30px;
+  padding-left: 5px;
+}
+.fcr-button-M .fcr-button-extra-inner {
+  @apply fcr-rounded-full;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fcr-button-S > p {
+  font-weight: 400;
+  line-height: 20px;
+  font-size: 13px;
+}
+.fcr-button-S:not(.fcr-button-link) {
+  min-width: 90px;
+  height: 36px;
+  padding: 0 20px;
+}
+.fcr-button-S:not(.fcr-button-icon-only) > div:first-child {
+  padding-right: 10px;
+}
+.fcr-button-S:not(.fcr-button-icon-only) > div:last-child {
+  padding-left: 10px;
+}
+.fcr-button-S:not(.fcr-button-icon-only) .fcr-button-icon svg {
+  width: 24px;
+  height: 24px;
+}
+.fcr-button-S.fcr-button-icon-only .fcr-button-icon svg {
+  width: 36px;
+  height: 36px;
+}
+.fcr-button-S:not(.fcr-button-link).fcr-button-with-extra {
+  min-width: 160px;
+  padding-right: 40px;
+}
+.fcr-button-S .fcr-button-extra {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  right: 5px;
+  height: 30px;
+  padding-left: 5px;
+}
+.fcr-button-S .fcr-button-extra-inner {
+  @apply fcr-rounded-full;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fcr-button-XS > p {
+  font-weight: 400;
+  line-height: 16px;
+  font-size: 12px;
+}
+.fcr-button-XS:not(.fcr-button-icon-only) > div:first-child {
+  padding-right: 8px;
+}
+.fcr-button-XS:not(.fcr-button-icon-only, .fcr-button-with-extra) > div:last-child {
+  padding-left: 8px;
+}
+.fcr-button-XS:not(.fcr-button-link) {
+  min-width: 90px;
+  height: 32px;
+  padding: 0 20px;
+}
+.fcr-button-XS:not(.fcr-button-icon-only) .fcr-button-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.fcr-button-XS.fcr-button-icon-only .fcr-button-icon svg {
+  width: 32px;
+  height: 32px;
+}
+.fcr-button-XS:not(.fcr-button-link).fcr-button-with-extra {
+  min-width: 140px;
+  padding-right: 36px;
+  padding-left: 10px;
+}
+.fcr-button-XS .fcr-button-extra {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  right: 5px;
+  height: 26px;
+  padding-left: 5px;
+}
+.fcr-button-XS .fcr-button-extra-inner {
+  @apply fcr-rounded-full;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fcr-button-XXS > p {
+  @apply fcr-font-regular;
+  line-height: 14px;
+  font-size: 12px;
+}
+.fcr-button-XXS:not(.fcr-button-link) {
+  min-width: 50px;
+  height: 24px;
+  padding: 0 10px;
+}
+.fcr-button-XXS:not(.fcr-button-link).fcr-button-rounded {
+  @apply fcr-rounded-6;
+}
+.fcr-button-XXS:not(.fcr-button-icon-only) > div:first-child {
+  padding-right: 2px;
+}
+.fcr-button-XXS:not(.fcr-button-icon-only) > div:last-child {
+  padding-left: 2px;
+}
+.fcr-button-XXS:not(.fcr-button-icon-only) .fcr-button-icon svg {
+  width: 14px;
+  height: 14px;
+}
+.fcr-button-XXS.fcr-button-icon-only .fcr-button-icon svg {
+  width: 24px;
+  height: 24px;
+}
+.fcr-button-XXS:not(.fcr-button-link).fcr-button-with-extra {
+  min-width: 160px;
+  padding-right: 40px;
+}
+.fcr-button-XXS .fcr-button-extra {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  right: 5px;
+  height: 30px;
+  padding-left: 5px;
+}
+.fcr-button-XXS .fcr-button-extra-inner {
+  @apply fcr-rounded-full;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/** rounded **/
+.fcr-button-rounded {
+  @apply fcr-rounded-8;
+}
+.fcr-button-circle {
+  @apply fcr-rounded-full;
+}
+
+.fcr-button.fcr-button-icon-only {
+  max-width: none;
+  min-width: 0;
+  padding: 0 12px;
+}
+.fcr-button.fcr-button-XXS.fcr-button-icon-only,
+.fcr-button.fcr-button-XS.fcr-button-icon-only {
+  max-width: none;
+  min-width: 0;
+  padding: 0 8px;
+}
+.fcr-button-loading {
+  animation: loadingCircle 1s infinite linear;
+}
+@keyframes loadingCircle {
+  100% {
+    transform: rotate(360deg);
+  }
+}

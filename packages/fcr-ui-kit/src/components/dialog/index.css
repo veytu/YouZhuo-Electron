@@ -1,0 +1,149 @@
+.fcr-dialog {
+  position: relative;
+  width: auto;
+  margin: 10px auto;
+}
+.fcr-dialog-wrap {
+  position: absolute;
+  overflow: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+}
+.fcr-dialog-content {
+  @apply fcr-bg-2 fcr-shadow-3 fcr-rounded-16;
+  position: relative;
+  border: none;
+  background-clip: padding-box;
+  backdrop-filter: blur(25px);
+}
+.fcr-dialog-body {
+  padding: 36px 32px 24px;
+}
+.fcr-dialog-zoom-enter,
+.fcr-dialog-zoom-appear {
+  opacity: 0;
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+  animation-play-state: paused;
+}
+.fcr-dialog-zoom-leave {
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+  animation-play-state: paused;
+}
+.fcr-dialog-zoom-enter.fcr-dialog-zoom-enter-active,
+.fcr-dialog-zoom-appear.fcr-dialog-zoom-appear-active {
+  animation-name: rcDialogZoomIn;
+  animation-play-state: running;
+}
+.fcr-dialog-zoom-leave.fcr-dialog-zoom-leave-active {
+  animation-name: rcDialogZoomOut;
+  animation-play-state: running;
+}
+@keyframes rcDialogZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
+@keyframes rcDialogZoomOut {
+  0% {
+    transform: scale(1, 1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0, 0);
+  }
+}
+@media (min-width: 768px) {
+  .fcr-dialog {
+    width: 600px;
+    margin: 30px auto;
+  }
+}
+.fcr-dialog-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #373737;
+  background-color: rgba(55, 55, 55, 0.6);
+  height: 100%;
+  filter: alpha(opacity=50);
+  z-index: 1050;
+}
+.fcr-dialog-mask-hidden {
+  display: none;
+}
+.fcr-dialog-fade-enter,
+.fcr-dialog-fade-appear {
+  opacity: 0;
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
+  animation-play-state: paused;
+}
+.fcr-dialog-fade-leave {
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
+  animation-play-state: paused;
+}
+.fcr-dialog-fade-enter.fcr-dialog-fade-enter-active,
+.fcr-dialog-fade-appear.fcr-dialog-fade-appear-active {
+  animation-name: rcDialogFadeIn;
+  animation-play-state: running;
+}
+.fcr-dialog-fade-leave.fcr-dialog-fade-leave-active {
+  animation-name: rcDialogFadeOut;
+  animation-play-state: running;
+}
+@keyframes rcDialogFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes rcDialogFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.fcr-dialog-close {
+  @apply fcr-rounded-full fcr-bg-1;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 15px;
+  top: 9px;
+  z-index: 1;
+}
+.fcr-dialog-close:hover {
+  @apply fcr-bg-brand-6;
+}
+.fcr-dialog-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

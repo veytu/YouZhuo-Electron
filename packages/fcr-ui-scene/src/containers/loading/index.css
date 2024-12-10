@@ -1,0 +1,20 @@
+.fcr-classroom-loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+}
+.fcr-classroom-loading-img-wrap {
+  @apply fcr-bg-4 fcr-rounded-6;
+  width: 60px;
+  height: 60px;
+}
+.fcr-classroom-loading-img-wrap img {
+  width: 100%;
+  height: 100%;
+}

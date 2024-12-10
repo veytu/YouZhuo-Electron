@@ -1,0 +1,25 @@
+.widget-container {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  pointer-events: none;
+}
+.widget-container * {
+  pointer-events: all;
+}
+
+.widget-slot-chat {
+  /* @apply bg-background; */
+}
+
+.fcr-countdown-mobile-widget {
+  position: relative;
+}
+.whiteboard-mobile-container .netless-whiteboard-wrapper {
+  background-color: #fff;
+
+  border-color: #fff;
+  pointer-events: none;
+}

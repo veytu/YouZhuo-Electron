@@ -1,0 +1,24 @@
+.fcr-action-bar-screen-share-tooltip,
+.fcr-screen-share-status-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+.fcr-screen-share-status-bar {
+  @apply fcr-bg-brand-6 fcr-rounded-8;
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  height: 32px;
+  width: fit-content;
+  padding-left: 20px;
+  padding-right: 4px;
+  z-index: 101;
+}
+.fcr-screen-share-status-bar span {
+  @apply fcr-text-1;
+  font-size: 12px;
+}

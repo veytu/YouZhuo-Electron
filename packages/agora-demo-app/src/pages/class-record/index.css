@@ -1,0 +1,11 @@
+.classtalk-record-wrapper{
+    background-image: url(@app/assets/classtalk/bg.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+.classtalk-content-wrapper{
+    height: calc(100vh - 8rem);
+    display: grid;
+    grid-template-rows: 2fr 1fr 1fr;
+}
