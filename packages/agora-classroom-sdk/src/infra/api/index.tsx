@@ -1,6 +1,6 @@
 import { VideoGallery } from '../capabilities/containers/fragments/video-gallery';
 import { Scenarios } from '../capabilities/scenarios';
-import { ExpandPlayer } from '../capabilities/containers/fragments/expand-player';
+import { ExpandPlayer,ExpandPlayerGrid } from '../capabilities/containers/fragments/expand-player';
 import {
   CloudDriveResource,
   EduClassroomConfig,
@@ -394,7 +394,8 @@ export class AgoraEduSDK {
     const mapping = {
       [WindowID.Main]: null,
       [WindowID.VideoGallery]: VideoGallery,
-      [WindowID.ExpandPlayer]: ExpandPlayer,
+      // [WindowID.ExpandPlayer]: ExpandPlayer,
+      [WindowID.ExpandPlayer]: ExpandPlayerGrid,
     };
 
     const Component = mapping[option.windowID];

@@ -48,6 +48,21 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
       },
     });
   }
+  private _updateAllShowPlayerInfo() {
+    const allShowStreams = [this.getters.teacherCameraStream, ...this.getters.studentCameraStreams]
+    const list: { streamUuid: string; isLocal: boolean; isMirrorMode: boolean; }[] = []
+    allShowStreams.forEach(stream => {
+      list.push({
+        streamUuid: stream?.streamUuid,
+        isLocal: stream?.isLocal,
+        isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
+      })
+    });
+    sendToRendererProcess(WindowID.ExpandPlayer, ChannelType.Message, {
+      type: 'allStreamUpdated',
+      payload: list
+    });
+  }
   onInstall() {
     // alex-tag-window-config
     if (EduRteEngineConfig.platform === EduRteRuntimePlatform.Electron) {
@@ -88,6 +103,9 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
           if (message.type === 'getTeacherStream') {
             this._updatePlayerInfo();
           }
+          if (message.type === 'getAllShowStream') {
+            this._updateAllShowPlayerInfo();
+          }
           if (message.type === IPCMessageType.BrowserWindowClose) {
             const { payload } = message as { payload: any };
             if (payload === WindowID.ExpandPlayer) {
@@ -98,14 +116,21 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
       );
       this._disposers.push(
         reaction(
-          () => this.getters.teacherCameraStream,
+          () => [this.getters.teacherCameraStream,this.getters.studentCameraStreams],
           () => {
-            if (this.getters.teacherCameraStream?.isLocal) {
-              this._transmitUids.add(0);
-            } else {
-              this._transmitUids.add(+this.getters.teacherCameraStream.streamUuid);
-            }
+            const allShowStreams = [this.getters.teacherCameraStream, ...this.getters.studentCameraStreams]
+            this._transmitUids.clear()
+            allShowStreams.forEach(stream => {
+              if (stream) {
+                if (stream?.isLocal) {
+                  this._transmitUids.add(0);
+                } else {
+                  this._transmitUids.add(+stream.streamUuid);
+                }
+              }
+            });
             this._updatePlayerInfo();
+            this._updateAllShowPlayerInfo();
           },
         ),
       );

@@ -24,13 +24,16 @@ export const LocalRenderer: FC<{ isMirrorMode: boolean }> = ({ isMirrorMode }) =
 /**
  *
  */
-export const RemoteRenderer: FC<{ uid: number; className?: string }> = ({ uid, className }) => {
+export const RemoteRenderer: FC<{ uid: number; className?: string,streamType?:number  }> = ({ uid, className,streamType }) => {
   const domRef = useRef<HTMLDivElement>(null);
   const context = useContext(RtcEngineContext);
   useEffect(() => {
     const { rtcEngine } = context;
     if (domRef.current && rtcEngine) {
       rtcEngine.initRender(uid, domRef.current, '');
+      if(streamType){
+        rtcEngine.setRemoteVideoStreamType(uid,streamType );
+      }
     }
     return () => {
       if (rtcEngine) {
@@ -46,14 +49,15 @@ export const RemoteRenderer: FC<{ uid: number; className?: string }> = ({ uid, c
     />
   );
 };
-export const VideoRenderer: FC<{ uid: number; isLocal: boolean; isMirrorMode: boolean }> = ({
+export const VideoRenderer: FC<{ uid: number; isLocal: boolean; isMirrorMode: boolean,streamType?:number }> = ({
   uid,
   isLocal,
   isMirrorMode,
+  streamType,
 }) => {
   return (
     <div className="fcr-w-full fcr-h-full fcr-relative">
-      {isLocal ? <LocalRenderer isMirrorMode={isMirrorMode} /> : <RemoteRenderer uid={uid} />}
+      {isLocal ? <LocalRenderer isMirrorMode={isMirrorMode} /> : <RemoteRenderer uid={uid} streamType={streamType}/>}
     </div>
   );
 };

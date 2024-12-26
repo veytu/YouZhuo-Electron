@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import './index.css'
 import { FC } from 'react';
 import { VideoRenderer } from './renderer';
 import { useRtcEngine } from './hooks';
@@ -47,3 +48,48 @@ export const ExpandPlayer: FC<Props> = () => {
     </RtcEngineContext.Provider>
   );
 };
+
+export const ExpandPlayerGrid: FC<Props> = () => {
+  const { rtcEngine } = useRtcEngine();
+  const [showList,setShowList] = useState([])
+  useEffect(() => {
+    const dispose = listenChannelMessage(ChannelType.Message, (_e, message) => {
+      console.log('message: ', message);
+      if (message.type === 'allStreamUpdated') {
+        //@ts-ignore
+        setShowList(message.payload)
+      }
+    });
+    console.log('send message');
+    //
+    sendToRendererProcess(WindowID.Main, ChannelType.Message, {
+      type: 'getAllShowStream',
+    });
+    return dispose;
+  }, []);
+
+  //@ts-ignore
+  const {columns,rows,streamType} = JSON.parse(localStorage.getItem("expandPlayConfig"));
+
+  return (
+    <RtcEngineContext.Provider value={{ rtcEngine }}>
+      <div>
+        <div className="expand-play-grid-container" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)`, gridTemplateRows: `repeat(${rows}, 1fr)` }}>
+          {showList.map((info: ShowInfo, index) => (
+            info.streamUuid != null && (
+              <div key={index} className='expand-play-grid-item' style={{ width: 100 / columns + 'vw', height: 100 / rows + "vh" }}>
+                <VideoRenderer uid={+info.streamUuid} isLocal={info.isLocal} isMirrorMode={info.isMirrorMode} streamType={streamType}/>
+              </div>
+            )
+          ))}
+        </div>
+      </div>
+    </RtcEngineContext.Provider>
+  );
+};
+
+class ShowInfo{
+  streamUuid: number | undefined;
+  isLocal: false = false;
+  isMirrorMode: false = false;
+}

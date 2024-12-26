@@ -246,10 +246,10 @@ export class FcrUIScene {
       } = opts;
 
       config.defaultCameraEncoderConfigurations = {
-        width: 735,
-        height: 417,
-        frameRate: 15,
-        bitrate: 800,
+        width: 1280,
+        height: 720,
+        frameRate: 30,
+        bitrate: 1600,
       };
 
       if (cameraEncoderConfiguration) {
