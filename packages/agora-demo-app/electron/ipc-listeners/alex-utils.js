@@ -16,6 +16,17 @@ function checkMac() {
   if(!macAddress){
     macAddress = electron.ipcRenderer.invoke('get-mac-address');
   }
+  if(!macAddress){
+    for (const iface in interfaces) {
+      for (const ifaceDetails of interfaces[iface]) {
+        // 检查接口类型和 MAC 地址
+        if (ifaceDetails.mac && ifaceDetails.mac !== '00:00:00:00:00:00') {
+          macAddress = ifaceDetails.mac;  // 返回第一个有效的 MAC 地址
+          return macAddress;
+        }
+      }
+    }
+  }
   return macAddress;
 }
 

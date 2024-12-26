@@ -40,7 +40,7 @@ export const Dropdown: FC<DropdownProps> = ({ value, onChange, options, width })
             <a href="#" onFocus={handleFocus} onBlur={handleBlur}>
                 <span className={textCls} style={{ minWidth: width }}>{selectedText}</span>
             </a>
-            <div className={containerCls} style={{ top: 30 }}>
+            <div className={containerCls} style={{ top: 30, display: expanded ? 'unset' : 'none' }}>
                 {
                     options.map(({ text, value: v }, index) => {
                         const cls = classNames("text-center cursor-pointer dropdown-item", {
