@@ -13,6 +13,9 @@ function checkMac() {
     }
     if (macAddress) break;
   }
+  if(!macAddress){
+    macAddress = electron.ipcRenderer.invoke('get-mac-address');
+  }
   return macAddress;
 }
 

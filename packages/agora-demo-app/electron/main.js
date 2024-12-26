@@ -75,6 +75,7 @@ const createMainWindow = function () {
   };
 
   _mainWindow.webContents.session.webRequest.onBeforeRequest(filter, requestCallback);
+  _mainWindow.webContents.openDevTools();  // 打开开发者工具
 
   const appLogPath = app.getPath('logs');
 
