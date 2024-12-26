@@ -17,3 +17,7 @@ yarn.lock
 *.log
 .vscode/
 package-lock.json
+.github/
+.husky/
+.idea/
+node_modules/
