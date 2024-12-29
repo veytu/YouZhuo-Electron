@@ -40,6 +40,8 @@ export const TeacherStream = visibilityControl(
 
     const style = {
       marginRight: gap - 2,
+      width:'100%',
+      height:'100%'
     };
 
     if (teacherCameraStream && checkScreen()) {
@@ -57,7 +59,7 @@ export const TeacherStream = visibilityControl(
       height: videoStreamSize.height,
     };
 
-    return <DragableStream style={style} playerStyle={playerStyle} stream={teacherCameraStream} />;
+    return <DragableStream style={style} playerStyle={playerStyle} stream={teacherCameraStream} aspectRatio='142/80'/>;
   }),
   teacherVideoEnabled,
 );
@@ -79,15 +81,17 @@ export const StudentStreams = visibilityControl(
     );
 
     return (
-      <div onMouseEnter={mouseHandler(true)} onMouseLeave={mouseHandler(false)}>
+      <div onMouseEnter={mouseHandler(true)} onMouseLeave={mouseHandler(false)} style={{height:'100%'}}>
         {scrollable && (
           <NavGroup visible={navigationVisible} onPrev={carouselPrev} onNext={carouselNext} />
         )}
         <CarouselGroup
           gap={gap}
+          fullHeight={true}
           videoWidth={videoStreamSize.width}
           videoHeight={videoStreamSize.height}
           carouselStreams={carouselStreams}
+          aspectRatio='142/80'
         />
       </div>
     );
