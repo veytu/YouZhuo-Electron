@@ -3,7 +3,7 @@ import { EduLectureH5UIStore } from '@classroom/infra/stores/lecture-mobile';
 import { EduClassroomConfig } from 'agora-edu-core';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { SvgImg } from '@classroom/ui-kit';
 import { useI18n } from 'agora-common-libs';
 import { ComponentLevelRules } from '../../config';
@@ -31,17 +31,83 @@ export const Chat = observer(function Chat() {
 
 export const Whiteboard = observer(function Board() {
   const { boardUIStore } = useStore();
-
   const { isCopying } = boardUIStore;
 
+  const [height, setHeight] = useState(boardUIStore.boardAreaHeight);
+  const resizableRef = useRef(null);
+
+  useEffect(() => {
+    let isResizing = false;
+    let startY: number;
+
+    function mouseDownHandler(e: { clientY: number; }) {
+      isResizing = true;
+      startY = e.clientY;
+    }
+
+    function mouseMoveHandler(e: { clientY: number; }) {
+      if (!isResizing) return;
+      // Calculate new height based on the mouse position.
+      // The top edge moves up as the height increases and vice versa.
+      const newHeight = boardUIStore.boardAreaHeight + startY - e.clientY;
+      setHeight(Math.min(Math.max(newHeight, 50), boardUIStore.boardAreaHeight)); // Ensure minimum height of 50px
+    }
+
+    function mouseUpHandler() {
+      isResizing = false;
+    }
+
+    //@ts-ignore
+    const resizeHandle = resizableRef.current.querySelector('.top-resize-handle');
+
+    if (resizeHandle) {
+      resizeHandle.addEventListener('mousedown', mouseDownHandler);
+      window.addEventListener('mousemove', mouseMoveHandler);
+      window.addEventListener('mouseup', mouseUpHandler);
+    }
+
+    return () => {
+      if (resizeHandle) {
+        resizeHandle.removeEventListener('mousedown', mouseDownHandler);
+        window.removeEventListener('mousemove', mouseMoveHandler);
+        window.removeEventListener('mouseup', mouseUpHandler);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    setHeight(boardUIStore.boardAreaHeight)
+  }, [boardUIStore.boardAreaHeight])
+
   return (
-    <React.Fragment>
-      <div
-        style={{ height: boardUIStore.boardAreaHeight, zIndex: ComponentLevelRules.WhiteBoard }}
-        className="widget-slot-board"
-      />
-      {isCopying && <Spinner />}
-    </React.Fragment>
+    <div
+      ref={resizableRef}
+      style={{
+        position: 'relative',
+        height: `${height}px`,
+        border: '1px solid black',
+        boxSizing: 'border-box'
+      }}
+    >
+      {/* Top resize handle */}
+      <div className="top-resize-handle" style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 10,
+        cursor: 'ns-resize',
+      }}
+      ></div>
+      {/* Content goes here */}
+      <React.Fragment>
+        <div
+          style={{ height: boardUIStore.boardAreaHeight, zIndex: ComponentLevelRules.WhiteBoard }}
+          className="widget-slot-board"
+        />
+        {isCopying && <Spinner />}
+      </React.Fragment>
+    </div>
   );
 });
 
