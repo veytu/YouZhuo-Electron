@@ -6,7 +6,7 @@ import {
 } from '@classroom/infra/stores/common/stream/struct';
 import { EduRoleTypeEnum } from 'agora-edu-core';
 import classnames from 'classnames';
-import { debounce } from 'lodash';
+import { debounce, head } from 'lodash';
 import { observer } from 'mobx-react';
 import React, {
   useRef,
@@ -257,21 +257,27 @@ export const CarouselGroup = observer(
     videoHeight,
     gap,
     carouselStreams,
+    aspectRatio,
+    fullHeight,
   }: {
     videoWidth: number;
     videoHeight: number;
     carouselStreams: EduStreamUI[];
     gap: number;
+    aspectRatio?:string,
+    fullHeight?:boolean
   }) => {
     const fullWith = (videoWidth + gap) * carouselStreams.length - gap + 2;
 
     const width = useDebounce(carouselStreams.length ? fullWith : 0, ANIMATION_DELAY);
 
     return (
-      <TransitionGroup className="fcr-flex fcr-overflow-hidden" style={{ width }}>
+      <TransitionGroup className="fcr-flex fcr-overflow-hidden" style={fullHeight ? { height: '100%' } : { width }}>
         {carouselStreams.map((stream: EduStreamUI, idx: number) => {
           const style = {
             marginRight: idx === carouselStreams.length - 1 ? 0 : gap - 2,
+            width:'100%',
+            height:'100%'
           };
 
           const playerStyle = {
@@ -284,7 +290,7 @@ export const CarouselGroup = observer(
               key={`carouse-${stream.stream.streamUuid}`}
               timeout={ANIMATION_DELAY}
               classNames="stream-player">
-              <DragableStream stream={stream} style={style} playerStyle={playerStyle} />
+              <DragableStream stream={stream} style={style} playerStyle={playerStyle} aspectRatio={aspectRatio}/>
             </CSSTransition>
           );
         })}

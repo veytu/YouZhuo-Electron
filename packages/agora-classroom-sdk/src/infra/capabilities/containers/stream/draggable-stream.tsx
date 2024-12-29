@@ -63,10 +63,12 @@ export const DragableStream = observer(
     stream,
     style,
     playerStyle,
+    aspectRatio,
   }: {
     stream?: EduStreamUI;
     style?: CSSProperties;
     playerStyle?: CSSProperties;
+    aspectRatio?:string
   }) => {
     const { streamWindowUIStore } = useStore();
     const {
@@ -83,7 +85,15 @@ export const DragableStream = observer(
     const handleStreamDoubleClick = () => {
       interactable && streamDragable && stream && handleDBClickStreamWindow(stream.stream);
     };
-
+    if (aspectRatio) {
+      return <div style={{ height: '100%', aspectRatio: aspectRatio }}>
+        {stream ? (
+          <div style={{ position: 'relative', ...style, width: '100%', height: '100%' }} onDoubleClick={handleStreamDoubleClick}>
+            <StreamPlayer renderAt="Bar" stream={stream} style={playerStyle} />
+          </div>
+        ) : null}
+      </div>
+    }
     return stream ? (
       <div style={{ position: 'relative', ...style }} onDoubleClick={handleStreamDoubleClick}>
         <StreamPlayer renderAt="Bar" stream={stream} style={playerStyle} />
