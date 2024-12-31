@@ -127,6 +127,24 @@ export const ClassTalk = observer(() => {
         url,
         taskId,
       }),
+      cameraEncoderConfiguration: {
+        width: 1280,
+        height: 720,
+        frameRate: 30,
+        bitrate: 1600,
+      },
+      lowStreamCameraEncoderConfiguration: {
+        width: 425,
+        height: 240,
+        frameRate: 15,
+        bitrate: 300,
+      },
+      screenShareEncoderConfiguration: {
+        width: 1280,
+        height: 720,
+        frameRate: 30,
+        bitrate: 1000,
+      },
     };
 
     // save talkCloudId

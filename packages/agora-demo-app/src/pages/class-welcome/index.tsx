@@ -40,12 +40,17 @@ export const ClassWelcome = observer(() => {
           bitrate: 1600,
         },
         lowStreamCameraEncoderConfiguration: {
-          width: 640,
-          height: 360,
+          width: 425,
+          height: 240,
           frameRate: 15,
-          bitrate: 600,
+          bitrate: 300,
         },
-        screenShareEncoderConfiguration: undefined,
+        screenShareEncoderConfiguration: {
+          width: 1280,
+          height: 720,
+          frameRate: 30,
+          bitrate: 1000,
+        },
       },
     };
     let pretest = false;
