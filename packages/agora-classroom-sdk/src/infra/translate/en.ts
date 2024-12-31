@@ -395,6 +395,8 @@ export const en = {
   },
   'biz-header': {
     perf: 'Perf',
+    handUp: 'HandUp',
+    chat: 'Chat',
     setting: 'Setting',
     exit: 'Exit',
     recording: 'Recording...',
