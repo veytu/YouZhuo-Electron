@@ -399,6 +399,8 @@ export class NavigationBarUIStore extends EduUIStoreBase {
     if (AgoraEduSDK.shareUrl) {
       commonActions.splice(1, 0, shareAction);
     }
+    commonActions.splice(0,0,chatAction)
+    commonActions.splice(0,0,handUpAction)
 
     const isInSubRoom = this.getters.isInSubRoom;
 
@@ -428,7 +430,7 @@ export class NavigationBarUIStore extends EduUIStoreBase {
     }
 
     actions = actions.concat(commonActions);
-    return [handUpAction,chatAction,...actions];
+    return [...actions];
   }
 
   @computed
