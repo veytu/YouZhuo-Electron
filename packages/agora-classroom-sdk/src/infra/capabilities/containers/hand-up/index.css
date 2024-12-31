@@ -132,3 +132,61 @@
   line-height: 40px;
   user-select: none;
 }
+
+.hands-up-ing-nav {
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  background-color: #0273ff;
+  color: #ffffff;
+  text-align: center;
+  line-height: 20px;
+  user-select: none;
+}
+
+.hands-up-tip-nav {
+  @apply fcr-bg-component fcr-border fcr-border-solid fcr-border-divider fcr-text-level1;
+  position: absolute;
+  padding: 0 10px;
+  height: 28px;
+  box-shadow: 0px 2px 6px 0px rgb(47 65 146 / 15%);
+  text-align: center;
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  line-height: 28px;
+  border-radius: 4px;
+  white-space: nowrap;
+  right: 50px;
+}
+.hands-up-tip-nav::before {
+  content: '';
+  display: block;
+  height: 0;
+  width: 0;
+  border-left: solid 8px #e1e1ea;
+  border-top: solid 8px transparent;
+  border-bottom: solid 8px transparent;
+  position: absolute;
+  right: -8px;
+  top: 5px;
+}
+.hands-up-tip-nav::after {
+  content: '';
+  display: block;
+  height: 0;
+  width: 0;
+  border-left: solid 6px white;
+  border-top: solid 6px transparent;
+  border-bottom: solid 6px transparent;
+  position: absolute;
+  right: -6px;
+  top: 7px;
+}
+
+.hands-up-sender-nav {
+  cursor: pointer;
+  position: relative;
+  background-color: transparent;
+  box-shadow: none;
+}

@@ -4,9 +4,9 @@ import { EduClassroomConfig } from 'agora-edu-core';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 import React, { useEffect, useRef, useState } from 'react';
-import { SvgImg } from '@classroom/ui-kit';
 import { useI18n } from 'agora-common-libs';
 import { ComponentLevelRules } from '../../config';
+import { Card, Popover, SvgIcon, SvgIconEnum, SvgImg } from '@classroom/ui-kit/components';
 
 export const Chat = observer(function Chat() {
   const { widgetUIStore } = useStore();
@@ -27,6 +27,28 @@ export const Chat = observer(function Chat() {
   }, [ready]);
 
   return <div className="widget-slot-chat fcr-h-full" />;
+});
+export const ChatNav = observer(function ChatNav() {
+  return <div onClick={() => {
+          // 获取目标 div 元素
+        const targetDiv = document.getElementsByClassName('fcr-hx-show-chat-icon');
+        if (targetDiv && targetDiv.length > 0) {
+          (targetDiv[0] as HTMLElement).click(); // 触发目标 div 的点击事件
+        }
+        }}>
+          <Card
+            className="hands-up-sender-nav"
+            width={20}
+            height={20}
+            borderRadius={20}>
+            <div>
+              <SvgImg
+                type={SvgIconEnum.CHAT}
+                size={16}
+              />
+            </div>
+          </Card>
+        </div>;
 });
 
 export const Whiteboard = observer(function Board() {

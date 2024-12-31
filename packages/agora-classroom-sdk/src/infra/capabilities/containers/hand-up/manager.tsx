@@ -48,34 +48,43 @@ export const WaveArmManager: FC<PropsWithChildren<WaveArmManagerProps>> = ({
   const content = useCallback(() => {
     return restProps.children;
   }, []);
-
+  useEffect(() => {
+    if (!waveArmCount) {
+      setPopoverVisible(false)
+    }
+  }, [waveArmCount])
   return (
     <div className={cls} {...restProps}>
       <Popover
         visible={popoverVisible}
         onVisibleChange={(visible) => {
+          debugger
           setPopoverVisible(visible);
         }}
         overlayClassName="customize-dialog-popover"
         trigger="hover"
         content={content}
         placement="leftBottom">
-        <Card
-          width={width}
-          height={height}
-          borderRadius={borderRadius}
-          className={twinkleFlag ? 'card-hands-up-active' : ''}>
-          <div className="hands-box-line">
-            <SvgImg
-              type={SvgIconEnum.HANDS_UP}
-              colors={twinkleFlag ? { iconPrimary: InteractionStateColors.allow } : {}}
-              size={24}
-            />
-          </div>
-          {waveArmCount ? (
-            <span className="hands-up-count">{waveArmCount > 99 ? '99+' : waveArmCount}</span>
-          ) : null}
-        </Card>
+        <div className='card-hands-up'onClick={()=>{
+          setPopoverVisible(true);
+        }}>
+          <Card
+            width={width}
+            height={height}
+            borderRadius={borderRadius}
+            className={twinkleFlag ? 'card-hands-up-active' : ''}>
+            <div className="hands-box-line">
+              <SvgImg
+                type={SvgIconEnum.HANDS_UP}
+                colors={twinkleFlag ? { iconPrimary: InteractionStateColors.allow } : {}}
+                size={24}
+              />
+            </div>
+            {waveArmCount ? (
+              <span className="hands-up-count">{waveArmCount > 99 ? '99+' : waveArmCount}</span>
+            ) : null}
+          </Card>
+        </div>
       </Popover>
     </div>
   );
@@ -166,4 +175,74 @@ export const StudentsWaveArmList: FC<StudentsWaveArmListProps> = ({
       </Card>
     </div>
   ) : null;
+};
+
+
+export const WaveArmManagerNav: FC<PropsWithChildren<WaveArmManagerProps>> = ({
+  width = 40,
+  height = 40,
+  borderRadius = 40,
+  className,
+  hasWaveArmUser = false,
+  waveArmCount = 0,
+  ...restProps
+}) => {
+  const cls = classnames({
+    [`hands-up hands-up-manager`]: 1,
+    [`${className}`]: !!className,
+  });
+  const [popoverVisible, setPopoverVisible] = useState<boolean>(false);
+  const [twinkleFlag, setTwinkleFlag] = useState(false);
+
+  useInterval(
+    (timer: ReturnType<typeof setInterval>) => {
+      debugger
+      if (hasWaveArmUser) {
+        setTwinkleFlag(!twinkleFlag);
+      } else {
+        setTwinkleFlag(false);
+        timer && clearInterval(timer);
+      }
+      return () => {
+        timer && clearInterval(timer);
+      };
+    },
+    500,
+    hasWaveArmUser,
+  );
+
+  const content = useCallback(() => {
+    return restProps.children;
+  }, []);
+
+  return (
+    <div className={cls} {...restProps}>
+      <Popover
+        visible={popoverVisible}
+        onVisibleChange={(visible) => {
+          setPopoverVisible(visible);
+        }}
+        overlayClassName="customize-dialog-popover"
+        trigger="hover"
+        content={content}
+        placement="leftBottom">
+        <Card
+          width={width}
+          height={height}
+          borderRadius={borderRadius}
+          className={twinkleFlag ? 'card-hands-up-active' : ''}>
+          <div className="hands-box-line">
+            <SvgImg
+              type={SvgIconEnum.HANDS_UP}
+              colors={twinkleFlag ? { iconPrimary: InteractionStateColors.allow } : {}}
+              size={24}
+            />
+          </div>
+          {waveArmCount ? (
+            <span className="hands-up-count">{waveArmCount > 99 ? '99+' : waveArmCount}</span>
+          ) : null}
+        </Card>
+      </Popover>
+    </div>
+  );
 };

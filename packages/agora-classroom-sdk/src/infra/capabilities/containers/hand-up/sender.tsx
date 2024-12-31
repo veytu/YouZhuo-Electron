@@ -213,3 +213,131 @@ export const WaveArmSender: FC<BaseWaveArmProps> = observer(({ isH5, isOnPodium,
     </Card>
   );
 });
+
+
+export const WaveArmSenderNav: FC<BaseWaveArmProps> = observer(({ isH5, isOnPodium, onOffPodium }) => {
+  const { handUpUIStore, shareUIStore } = useStore();
+  const { waveArm, teacherUuid, beingInvited, waveArmDurationTime } = handUpUIStore;
+  const fsm = useMemo(() => new FSM(WaveArmStateEnum.waveArmBefore), []);
+  const [firstTip, setFirstTip] = useState<boolean>(false);
+  const [showTip, setShowTip] = useState<boolean>(false);
+
+  const [countDownNum, setCountDownNum] = useState<number>(0);
+  const [startCountDown, setStartCountDown] = useState<boolean>(false);
+
+  useInvitedModal(beingInvited, handUpUIStore, shareUIStore);
+
+  useEffect(() => {
+    let task: Scheduler.Task | undefined = undefined;
+
+    const userName = EduClassroomConfig.shared.sessionInfo.userName;
+
+    let promise: Promise<void> | null = null;
+
+    fsm.whenAfter(WaveArmStateEnum.waveArmBefore, WaveArmStateEnum.waveArming, () => {
+      setCountDownNum(waveArmDurationTime);
+      setStartCountDown(false);
+      promise = new Promise(async (resolve) => {
+        task = Scheduler.shared.addPollingTask(async () => {
+          await waveArm(teacherUuid, waveArmDurationTime, { userName });
+        }, Scheduler.Duration.second(waveArmDurationTime));
+        resolve();
+      });
+    });
+
+    fsm.whenAfter(WaveArmStateEnum.waveArming, WaveArmStateEnum.waveArmAfter, () => {
+      setCountDownNum(waveArmDurationTime);
+      setStartCountDown(true);
+      promise?.then(async () => {
+        task?.stop();
+        await waveArm(teacherUuid, waveArmDurationTime, { userName });
+        promise = null;
+      });
+    });
+
+    return () => {
+      task?.stop();
+    };
+  }, []);
+
+  const handleMouseDown = () => {
+    setFirstTip(true);
+    fsm.changeState(WaveArmStateEnum.waveArming, waveArmDurationTime);
+  };
+
+  const handleMouseUp = () => {
+    fsm.changeState(WaveArmStateEnum.waveArmAfter, waveArmDurationTime);
+  };
+
+  useEffect(() => {
+    if (firstTip) {
+      setShowTip(true);
+      const timer = setTimeout(() => {
+        setShowTip(false);
+        clearTimeout(timer);
+      }, waveArmDurationTime * 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [firstTip]);
+
+  useInterval(
+    (timer: ReturnType<typeof setTimeout>) => {
+      if (startCountDown) {
+        if (countDownNum > 1) {
+          setCountDownNum(countDownNum - 1);
+        } else {
+          setCountDownNum(0);
+          setStartCountDown(false);
+        }
+      } else {
+        clearInterval(timer);
+      }
+    },
+    1000,
+    startCountDown,
+  );
+
+  // vocational h5
+  if (isH5) {
+    // 已上台
+    if (isOnPodium) {
+      return (
+        <button className="hands-up-btn" onClick={onOffPodium} disabled={!!countDownNum}>
+          {transI18n('vocational.offPodium')}
+        </button>
+      );
+    }
+    // 未上台
+    return (
+      <button
+        className="hands-up-btn"
+        onTouchStart={!isOnPodium ? handleMouseDown : undefined}
+        onTouchEnd={!isOnPodium ? handleMouseUp : undefined}
+        disabled={!!countDownNum}>
+        {!countDownNum
+          ? transI18n('vocational.handsUp')
+          : `${transI18n('vocational.handsUpReviewing')} ${countDownNum}s`}
+      </button>
+    );
+  }
+
+  return (
+    <Card
+      className="hands-up-sender-nav"
+      width={20}
+      height={20}
+      borderRadius={20}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}>
+      {!countDownNum ? (
+        <SvgImg type={SvgIconEnum.HANDS_UP_ACTIVE} size={24} />
+      ) : (
+        <div className="hands-up-ing-nav">{countDownNum}</div>
+      )}
+      {fsm.getCurrentState() !== WaveArmStateEnum.waveArmBefore && showTip ? (
+        <div className="hands-up-tip-nav">{transI18n('hands_up_tip')}</div>
+      ) : null}
+    </Card>
+  );
+});

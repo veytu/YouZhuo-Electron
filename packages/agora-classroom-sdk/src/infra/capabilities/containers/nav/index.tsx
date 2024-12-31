@@ -34,6 +34,8 @@ import ClipboardJS from 'clipboard';
 import { AgoraEduSDK } from '@classroom/infra/api';
 import { useI18n } from 'agora-common-libs';
 import { useClickAnywhere } from '@classroom/infra/hooks';
+import { HandsUpContainerNav } from '../hand-up';
+import { ChatNav } from '../widget/slots';
 
 const SignalContent = observer(() => {
   const { navigationBarUIStore } = useStore();
@@ -302,6 +304,8 @@ export const NavigationBar = visibilityControl(() => {
         <RoomState />
       </div>
       <div className="header-actions">
+        <HandsUpContainerNav />
+        <ChatNav/>
         <Actions />
         <ShareCard />
       </div>

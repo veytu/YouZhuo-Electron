@@ -169,35 +169,6 @@ export class NavigationBarUIStore extends EduUIStoreBase {
       ? transI18n('toast.stop_recording.body')
       : transI18n('toast.start_recording.body');
 
-    const handUpAction: EduNavAction<EduNavRecordActionPayload | undefined> = {
-      id: 'HandUp',
-      title: transI18n('biz-header.handUp'),
-      iconType: SvgIconEnum.HANDS_UP,
-      onClick: async () => {
-        const userRole = EduClassroomConfig.shared.sessionInfo.role;
-        if (userRole === EduRoleTypeEnum.teacher) {
-          // 获取目标 div 元素
-          const targetDiv = document.getElementsByClassName('card-hands-up-active');
-          if (targetDiv && targetDiv.length > 0) {
-            (targetDiv[0] as HTMLElement).click(); // 触发目标 div 的点击事件
-          }
-        }
-        if (userRole === EduRoleTypeEnum.student) {
-        }
-      },
-    };
-    const chatAction: EduNavAction<EduNavRecordActionPayload | undefined> = {
-      id: 'Chat',
-      title: transI18n('biz-header.chat'),
-      iconType: SvgIconEnum.CHAT,
-      onClick: async () => {
-        // 获取目标 div 元素
-        const targetDiv = document.getElementsByClassName('fcr-hx-show-chat-icon');
-        if (targetDiv && targetDiv.length > 0) {
-          (targetDiv[0] as HTMLElement).click(); // 触发目标 div 的点击事件
-        }
-      }
-    };
     const exitAction: EduNavAction<EduNavRecordActionPayload | undefined> = {
       id: 'Exit',
       title: transI18n('biz-header.exit'),
@@ -399,8 +370,6 @@ export class NavigationBarUIStore extends EduUIStoreBase {
     if (AgoraEduSDK.shareUrl) {
       commonActions.splice(1, 0, shareAction);
     }
-    commonActions.splice(0,0,chatAction)
-    commonActions.splice(0,0,handUpAction)
 
     const isInSubRoom = this.getters.isInSubRoom;
 
