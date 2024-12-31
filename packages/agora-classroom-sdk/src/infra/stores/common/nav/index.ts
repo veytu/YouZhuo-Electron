@@ -38,7 +38,7 @@ const classtalkDomain = ({ isDevc }: { isDevc: boolean }) => {
 };
 
 export interface EduNavAction<P = undefined> {
-  id: 'Record' | 'AskForHelp' | 'Settings' | 'Exit' | 'Camera' | 'Mic' | 'Share';
+  id: 'Record' | 'AskForHelp' | 'Settings' | 'Exit' | 'Camera' | 'Mic' | 'Share' | 'HandUp' | 'Chat';
   title: string;
   iconType: SvgIconEnum;
   iconColor?: string;
@@ -161,7 +161,7 @@ export class NavigationBarUIStore extends EduUIStoreBase {
    */
   @computed
   get actions(): EduNavAction<EduNavRecordActionPayload | undefined>[] {
-    const { isRecording, isRecordStarting, recordStatus } = this;
+    const { isRecording, isRecordStarting, recordStatus,getters:{classroomUIStore:{handUpUIStore,widgetUIStore}} } = this;
     const recordingTitle = isRecording
       ? transI18n('toast.stop_recording.title')
       : transI18n('toast.start_recording.title');
@@ -169,6 +169,35 @@ export class NavigationBarUIStore extends EduUIStoreBase {
       ? transI18n('toast.stop_recording.body')
       : transI18n('toast.start_recording.body');
 
+    const handUpAction: EduNavAction<EduNavRecordActionPayload | undefined> = {
+      id: 'HandUp',
+      title: transI18n('biz-header.handUp'),
+      iconType: SvgIconEnum.HANDS_UP,
+      onClick: async () => {
+        const userRole = EduClassroomConfig.shared.sessionInfo.role;
+        if (userRole === EduRoleTypeEnum.teacher) {
+          // 获取目标 div 元素
+          const targetDiv = document.getElementsByClassName('card-hands-up-active');
+          if (targetDiv && targetDiv.length > 0) {
+            (targetDiv[0] as HTMLElement).click(); // 触发目标 div 的点击事件
+          }
+        }
+        if (userRole === EduRoleTypeEnum.student) {
+        }
+      },
+    };
+    const chatAction: EduNavAction<EduNavRecordActionPayload | undefined> = {
+      id: 'Chat',
+      title: transI18n('biz-header.chat'),
+      iconType: SvgIconEnum.CHAT,
+      onClick: async () => {
+        // 获取目标 div 元素
+        const targetDiv = document.getElementsByClassName('fcr-hx-show-chat-icon');
+        if (targetDiv && targetDiv.length > 0) {
+          (targetDiv[0] as HTMLElement).click(); // 触发目标 div 的点击事件
+        }
+      }
+    };
     const exitAction: EduNavAction<EduNavRecordActionPayload | undefined> = {
       id: 'Exit',
       title: transI18n('biz-header.exit'),
@@ -399,7 +428,7 @@ export class NavigationBarUIStore extends EduUIStoreBase {
     }
 
     actions = actions.concat(commonActions);
-    return actions;
+    return [handUpAction,chatAction,...actions];
   }
 
   @computed

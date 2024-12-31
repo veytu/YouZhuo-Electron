@@ -384,6 +384,8 @@ export const zh = {
   'biz-header': {
     perf: 'Perf',
     setting: '设置',
+    handUp: '举手',
+    chat: '聊天',
     exit: '退出',
     recording: '录制中...',
     start_record: '开启录制',
