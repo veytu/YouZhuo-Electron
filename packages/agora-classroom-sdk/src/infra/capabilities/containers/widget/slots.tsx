@@ -7,6 +7,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useI18n } from 'agora-common-libs';
 import { ComponentLevelRules } from '../../config';
 import { Card, Popover, SvgIcon, SvgIconEnum, SvgImg } from '@classroom/ui-kit/components';
+import topResizeHandleBg from './assets/svga/top-resize-handle-bg.svg'
 
 export const Chat = observer(function Chat() {
   const { widgetUIStore } = useStore();
@@ -52,7 +53,7 @@ export const ChatNav = observer(function ChatNav() {
 });
 
 export const Whiteboard = observer(function Board() {
-  const { boardUIStore } = useStore();
+  const { boardUIStore,streamUIStore } = useStore();
   const { isCopying } = boardUIStore;
 
   const [height, setHeight] = useState(boardUIStore.boardAreaHeight);
@@ -60,19 +61,59 @@ export const Whiteboard = observer(function Board() {
 
   useEffect(() => {
     let isResizing = false;
-    let startY: number;
+    let lastY: number;
+    let lastHeight: number = boardUIStore.boardAreaHeight;
+    //音视频区域最大显示的人数数量
+    const streamShowCount = 3;
 
+    //获取音视频流区域宽高
+    function getStreamContainerWidthHeight() {
+      // 获取目标元素
+      const element = document.getElementById('stage-container');
+      if (element) {
+        // 获取元素的尺寸
+        const rect = element.getBoundingClientRect();
+        const width = rect.width;  // 获取宽度
+        const height = rect.height;  // 获取高度
+        return { width, height }
+      } else {
+        return { width: 0, height: 0 }
+      }
+    }
+    //计算父容器应该显示的最大高度
+    function calculateContainerHeight(containerWidth: number, childHeight: number, aspectRatio: number, maxUsers: number) {
+      // 计算子元素的宽度
+      const childWidth = childHeight * aspectRatio;
+      // 所有使用的宽度
+      const useWidth = maxUsers * childWidth;
+      if(containerWidth > useWidth){
+        return childHeight
+      }else{
+        return containerWidth / maxUsers / aspectRatio;
+      }
+    }
     function mouseDownHandler(e: { clientY: number; }) {
+      if (lastHeight < 0) {
+        lastHeight = boardUIStore.boardAreaHeight;
+      }
       isResizing = true;
-      startY = e.clientY;
+      lastY = e.clientY;
     }
 
     function mouseMoveHandler(e: { clientY: number; }) {
       if (!isResizing) return;
-      // Calculate new height based on the mouse position.
-      // The top edge moves up as the height increases and vice versa.
-      const newHeight = boardUIStore.boardAreaHeight + startY - e.clientY;
-      setHeight(Math.min(Math.max(newHeight, 50), boardUIStore.boardAreaHeight)); // Ensure minimum height of 50px
+      //音视频区域宽高
+      const {width,height} = getStreamContainerWidthHeight()
+      //最大可容纳人数对应的高度
+      const maxHeight = calculateContainerHeight(width, height, 142 / 80, Math.min(streamShowCount, streamUIStore.allUIStreams.size))
+      //需要一定冗余量
+      if (Math.abs(maxHeight - height) < 10 || lastY > e.clientY) {
+        lastHeight = lastHeight + lastY - e.clientY;
+        lastHeight += Math.max(0, maxHeight - height)
+        lastHeight = Math.min(Math.max(lastHeight, 50), boardUIStore.boardAreaHeight)
+        lastY = e.clientY;
+        setHeight(lastHeight); // Ensure minimum height of 50px
+      }
     }
 
     function mouseUpHandler() {
@@ -101,6 +142,16 @@ export const Whiteboard = observer(function Board() {
     setHeight(boardUIStore.boardAreaHeight)
   }, [boardUIStore.boardAreaHeight])
 
+  // 定义 hover 状态
+  const [isHovered, setIsHovered] = useState(false);
+  // hover 样式
+  const hoverStyle = {
+    background: isHovered ? `url(${topResizeHandleBg}) center center / cover no-repeat` : 'transparent',
+    height: 10,
+    width: '100%',
+    cursor: 'ns-resize',
+  };
+
   return (
     <div
       ref={resizableRef}
@@ -112,14 +163,10 @@ export const Whiteboard = observer(function Board() {
       }}
     >
       {/* Top resize handle */}
-      <div className="top-resize-handle" style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: 10,
-        cursor: 'ns-resize',
-      }}
+      <div className="top-resize-handle" 
+       style={hoverStyle}
+       onMouseEnter={() => setIsHovered(true)}  // 进入时修改 hover 状态
+       onMouseLeave={() => setIsHovered(false)} // 离开时修改 hover 状态
       ></div>
       {/* Content goes here */}
       <React.Fragment>
