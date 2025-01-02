@@ -1,6 +1,6 @@
 import { useLectureH5UIStores, useStore } from '@classroom/infra/hooks/ui-store';
 import { EduLectureH5UIStore } from '@classroom/infra/stores/lecture-mobile';
-import { EduClassroomConfig } from 'agora-edu-core';
+import { EduClassroomConfig, EduRoleTypeEnum } from 'agora-edu-core';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 import React, { useEffect, useRef, useState } from 'react';
@@ -93,11 +93,13 @@ export const Whiteboard = observer(function Board() {
       }
     }
     function mouseDownHandler(e: { clientY: number; }) {
-      if (lastHeight < 0) {
-        lastHeight = boardUIStore.boardAreaHeight;
+      if (EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher) {
+        if (lastHeight < 0) {
+          lastHeight = boardUIStore.boardAreaHeight;
+        }
+        isResizing = true;
+        lastY = e.clientY;
       }
-      isResizing = true;
-      lastY = e.clientY;
     }
 
     function mouseMoveHandler(e: { clientY: number; }) {
@@ -163,12 +165,12 @@ export const Whiteboard = observer(function Board() {
       }}
     >
       {/* Top resize handle */}
-      <div className="top-resize-handle" 
-       style={hoverStyle}
-       onMouseEnter={() => setIsHovered(true)}  // 进入时修改 hover 状态
-       onMouseLeave={() => setIsHovered(false)} // 离开时修改 hover 状态
+      <div className="top-resize-handle"
+        style={EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher ? {...hoverStyle,position:'absolute',zIndex:9999} : { display: 'none' }}
+        onMouseEnter={() => { if (EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher) setIsHovered(true) }}  // 进入时修改 hover 状态
+        onMouseLeave={() => { if (EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher) setIsHovered(false) }} // 离开时修改 hover 状态
       ></div>
-      {/* Content goes here */}
+      { }
       <React.Fragment>
         <div
           style={{ height: boardUIStore.boardAreaHeight, zIndex: ComponentLevelRules.WhiteBoard }}
