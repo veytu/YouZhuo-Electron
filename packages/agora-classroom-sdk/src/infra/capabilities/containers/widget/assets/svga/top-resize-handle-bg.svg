@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920px" height="16px" viewBox="0 0 1920 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 40</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="分割线-举手聊天左侧" transform="translate(0.000000, -216.000000)">
+            <g id="编组-40" transform="translate(0.000000, 216.000000)">
+                <g id="编组-58" transform="translate(0.000000, 6.000000)">
+                    <rect id="矩形" fill="#0C88FF" x="0" y="0.857142857" width="1920" height="3.42857143"></rect>
+                    <line x1="0" y1="0.857142857" x2="1920" y2="0.857142857" id="路径-2" stroke="#CAE6FF" stroke-width="1.72817282" stroke-dasharray="5.184518297334494"></line>
+                </g>
+                <g id="编组-57" transform="translate(921.000000, 0.000000)">
+                    <rect id="矩形" stroke="#108AFF" stroke-width="1.30434783" fill="#DFF0FF" x="0.652173913" y="0.652173913" width="84.6956522" height="14.6956522" rx="7.34782609"></rect>
+                    <g id="编组-38" transform="translate(36.000000, 3.000000)">
+                        <rect id="矩形" fill="#90CCF7" x="1.35111693" y="1.34161491" width="10.8089354" height="2.68322981"></rect>
+                        <rect id="矩形" fill="#1C8CED" x="0" y="0" width="13.5111693" height="1.34161491"></rect>
+                        <rect id="矩形" fill="#1C8CED" x="0" y="4.02484472" width="13.5111693" height="1.34161491"></rect>
+                        <g id="编组" transform="translate(0.000000, 5.366460)" fill="#1C8CED" fill-rule="nonzero">
+                            <polygon id="路径" points="13.5111693 0 6.75520201 4.02484472 0 0"></polygon>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
