@@ -43,26 +43,7 @@ export const HandsUpContainerNav = visibilityControl(
   observer(() => {
     const userRole = EduClassroomConfig.shared.sessionInfo.role;
     if (userRole === EduRoleTypeEnum.teacher) {
-      return <div onClick={() => {
-        // 获取目标 div 元素
-        const targetDiv = document.getElementsByClassName('card-hands-up');
-        if (targetDiv && targetDiv.length > 0) {
-          (targetDiv[0] as HTMLElement).click(); // 触发目标 div 的点击事件
-        }
-      }}>
-        <Card
-          className="hands-up-sender-nav"
-          width={20}
-          height={20}
-          borderRadius={20}>
-          <div>
-            <SvgImg
-              type={SvgIconEnum.HANDS_UP}
-              size={20}
-            />
-          </div>
-        </Card>
-      </div>;
+      return <WaveArmManagerContainerNav />;
     }
     if (userRole === EduRoleTypeEnum.student) {
       return <WaveArmSenderContainerNav />;
@@ -71,3 +52,10 @@ export const HandsUpContainerNav = visibilityControl(
   }),
   raiseHandEnabled,
 );
+export const WaveArmManagerContainerNav = observer(() => {
+  const { handUpUIStore } = useStore();
+  const { waveArmCount, hasWaveArmUser } = handUpUIStore;
+  return (
+    <WaveArmManagerNav hasWaveArmUser={hasWaveArmUser} waveArmCount={waveArmCount} />
+  );
+});

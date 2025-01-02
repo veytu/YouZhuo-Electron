@@ -235,6 +235,8 @@ export class NavigationBarUIStore extends EduUIStoreBase {
           });
         },
       },
+      {id: 'HandUp',title: '',iconType: SvgIconEnum.HANDS_UP},
+      {id: 'Chat',title: '',iconType: SvgIconEnum.CHAT},
     ];
 
     const teacherMediaActions: EduNavAction[] = [
@@ -386,6 +388,8 @@ export class NavigationBarUIStore extends EduUIStoreBase {
       if (isInSubRoom) {
         actions = actions.concat(studentActions);
       }
+      actions.unshift({id: 'Chat',title: '',iconType: SvgIconEnum.CHAT})
+      actions.unshift({id: 'HandUp',title: '',iconType: SvgIconEnum.HANDS_UP})
       if (isRecording)
         actions.unshift({
           id: 'Record',

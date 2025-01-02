@@ -23,3 +23,16 @@
   border-color: #fff;
   pointer-events: none;
 }
+
+.widget-slot-chat * .fcr-hx-show-chat-icon{
+  background-color: transparent !important;
+  box-shadow: none !important;
+  width: 0;
+  height: 0;
+}
+.card-hands-up{
+  background-color: transparent !important;
+  box-shadow: none !important;
+  width: 0;
+  height: 0;
+}

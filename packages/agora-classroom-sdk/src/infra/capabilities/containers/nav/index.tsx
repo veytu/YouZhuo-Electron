@@ -139,20 +139,26 @@ const Actions = observer(() => {
   const { navigationBarUIStore } = useStore();
   const { actions } = navigationBarUIStore;
 
+
+  const getShowAction = (a: EduNavAction<EduNavRecordActionPayload> | EduNavAction<undefined>) => {
+    switch (a.id) {
+      case 'Record':
+        return <NavigationBarRecordAction
+          key={a.iconType}
+          action={a as EduNavAction<EduNavRecordActionPayload>}
+        />
+      case 'HandUp':
+        return <div className='action-icon'><HandsUpContainerNav /></div>
+      case 'Chat':
+        return <div className='action-icon'><ChatNav /></div>
+      default:
+        return <NavigationBarAction key={a.iconType} action={a as EduNavAction} />
+    }
+  }
+
   return (
     <React.Fragment>
-      {actions.length
-        ? actions.map((a) =>
-            a.id === 'Record' ? (
-              <NavigationBarRecordAction
-                key={a.iconType}
-                action={a as EduNavAction<EduNavRecordActionPayload>}
-              />
-            ) : (
-              <NavigationBarAction key={a.iconType} action={a as EduNavAction} />
-            ),
-          )
-        : null}
+      {actions.length ? actions.map((a) => getShowAction(a)) : null}
     </React.Fragment>
   );
 });
@@ -304,8 +310,6 @@ export const NavigationBar = visibilityControl(() => {
         <RoomState />
       </div>
       <div className="header-actions">
-        <HandsUpContainerNav />
-        <ChatNav/>
         <Actions />
         <ShareCard />
       </div>
