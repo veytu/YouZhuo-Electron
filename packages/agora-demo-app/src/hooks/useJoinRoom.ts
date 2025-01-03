@@ -153,11 +153,11 @@ export const useJoinRoom = () => {
           },
           screenShareEncoderConfiguration: isProctoring
             ? {
-                width: 1280,
-                height: 720,
-                frameRate: 30,
-                bitrate: 1000,
-              }
+              width: 1920,
+              height: 1080,
+              frameRate: 30,
+              bitrate: 500,
+            }
             : undefined,
         },
         returnToPath: options.returnToPath,
