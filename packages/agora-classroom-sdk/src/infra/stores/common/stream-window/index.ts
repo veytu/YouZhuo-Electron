@@ -58,6 +58,7 @@ export class StreamWindowUIStore extends EduUIStoreBase {
   private _streamWindowUpdatedFromRoom = false; // 收到widget更新标志位
   private _lowUuids = new Set<string>();
   private _highUuids = new Set<string>();
+  private _highDefaultUuids:string[] = [];//默认显示大流的流id列表
 
   @observable
   private _streamWindowContainerBounds = {
@@ -823,6 +824,18 @@ export class StreamWindowUIStore extends EduUIStoreBase {
     this.sendWidgetDataToServer(); //发送消息到远端
   }
 
+  //更新老师流类型为大流
+  @action.bound
+  async updateTeacherStreamToHigh() {
+    const { teacherCameraStream } = this.getters;
+    if (teacherCameraStream) {
+      this._highDefaultUuids.push(teacherCameraStream.streamUuid)
+      await this.classroomStore.streamStore.setRemoteVideoStreamType(
+        teacherCameraStream.streamUuid,
+        AGRemoteVideoStreamType.HIGH_STREAM,
+      );    }
+  }
+
   @action.bound
   private _handleToggleTeacherStreamWindow(visible: boolean) {
     const { teacherCameraStream } = this.getters;
@@ -1044,7 +1057,7 @@ export class StreamWindowUIStore extends EduUIStoreBase {
         async (stream, streamUuid: string) => {
           if (stream.videoSourceType !== AgoraRteVideoSourceType.ScreenShare) {
             const isLow = this._lowUuids.has(streamUuid);
-            const isHigh = this._highUuids.has(streamUuid);
+            const isHigh = this._highUuids.has(streamUuid) || this._highDefaultUuids.indexOf(streamUuid) >= 0;
             if (highStreamUuids.has(streamUuid) && !isHigh) {
               await this.classroomStore.streamStore.setRemoteVideoStreamType(
                 streamUuid,

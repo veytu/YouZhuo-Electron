@@ -26,7 +26,7 @@ export const RoomMidStreamsContainer = observer(() => {
         stageVisible && role == '1' ? '' : checkScreen() ? 'fcr-hidden' : ''
       }`}>
       <div className="fcr-h-full fcr-flex fcr-justify-center fcr-items-center fcr-relative">
-        <TeacherStream />
+        <TeacherStream  />
         <StudentStreams />
       </div>
     </div>
@@ -34,7 +34,13 @@ export const RoomMidStreamsContainer = observer(() => {
 });
 
 export const TeacherStream = visibilityControl(
-  observer(() => {
+  observer(({
+    aspectRatio = '142/80',
+    highTeacherStream,
+  }: {
+    aspectRatio?: string,
+    highTeacherStream?:boolean
+  }) => {
     const { streamUIStore } = useInteractiveUIStores() as EduInteractiveUIClassStore;
     const { teacherCameraStream, videoStreamSize, gap } = streamUIStore;
 
@@ -59,7 +65,8 @@ export const TeacherStream = visibilityControl(
       height: videoStreamSize.height,
     };
 
-    return <DragableStream style={style} playerStyle={playerStyle} stream={teacherCameraStream} aspectRatio='142/80'/>;
+    return <DragableStream style={style} playerStyle={playerStyle} stream={teacherCameraStream}
+      aspectRatio={aspectRatio ? aspectRatio : '142/80'} highTeacherStream={highTeacherStream} />;
   }),
   teacherVideoEnabled,
 );
