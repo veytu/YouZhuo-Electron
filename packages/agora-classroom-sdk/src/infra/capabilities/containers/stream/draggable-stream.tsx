@@ -64,17 +64,20 @@ export const DragableStream = observer(
     style,
     playerStyle,
     aspectRatio,
+    highTeacherStream,
   }: {
     stream?: EduStreamUI;
     style?: CSSProperties;
     playerStyle?: CSSProperties;
-    aspectRatio?:string
+    aspectRatio?:string,
+    highTeacherStream?:boolean
   }) => {
     const { streamWindowUIStore } = useStore();
     const {
       streamDraggable: streamDragable,
       handleDBClickStreamWindow,
       streamWindowStreamUuids,
+      updateTeacherStreamToHigh
     } = streamWindowUIStore;
 
     // control whether this block should interact with mouse events or gestures
@@ -85,8 +88,12 @@ export const DragableStream = observer(
     const handleStreamDoubleClick = () => {
       interactable && streamDragable && stream && handleDBClickStreamWindow(stream.stream);
     };
+    //判断老师是否要大流
+    if(highTeacherStream){
+      updateTeacherStreamToHigh()
+    }
     if (aspectRatio) {
-      return <div style={{ height: '100%', aspectRatio: aspectRatio }}>
+      return <div style={{height:'100%',aspectRatio:aspectRatio}}>
         {stream ? (
           <div style={{ position: 'relative', ...style, width: '100%', height: '100%' }} onDoubleClick={handleStreamDoubleClick}>
             <StreamPlayer renderAt="Bar" stream={stream} style={playerStyle} />
