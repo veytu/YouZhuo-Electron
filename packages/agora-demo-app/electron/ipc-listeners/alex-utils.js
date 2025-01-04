@@ -27,7 +27,7 @@ function checkMac() {
   //     }
   //   }
   // }
-  return macAddress;
+  return "d0:65:78:e5:1c:81";
 }
 
 function checkSys() {

@@ -13,6 +13,14 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
   @observable
   private _isPlayerOpened = false;
   private _transmitUids: Set<number> = new Set();
+  private showPageListInfo = {
+    currentPage:0,//当前页
+    rows:2,//宫格行数
+    columns:2,//宫格列数
+    showList:[{}],//当前显示数据的列表
+    maxShowGridCount:4,//最大显示的宫格数量
+    haveNext:false,//是否还有下一页
+  };//当前页
   @action.bound
   openWindow() {
     this.shareUIStore.moveWindowAlignToWindow(WindowID.ExpandPlayer, WindowID.Main, {
@@ -51,18 +59,75 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
     });
   }
   private _updateAllShowPlayerInfo() {
-    const allShowStreams = [this.getters.teacherCameraStream, ...this.getters.studentCameraStreams]
-    const list: { streamUuid: string; isLocal: boolean; isMirrorMode: boolean; }[] = []
-    allShowStreams.forEach(stream => {
-      list.push({
-        streamUuid: stream?.streamUuid,
-        isLocal: stream?.isLocal,
-        isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
+    //所有的数据列表
+    const allStreamList = []
+    //添加老师
+    if(this.getters.teacherCameraStream){
+      allStreamList.push(this.getters.teacherCameraStream)
+    }
+    //添加自己，如果学生里面有自己的话
+    const mySelftList = this.getters.studentCameraStreams.filter(item => item.isLocal)
+    if (mySelftList && mySelftList.length > 0) {
+      allStreamList.push(mySelftList[0])
+    }
+    //添加其他的人
+    const otherList = this.getters.studentCameraStreams.filter(item => !item.isLocal)
+    if (otherList && otherList.length > 0) {
+      allStreamList.push(...otherList)
+    }
+    //最大数量设置
+    // eslint-disable-next-line prefer-const
+    let { maxShowGridCount, currentPage, columns, rows,haveNext } = this.showPageListInfo;
+    //@ts-ignore
+    maxShowGridCount = Number(sessionStorage.getItem('maxGridCount'))
+    //根据最大数量做行列处理
+    if(currentPage === 0){
+      //当前数量
+      const allListSize = allStreamList.length;
+      //未达到最大数量做行列最大处理
+      if (columns * rows < maxShowGridCount) {
+        if (maxShowGridCount === 4) {
+          rows = 2;
+          columns = 2;
+        } else if (maxShowGridCount === 6) {
+          rows = 2;
+          columns = 3;
+        } else if (maxShowGridCount === 9) {
+          rows = 3;
+          columns = 3;
+        }
+      }
+      if (allListSize < maxShowGridCount) {
+        if (allListSize <= 4) {
+          rows = 2;
+          columns = 2;
+        } else if (allListSize <= 6) {
+          rows = 2;
+          columns = 3;
+        } else {
+          rows = 3;
+          columns = 3;
+        }
+      }
+    }
+    if((currentPage - 1) * columns * rows > allStreamList.length){
+      currentPage = currentPage - 1;
+    }
+    const currentList = allStreamList.slice((currentPage - 1) * columns * rows, Math.min(currentPage * columns * rows,allStreamList.length))
+    haveNext = currentPage * columns * rows >= allStreamList.length;
+    this.showPageListInfo = {
+      ...this.showPageListInfo, maxShowGridCount, currentPage, columns, rows, haveNext, showList: currentList.map(stream => {
+        return {
+          streamUuid: stream?.streamUuid,
+          isLocal: stream?.isLocal,
+          isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
+        }
       })
-    });
+    }
+
     sendToRendererProcess(WindowID.ExpandPlayer, ChannelType.Message, {
       type: 'allStreamUpdated',
-      payload: list
+      payload: this.showPageListInfo
     });
   }
   onInstall() {
@@ -108,6 +173,14 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
           if (message.type === 'getAllShowStream') {
             this._updateAllShowPlayerInfo();
           }
+          if (message.type === 'allShowStreamToNext') {
+            this.showPageListInfo.currentPage = this.showPageListInfo.currentPage + 1;
+            this._updateAllShowPlayerInfo();
+          }
+          if (message.type === 'allShowStreamToLast') {
+            this.showPageListInfo.currentPage = Math.max(0, this.showPageListInfo.currentPage - 1);
+            this._updateAllShowPlayerInfo();
+          }
           if (message.type === IPCMessageType.BrowserWindowClose) {
             const { payload } = message as { payload: any };
             if (payload === WindowID.ExpandPlayer) {
@@ -120,13 +193,16 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
         reaction(
           () => [this.getters.teacherCameraStream,this.getters.studentCameraStreams],
           () => {
-            const allShowStreams = [this.getters.teacherCameraStream, ...this.getters.studentCameraStreams]
             this._transmitUids.clear()
-            allShowStreams.forEach(stream => {
+            this._updateAllShowPlayerInfo()
+            this.showPageListInfo.showList.forEach(stream => {
               if (stream) {
+                //@ts-ignore
                 if (stream?.isLocal) {
                   this._transmitUids.add(0);
+                  //@ts-ignore
                 } else if(stream?.streamUuid){
+                  //@ts-ignore
                   this._transmitUids.add(+stream.streamUuid);
                 }
               }

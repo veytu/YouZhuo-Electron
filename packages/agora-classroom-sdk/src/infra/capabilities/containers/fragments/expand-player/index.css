@@ -16,3 +16,16 @@
   justify-content: center;
   align-items: center;
 }
+.expand-play-go-other-page {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.expand-play-go-last-page {
+  left: 0;
+}
+
+.expand-play-go-next-page {
+  right: 0;
+}
