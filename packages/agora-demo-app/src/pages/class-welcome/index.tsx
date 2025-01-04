@@ -15,15 +15,12 @@ export const ClassWelcome = observer(() => {
   const [tableConfig, setTableConfig] = useState<TableInfo | null>(null);
   const history = useHistory();
   const { language, region, setLaunchConfig } = useContext(GlobalStoreContext);
-  const [expandPlayConfig, setExpandPlayConfig] = useState({columns:3, rows:3, streamType:1});
   const handleFetchDone = async (params: InClassTalkConfig) => {
     console.log('handleFetchDone', params);
     setTableConfig(params.tableInfo);
     setAgoraLaunchConfig(params.agoraConfig);
   };
   const webRTCCodec = 'vp8';
-  const gridCount = [{text:"4",value:'2,2'},{text:"6",value:'3,2'},{text:"9",value:'3,3'}]
-  localStorage.setItem("expandPlayConfig",JSON.stringify(expandPlayConfig))
 
   const handleEnter = () => {
     const config = {
@@ -83,15 +80,6 @@ export const ClassWelcome = observer(() => {
             <CompositeArea />
           </div>
         </div>
-      </div>
-      <div style={{ zIndex: 999, position: 'absolute',left:0,top:0 }}>
-        <Dropdown options={gridCount} value={expandPlayConfig.columns + "," + expandPlayConfig.rows} width={100} onChange={function (value: string): void {
-          expandPlayConfig.columns = Number(value.split(',')[0])
-          expandPlayConfig.rows = Number(value.split(',')[1])
-          expandPlayConfig.streamType = value == "2,2" ? 0 : 1
-          setExpandPlayConfig({...expandPlayConfig})
-          localStorage.setItem("expandPlayConfig",JSON.stringify(expandPlayConfig))
-        }} />
       </div>
     </div>
   );

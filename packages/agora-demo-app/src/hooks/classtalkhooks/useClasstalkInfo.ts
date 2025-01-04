@@ -94,6 +94,7 @@ export const useClasstalkInfo = (props: ClassInfoProps) => {
           const isDev = false; // 方便调试
           const { name, id: croomId } = await getClassroomInfo({ isDev, mac: args || '' });
           sessionStorage.setItem('croomId', croomId);
+          sessionStorage.setItem('maxGridCount','4')
           setClasstalkName(name);
           const {
             id: tableId,
