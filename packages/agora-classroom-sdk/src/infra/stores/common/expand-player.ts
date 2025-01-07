@@ -113,7 +113,7 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
     if((currentPage - 1) * columns * rows > allStreamList.length){
       currentPage = currentPage - 1;
     }
-    const currentList = allStreamList.slice((currentPage - 1) * columns * rows, Math.min(currentPage * columns * rows,allStreamList.length))
+    const currentList = allStreamList.slice(currentPage * columns * rows, Math.min((currentPage + 1) * columns * rows, allStreamList.length))
     haveNext = currentPage * columns * rows >= allStreamList.length;
     this.showPageListInfo = {
       ...this.showPageListInfo, maxShowGridCount, currentPage, columns, rows, haveNext, showList: currentList.map(stream => {
@@ -127,7 +127,7 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
 
     sendToRendererProcess(WindowID.ExpandPlayer, ChannelType.Message, {
       type: 'allStreamUpdated',
-      payload: this.showPageListInfo
+      payload: JSON.stringify(this.showPageListInfo)
     });
   }
   onInstall() {
