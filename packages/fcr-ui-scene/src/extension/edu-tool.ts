@@ -27,6 +27,11 @@ export class EduTool {
       id: 'breakout',
       iconType: SvgIconEnum.FCR_V2_BREAKROOM,
     },
+    {
+      name: transI18n('fcr_tool_box_breakout_room'),
+      id: 'breakout1',
+      iconType: SvgIconEnum.FCR_V2_BREAKROOM,
+    },
   ];
   @observable
   private _visibleStateMap = new Map<string, boolean>();

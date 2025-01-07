@@ -72,6 +72,7 @@ export class ToolbarUIStore extends EduUIStoreBase {
     CabinetItemEnum.BreakoutRoom,
     CabinetItemEnum.Laser,
     CabinetItemEnum.VideoGallery,
+    CabinetItemEnum.ScanCode,
   ];
 
   private _disposers: (() => void)[] = [];
@@ -392,6 +393,15 @@ export class ToolbarUIStore extends EduUIStoreBase {
       case CabinetItemEnum.Laser:
         this.setTool(id);
         break;
+      case CabinetItemEnum.ScanCode:
+        //@ts-ignore
+        const scanCodeDomainUrl = sessionStorage.getItem('scanCodeDomainUrl') ? sessionStorage.getItem('scanCodeDomainUrl') : 'https://aws.aliyu.info/youzhuoUploadFile/'
+        //@ts-ignore
+        const roomId = sessionStorage.getItem('croomId');
+        this.boardApi.putImageResource(`https://api.qrserver.com/v1/create-qr-code/?data=${scanCodeDomainUrl}?roomId=${roomId}&size=200x200`, {
+          x: 100, y: 100, width: 200, height: 200
+        });
+        break;
       case CabinetItemEnum.Whiteboard:
         if (this.isWhiteboardOpening) {
           this.shareUIStore.addConfirmDialog(
@@ -635,6 +645,11 @@ export class ToolbarUIStore extends EduUIStoreBase {
         iconType: 'laser-pointer',
         name: transI18n('scaffold.laser_pointer'),
       },
+      {
+        id: CabinetItemEnum.ScanCode,
+        iconType: 'scan_code',
+        name: transI18n('scaffold.scan_code'),
+      },
     ];
 
     let apps = this.extensionApi.cabinetItems.concat(
@@ -649,6 +664,7 @@ export class ToolbarUIStore extends EduUIStoreBase {
     }
     if (!this.boardApi.mounted) {
       excludes.add(CabinetItemEnum.Laser);
+      excludes.add(CabinetItemEnum.ScanCode);
     }
 
     if (this.getters.isInSubRoom) {

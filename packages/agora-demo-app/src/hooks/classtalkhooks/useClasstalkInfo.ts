@@ -92,15 +92,16 @@ export const useClasstalkInfo = (props: ClassInfoProps) => {
             duration: 1,
           });
           const isDev = false; // 方便调试
-          const { name, id: croomId } = await getClassroomInfo({ isDev, mac: args || '' });
+          const { name, id: croomId, } = await getClassroomInfo({ isDev, mac: args || '' });
           sessionStorage.setItem('croomId', croomId);
-          sessionStorage.setItem('maxGridCount','4')
           setClasstalkName(name);
           const {
             id: tableId,
             timetableId,
+            screens,
             ...tableInfo
           } = await getTableInfo({ isDev, id: croomId });
+          sessionStorage.setItem('maxGridCount',screens)
           sessionStorage.setItem('tableId', timetableId);
           const agoraParams = await getAgoraData({ isDev, id: tableId });
           const { role } = agoraParams;

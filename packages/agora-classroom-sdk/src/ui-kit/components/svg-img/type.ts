@@ -53,6 +53,7 @@ export enum SvgIconEnum {
   INVITE_TO_PODIUM = 'invite-to-podium',
   KICK_OUT = 'kick-out',
   LASER_POINTER = 'laser-pointer',
+  SCAN_CODE = 'scan_code',
   LINE = 'line',
   LINK = 'link',
   LINK_SOLID = 'link-solid',

@@ -19,6 +19,7 @@ export enum CabinetItemEnum {
   Laser = 'laser',
   Whiteboard = 'whiteboard',
   VideoGallery = 'videoGallery',
+  ScanCode = 'scanCode',
 }
 
 export interface CabinetItem {
