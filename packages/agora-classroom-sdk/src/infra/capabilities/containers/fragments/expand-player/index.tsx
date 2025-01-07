@@ -65,7 +65,7 @@ export const ExpandPlayerGrid: FC<Props> = () => {
       console.log('message: ', message);
       if (message.type === 'allStreamUpdated') {
         //@ts-ignore
-        setShowPageData(message.payload)
+        setShowPageData(JSON.parse(message.payload))
       }
     });
     console.log('send message');

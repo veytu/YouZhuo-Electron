@@ -13,6 +13,7 @@ function checkMac() {
     }
     if (macAddress)  break;
   }
+  return macAddress;
   // if (!(macAddress && macAddress !== '00:00:00:00:00:00')) {
   //   macAddress = electron.ipcRenderer.invoke('get-mac-address');
   // }
@@ -27,7 +28,7 @@ function checkMac() {
   //     }
   //   }
   // }
-  return "d0:65:78:e5:1c:81";
+  // return "d0:65:78:e5:1c:81";
 }
 
 function checkSys() {

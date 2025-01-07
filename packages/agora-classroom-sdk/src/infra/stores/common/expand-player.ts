@@ -46,15 +46,17 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
   };
   private _updatePlayerInfo() {
     const stream = this.getters.teacherCameraStream;
-    console.log(`alex-extend-update-${JSON.stringify(stream)}- isLocal - ${stream.isLocal}`);
-    sendToRendererProcess(WindowID.ExpandPlayer, ChannelType.Message, {
-      type: 'teacherStreamUpdated',
-      payload: {
-        streamUuid: stream?.streamUuid,
-        isLocal: stream?.isLocal,
-        isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
-      },
-    });
+    console.log(`alex-extend-update-${stream ? JSON.stringify(stream) : 'null'}- isLocal - ${stream ? stream.isLocal : ''}`);
+    if(stream){
+      sendToRendererProcess(WindowID.ExpandPlayer, ChannelType.Message, {
+        type: 'teacherStreamUpdated',
+        payload: {
+          streamUuid: stream?.streamUuid,
+          isLocal: stream?.isLocal,
+          isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
+        },
+      });
+    }
   }
   private _updateAllShowPlayerInfo() {
     //所有的数据列表
@@ -111,7 +113,7 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
     if((currentPage - 1) * columns * rows > allStreamList.length){
       currentPage = currentPage - 1;
     }
-    const currentList = allStreamList.slice((currentPage - 1) * columns * rows, Math.min(currentPage * columns * rows,allStreamList.length))
+    const currentList = allStreamList.slice(currentPage * columns * rows, Math.min((currentPage + 1) * columns * rows, allStreamList.length))
     haveNext = currentPage * columns * rows >= allStreamList.length;
     this.showPageListInfo = {
       ...this.showPageListInfo, maxShowGridCount, currentPage, columns, rows, haveNext, showList: currentList.map(stream => {
@@ -125,7 +127,7 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
 
     sendToRendererProcess(WindowID.ExpandPlayer, ChannelType.Message, {
       type: 'allStreamUpdated',
-      payload: this.showPageListInfo
+      payload: JSON.stringify(this.showPageListInfo)
     });
   }
   onInstall() {

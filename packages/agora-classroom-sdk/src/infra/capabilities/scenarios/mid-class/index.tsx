@@ -26,8 +26,14 @@ import { CameraPlaceholderType } from '@classroom/infra/stores/common/stream/str
 export const MidClassScenario = () => {
   // layout
   const layoutCls = classnames('edu-room', 'mid-class-room');
-  const { shareUIStore,streamUIStore:{teacherCameraStream} } = useStore();
-
+  const { shareUIStore, streamUIStore: { teacherCameraStream } } = useStore();
+  const checkScreen = () => {
+    const screenLimit = 2;
+    //@ts-ignore
+    const screenNum = sessionStorage.getItem('screen');
+    if (screenNum && +screenNum >= screenLimit) return true;
+    return false;
+  };
   return (
     <Room>
       <FixedAspectRatioRootBox trackMargin={{ top: shareUIStore.navHeight }}>
@@ -41,7 +47,7 @@ export const MidClassScenario = () => {
                 <RoomMidStreamsContainer />
               </div>
               {
-                EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.student ?
+                EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.student && !checkScreen() ?
                   <div style={{ display: 'flex', width: '100%', flexDirection: 'row' }}>
                     <div style={{ width: '67%', textAlign: 'center' }}>
                       <Whiteboard />
