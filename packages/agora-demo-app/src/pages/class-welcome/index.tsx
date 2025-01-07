@@ -21,7 +21,8 @@ export const ClassWelcome = observer(() => {
     setAgoraLaunchConfig(params.agoraConfig);
   };
   const webRTCCodec = 'vp8';
-
+  //@ts-ignore
+  sessionStorage.setItem('scanCodeDomainUrl','https://aws.aliyu.info/youzhuoUploadFile/')
   const handleEnter = () => {
     const config = {
       platform: checkBrowserDevice(),

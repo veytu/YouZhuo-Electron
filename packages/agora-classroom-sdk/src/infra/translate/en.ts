@@ -304,6 +304,7 @@ export const en = {
     tools: 'Tools',
     user_list: 'User List',
     breakout_room: 'Breakout Room',
+    scan_code: 'Scan Upload',
     in_progress: '-In progress',
     not_in_progress: '-Not started',
     register: 'Roster',

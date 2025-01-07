@@ -296,6 +296,7 @@ export const zh = {
     tools: '工具栏',
     user_list: '用户列表',
     breakout_room: '分组讨论',
+    scan_code: '扫码上传',
     in_progress: '-进行中',
     not_in_progress: '-未开始',
     register: '花名册',
