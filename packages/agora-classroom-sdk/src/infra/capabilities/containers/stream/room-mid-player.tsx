@@ -22,7 +22,7 @@ export const RoomMidStreamsContainer = observer(() => {
   return (
     <div
       id="stage-container"
-      className={`fcr-w-full fcr-flex-grow fcr-flex-shrink-0 ${
+      className={`fcr-w-full fcr-flex-grow fcr-flex-shrink-0 fcr-h-full ${
         stageVisible && role == '1' ? '' : checkScreen() ? 'fcr-hidden' : ''
       }`}>
       <div className="fcr-h-full fcr-flex fcr-justify-center fcr-items-center fcr-relative">
