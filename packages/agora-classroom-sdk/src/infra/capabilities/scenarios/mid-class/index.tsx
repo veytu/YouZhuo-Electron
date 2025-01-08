@@ -43,7 +43,7 @@ export const MidClassScenario = () => {
             <Layout
               className="fcr-flex-grow fcr-items-stretch fcr-relative fcr-justify-center fcr-room-bg"
               direction="col">
-              <div style={{ display: EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher ? 'unset' : 'none' }}>
+              <div style={{ display: EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher ? 'unset' : 'none',height:'100%' }}>
                 <RoomMidStreamsContainer />
               </div>
               {
