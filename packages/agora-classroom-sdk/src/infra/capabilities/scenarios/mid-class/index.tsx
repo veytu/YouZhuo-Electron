@@ -22,6 +22,7 @@ import CameraPreview from '../../containers/camera-preview';
 import { EduClassroomConfig, EduRoleTypeEnum } from 'agora-edu-core';
 import { StreamPlaceholder, StreamPlayerCameraPlaceholder } from '../../containers/stream';
 import { CameraPlaceholderType } from '@classroom/infra/stores/common/stream/struct';
+import './index.mobile.css';
 
 export const MidClassScenario = () => {
   // layout
