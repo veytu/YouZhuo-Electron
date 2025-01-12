@@ -397,7 +397,9 @@ export class ToolbarUIStore extends EduUIStoreBase {
         //@ts-ignore
         const scanCodeDomainUrl = sessionStorage.getItem('scanCodeDomainUrl') ? sessionStorage.getItem('scanCodeDomainUrl') : 'https://aws.aliyu.info/youzhuoUploadFile/'
         //@ts-ignore
-        const roomId = sessionStorage.getItem('croomId');
+        let roomId = sessionStorage.getItem('croomId');
+        //@ts-ignore
+        roomId = roomId ? roomId : sessionStorage.getItem("tableId");
         this.boardApi.putImageResource(`https://api.qrserver.com/v1/create-qr-code/?data=${scanCodeDomainUrl}?roomId=${roomId}&size=200x200`, {
           x: 100, y: 100, width: 200, height: 200
         });
