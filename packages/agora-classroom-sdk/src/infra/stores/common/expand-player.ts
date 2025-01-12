@@ -38,7 +38,9 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
   };
   private _updatePlayerInfo() {
     const stream = this.getters.teacherCameraStream;
-    console.log(`alex-extend-update-${JSON.stringify(stream)}- isLocal - ${stream.isLocal}`);
+    if(stream){
+      console.log(`alex-extend-update-${JSON.stringify(stream)}- isLocal - ${stream.isLocal}`);
+    }
     sendToRendererProcess(WindowID.ExpandPlayer, ChannelType.Message, {
       type: 'teacherStreamUpdated',
       payload: {
@@ -102,7 +104,7 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
           () => {
             if (this.getters.teacherCameraStream?.isLocal) {
               this._transmitUids.add(0);
-            } else {
+            } else if (this.getters.teacherCameraStream?.streamUuid) {
               this._transmitUids.add(+this.getters.teacherCameraStream.streamUuid);
             }
             this._updatePlayerInfo();

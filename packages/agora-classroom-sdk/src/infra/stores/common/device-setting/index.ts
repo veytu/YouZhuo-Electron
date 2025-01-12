@@ -144,7 +144,7 @@ export class DeviceSettingUIStore extends EduUIStoreBase {
             if (!EduClassroomConfig.shared.openCameraDeviceAfterLaunch) {
               //this.setCameraDevice(DEVICE_DISABLE);
               // alex-tag-device-default-config-video
-              const DEFAULT_VALUE = JSON.parse(localStorage.getItem('video-value') ?? '');
+              const DEFAULT_VALUE = JSON.parse(localStorage.getItem('video-value') ?? '{}');
               // this.setCameraDevice(DEVICE_DISABLE);
               this.setCameraDevice(DEFAULT_VALUE || DEVICE_DISABLE);
             }
@@ -219,7 +219,7 @@ export class DeviceSettingUIStore extends EduUIStoreBase {
               // this.setRecordingDevice(DEVICE_DISABLE);
               // this._userHasSelectedAudioRecordingDevice = true;
               // alex-tag-device-default-config-audio
-              const DEFAULT_VALUE = JSON.parse(localStorage.getItem('audio-value') ?? '');
+              const DEFAULT_VALUE = JSON.parse(localStorage.getItem('audio-value') ?? '{}');
               this.setRecordingDevice(DEFAULT_VALUE || DEVICE_DISABLE);
               this._userHasSelectedAudioRecordingDevice = true;
             }
