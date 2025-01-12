@@ -97,6 +97,16 @@ export class BoardUIStore extends EduUIStoreBase {
         }),
       );
     }
+    this._disposers.push(
+      computed(() => this.getters.classroomUIStore.classroomStore.roomStore.flexProps).observe(async ({ newValue, oldValue }) => {
+        if (newValue["Photo upload"] && EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher) {
+          const view = document.getElementsByClassName("widget-slot-board")
+          if(view && view.length == 1){
+            this.boardApi.putImageResource(newValue["Photo upload"], { x: view[0].clientWidth / 2, y: view[0].clientHeight / 2, width: view[0].clientWidth * 0.5 , height: view[0].clientHeight * 0.5 })
+          }
+        }
+      }),
+    );
     EduEventUICenter.shared.onClassroomUIEvents(this._handleUIEvents);
   }
 
