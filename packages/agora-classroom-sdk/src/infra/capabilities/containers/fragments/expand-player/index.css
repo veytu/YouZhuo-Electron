@@ -1,9 +1,10 @@
 /* 设置宫格容器 */
 .expand-play-grid-container {
   display: grid;
-  width: 100%;
-  height: 100vh; /* 高度自适应全屏 */
+  width: 92%;
+  height: 92vh; /* 高度自适应全屏 */
   box-sizing: border-box;
+  margin: 2vh 4%;
 }
 
 /* 设置宫格项 */
@@ -15,6 +16,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 5px;
+  border-radius: 5.51px;
+  overflow: hidden;
+  background-clip: padding-box;
+  -webkit-mask-image: inset(0 0 0 0 round);
+  mask-image: inset(0 0 0 0 round);
 }
 .expand-play-go-other-page {
   position: absolute;

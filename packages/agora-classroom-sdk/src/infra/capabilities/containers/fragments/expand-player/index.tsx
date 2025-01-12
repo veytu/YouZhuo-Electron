@@ -95,7 +95,7 @@ export const ExpandPlayerGrid: FC<Props> = () => {
         <div className="expand-play-grid-container" style={{ gridTemplateColumns: `repeat(${showPageData.columns}, 1fr)`, gridTemplateRows: `repeat(${showPageData.rows}, 1fr)` }}>
           {showPageData.showList.map((info: ShowInfo, index) => (
             info.streamUuid != null && (
-              <div key={index} className='expand-play-grid-item' style={{ width: 100 / showPageData.columns + 'vw', height: 100 / showPageData.rows + "vh" }}>
+              <div key={index} className='expand-play-grid-item' style={{ width: 90 / showPageData.columns + 'vw', height: 94 / showPageData.rows + "vh" }}>
                 <VideoRenderer uid={+info.streamUuid} isLocal={info.isLocal} isMirrorMode={info.isMirrorMode} streamType={showPageData.maxShowGridCount <= 4 ? 0 : 1} />
               </div>
             )
