@@ -173,7 +173,7 @@ export const Whiteboard = observer(function Board() {
       { }
       <React.Fragment>
         <div
-          style={{ height: boardUIStore.boardAreaHeight, zIndex: ComponentLevelRules.WhiteBoard }}
+          style={{ height: `${height}px`, zIndex: ComponentLevelRules.WhiteBoard }}
           className="widget-slot-board"
         />
         {isCopying && <Spinner />}
