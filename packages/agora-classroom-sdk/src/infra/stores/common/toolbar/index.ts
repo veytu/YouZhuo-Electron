@@ -401,7 +401,7 @@ export class ToolbarUIStore extends EduUIStoreBase {
         //@ts-ignore
         roomId = roomId ? roomId : sessionStorage.getItem("tableId");
         this.boardApi.putImageResource(`https://api.qrserver.com/v1/create-qr-code/?data=${scanCodeDomainUrl}?roomId=${roomId}&size=200x200`, {
-          x: 100, y: 100, width: 200, height: 200
+          x: 200, y: 100, width: 200, height: 200
         });
         break;
       case CabinetItemEnum.Whiteboard:

@@ -1,7 +1,7 @@
 import { isSupportedImageType } from '@classroom/infra/utils';
 import { AgoraEduClassroomUIEvent, EduEventUICenter } from '@classroom/infra/utils/event-center';
 import { AGEduErrorCode, EduClassroomConfig, EduRoleTypeEnum, getImageSize } from 'agora-edu-core';
-import { AGErrorWrapper, bound } from 'agora-rte-sdk';
+import { AGErrorWrapper, AgoraRteCustomMessage, bound } from 'agora-rte-sdk';
 import { action, computed, IReactionDisposer, Lambda, observable, runInAction } from 'mobx';
 import { EduUIStoreBase } from '../base';
 import { conversionOption, extractFileExt, fileExt2ContentType } from '../cloud-drive/helper';
@@ -78,7 +78,18 @@ export class BoardUIStore extends EduUIStoreBase {
   get mounted() {
     return this.boardApi.mounted;
   }
-
+  @bound
+  private _onReceiveChannelMessage(message: AgoraRteCustomMessage) {
+  }
+  @bound
+  private _onReceivePeerMessage(message: AgoraRteCustomMessage) {
+    if ("Photo upload" === message.payload.cmd && message.payload.data.filePath && EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher) {
+      const view = document.getElementsByClassName("widget-slot-board")
+      if (view && view.length == 1) {
+        this.boardApi.putImageResource(message.payload.data.filePath, { x: view[0].clientWidth / 2, y: view[0].clientHeight / 2, width: view[0].clientWidth * 0.5, height: view[0].clientHeight * 0.5 })
+      }
+    }
+  }
   onInstall() {
     const { role, userUuid } = EduClassroomConfig.shared.sessionInfo;
     if (role === EduRoleTypeEnum.student) {
@@ -98,13 +109,15 @@ export class BoardUIStore extends EduUIStoreBase {
       );
     }
     this._disposers.push(
-      computed(() => this.getters.classroomUIStore.classroomStore.roomStore.flexProps).observe(async ({ newValue, oldValue }) => {
-        if (newValue["Photo upload"] && EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher) {
-          const view = document.getElementsByClassName("widget-slot-board")
-          if(view && view.length == 1){
-            this.boardApi.putImageResource(newValue["Photo upload"], { x: view[0].clientWidth / 2, y: view[0].clientHeight / 2, width: view[0].clientWidth * 0.5 , height: view[0].clientHeight * 0.5 })
-          }
-        }
+      computed(() => this.getters.classroomUIStore.classroomStore.connectionStore.scene).observe(async ({ newValue, oldValue }) => {
+        this.getters.classroomUIStore.classroomStore.connectionStore.scene?.removeCustomMessageObserver({
+          onReceiveChannelMessage: this._onReceiveChannelMessage,
+          onReceivePeerMessage: this._onReceivePeerMessage,
+        })
+        this.getters.classroomUIStore.classroomStore.connectionStore.scene?.addCustomMessageObserver({
+          onReceiveChannelMessage: this._onReceiveChannelMessage,
+          onReceivePeerMessage: this._onReceivePeerMessage,
+        })
       }),
     );
     EduEventUICenter.shared.onClassroomUIEvents(this._handleUIEvents);
@@ -236,6 +249,10 @@ export class BoardUIStore extends EduUIStoreBase {
   }
 
   onDestroy() {
+    this.getters.classroomUIStore.classroomStore.connectionStore.scene?.removeCustomMessageObserver({
+      onReceiveChannelMessage: this._onReceiveChannelMessage,
+      onReceivePeerMessage: this._onReceivePeerMessage,
+    })
     EduEventUICenter.shared.offClassroomUIEvents(this._handleUIEvents);
     this._disposers.forEach((d) => d());
     this._disposers = [];
