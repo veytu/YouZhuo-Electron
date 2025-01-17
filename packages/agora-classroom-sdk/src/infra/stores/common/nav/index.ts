@@ -238,7 +238,7 @@ export class NavigationBarUIStore extends EduUIStoreBase {
     ];
     if(EduRoomTypeEnum.RoomSmallClass === EduClassroomConfig.shared.sessionInfo.roomType){
       teacherActions.push({id: 'HandUp',title: '',iconType: SvgIconEnum.HANDS_UP})
-      teacherActions.push( {id: 'Chat',title: '',iconType: SvgIconEnum.CHAT})
+      // teacherActions.push( {id: 'Chat',title: '',iconType: SvgIconEnum.CHAT})
     }
 
 
@@ -392,7 +392,7 @@ export class NavigationBarUIStore extends EduUIStoreBase {
         actions = actions.concat(studentActions);
       }
       if(EduRoomTypeEnum.RoomSmallClass === EduClassroomConfig.shared.sessionInfo.roomType){
-        actions.unshift({id: 'Chat',title: '',iconType: SvgIconEnum.CHAT})
+        // actions.unshift({id: 'Chat',title: '',iconType: SvgIconEnum.CHAT})
         actions.unshift({id: 'HandUp',title: '',iconType: SvgIconEnum.HANDS_UP})
       }
       if (isRecording)
