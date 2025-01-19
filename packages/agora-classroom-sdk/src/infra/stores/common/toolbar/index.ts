@@ -396,14 +396,21 @@ export class ToolbarUIStore extends EduUIStoreBase {
       case CabinetItemEnum.ScanCode:
         //@ts-ignore
         const scanCodeDomainUrl = sessionStorage.getItem('scanCodeDomainUrl') ? sessionStorage.getItem('scanCodeDomainUrl') : 'https://aws.aliyu.info/youzhuoUploadFile/'
+        const scanCodeDomainUrlTimeRangSenond = sessionStorage.getItem('scanCodeDomainUrlTimeRangSenond') ? sessionStorage.getItem('scanCodeDomainUrlTimeRangSenond') : '60'
         //@ts-ignore
         let roomId = sessionStorage.getItem('croomId');
         //@ts-ignore
         roomId = roomId ? roomId : sessionStorage.getItem("tableId");
-        this.boardApi.putImageResource(`https://api.qrserver.com/v1/create-qr-code/?data=${scanCodeDomainUrl}?roomId=${roomId}&size=200x200`, {
+        if(localStorage.getItem("launch_options")){
+          roomId = roomId ? roomId : JSON.parse(localStorage.getItem("launch_options")!).roomUuid;
+        }
+        //传递的信息
+        const infoStr = JSON.stringify({startTime:Date.now(),endTime:Date.now() + Number(scanCodeDomainUrlTimeRangSenond) * 1000,roomId:roomId})
+        const rangText = btoa(infoStr);
+        this.boardApi.putImageResource(`https://api.qrserver.com/v1/create-qr-code/?data=${scanCodeDomainUrl}?info=${rangText}&size=200x200`, {
           x: 200, y: 100, width: 200, height: 200
         });
-        break;
+        break
       case CabinetItemEnum.Whiteboard:
         if (this.isWhiteboardOpening) {
           this.shareUIStore.addConfirmDialog(
