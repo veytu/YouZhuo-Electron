@@ -23,6 +23,7 @@ export const ClassWelcome = observer(() => {
   const webRTCCodec = 'vp8';
   //@ts-ignore
   sessionStorage.setItem('scanCodeDomainUrl','https://aws.aliyu.info/youzhuoUploadFile/')
+  sessionStorage.setItem('scanCodeDomainUrlTimeRangSenond',"60")//扫码二维码有效时间，单位秒
   const handleEnter = () => {
     const config = {
       platform: checkBrowserDevice(),

@@ -6,6 +6,7 @@ import { action, computed, IReactionDisposer, Lambda, observable, runInAction } 
 import { EduUIStoreBase } from '../base';
 import { conversionOption, extractFileExt, fileExt2ContentType } from '../cloud-drive/helper';
 import { transI18n } from 'agora-common-libs';
+import { fetchNetlessImageByUrl } from '@classroom/infra/utils/board-utils';
 
 export class BoardUIStore extends EduUIStoreBase {
   protected _disposers: (IReactionDisposer | Lambda)[] = [];
@@ -82,11 +83,20 @@ export class BoardUIStore extends EduUIStoreBase {
   private _onReceiveChannelMessage(message: AgoraRteCustomMessage) {
   }
   @bound
-  private _onReceivePeerMessage(message: AgoraRteCustomMessage) {
+  private async _onReceivePeerMessage(message: AgoraRteCustomMessage) {
     if ("Photo upload" === message.payload.cmd && message.payload.data.filePath && EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher) {
       const view = document.getElementsByClassName("widget-slot-board")
       if (view && view.length == 1) {
-        this.boardApi.putImageResource(message.payload.data.filePath, { x: view[0].clientWidth / 2, y: view[0].clientHeight / 2, width: view[0].clientWidth * 0.5, height: view[0].clientHeight * 0.5 })
+        const size = await fetchNetlessImageByUrl(message.payload.data.filePath)
+        // 计算宽高比例
+        const widthRatio = view[0].clientWidth / size.width;
+        const heightRatio = view[0].clientHeight / size.height;
+        // 选择较小的比例来保证图片不会超出容器的宽高
+        const scaleRatio = Math.min(widthRatio, heightRatio);
+        // 计算缩放后的图片宽高
+        const newWidth = size.width * scaleRatio;
+        const newHeight = size.height * scaleRatio;
+        this.boardApi.putImageResource(message.payload.data.filePath, { x: view[0].clientWidth / 2, y: view[0].clientHeight / 2, width: newWidth, height: newHeight })
       }
     }
   }

@@ -37,7 +37,7 @@ export const StreamPlayerToolbar: FC<{
         }}
         overlayClassName="video-player-tools-popover"
         content={
-          <div
+          <div style={{ marginTop: '-2px',pointerEvents:'none',zIndex:101 }}
             onDoubleClick={(e) => {
               e.stopPropagation();
             }}>

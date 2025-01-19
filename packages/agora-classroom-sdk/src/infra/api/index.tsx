@@ -88,6 +88,24 @@ export class AgoraEduSDK {
   }
   private static _convertMediaOptions(opts?: LaunchMediaOptions): ConvertMediaOptionsConfig {
     const config: ConvertMediaOptionsConfig = {};
+    config.defaultCameraEncoderConfigurations = {
+      width: 1280,
+      height: 720,
+      frameRate: 30,
+      bitrate: 1600,
+    };
+    config.defaultLowStreamCameraEncoderConfigurations = {
+      width: 640,
+      height: 360,
+      frameRate: 15,
+      bitrate: 600,
+    }
+    config.defaultScreenEncoderConfigurations = {
+      width: 1920,
+      height: 1080,
+      frameRate: 30,
+      bitrate: 500,
+    }
     if (opts) {
       const {
         cameraEncoderConfiguration,
@@ -97,6 +115,7 @@ export class AgoraEduSDK {
         channelProfile,
         web,
       } = opts;
+
       if (cameraEncoderConfiguration) {
         config.defaultCameraEncoderConfigurations = {
           ...cameraEncoderConfiguration,
