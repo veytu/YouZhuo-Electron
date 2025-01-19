@@ -166,7 +166,7 @@ export const Whiteboard = observer(function Board() {
     >
       {/* Top resize handle */}
       <div className="top-resize-handle"
-        style={EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher ? {...hoverStyle,position:'absolute',zIndex:9999} : { display: 'none' }}
+        style={EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher ? {...hoverStyle,position:'absolute',zIndex:99} : { display: 'none' }}
         onMouseEnter={() => { if (EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher) setIsHovered(true) }}  // 进入时修改 hover 状态
         onMouseLeave={() => { if (EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.teacher) setIsHovered(false) }} // 离开时修改 hover 状态
       ></div>
