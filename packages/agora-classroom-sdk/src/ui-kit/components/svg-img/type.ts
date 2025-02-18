@@ -47,6 +47,8 @@ export enum SvgIconEnum {
   HAND = 'hand',
   HANDS_UP = 'hands-up',
   HANDS_UP_ACTIVE = 'hands-up-active',
+  OPEN_EXTEND_SCREEN_GRID = 'open-extend-screen-grid',
+  OPEN_EXTEND_SCREEN_GRID_ACTIVE = 'open-extend-screen-grid-active',
   ID = 'id',
   IMAGE = 'image',
   INVITE_ON_PODIUM = 'invite-on-podium',

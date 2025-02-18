@@ -38,7 +38,7 @@ const classtalkDomain = ({ isDevc }: { isDevc: boolean }) => {
 };
 
 export interface EduNavAction<P = undefined> {
-  id: 'Record' | 'AskForHelp' | 'Settings' | 'Exit' | 'Camera' | 'Mic' | 'Share' | 'HandUp' | 'Chat';
+  id: 'Record' | 'AskForHelp' | 'Settings' | 'Exit' | 'Camera' | 'Mic' | 'Share' | 'HandUp' | 'Chat' | 'OpenExtendScreenGrid';
   title: string;
   iconType: SvgIconEnum;
   iconColor?: string;
@@ -237,6 +237,12 @@ export class NavigationBarUIStore extends EduUIStoreBase {
       },
     ];
     if(EduRoomTypeEnum.RoomSmallClass === EduClassroomConfig.shared.sessionInfo.roomType){
+      teacherActions.push({id: 'OpenExtendScreenGrid',title: '',
+        iconType: this.openExtendScreenGrid ? SvgIconEnum.OPEN_EXTEND_SCREEN_GRID_ACTIVE : SvgIconEnum.OPEN_EXTEND_SCREEN_GRID,
+        onClick:()=> {
+          this.classroomStore.roomStore.updateFlexProperties({ openExtendScreenGrid: !this.openExtendScreenGrid }, {type:'changeOpenExtendScreenGrid'})
+        },
+      })
       teacherActions.push({id: 'HandUp',title: '',iconType: SvgIconEnum.HANDS_UP})
       // teacherActions.push( {id: 'Chat',title: '',iconType: SvgIconEnum.CHAT})
     }
@@ -417,6 +423,12 @@ export class NavigationBarUIStore extends EduUIStoreBase {
       this.teacherGroupUuid &&
       this.teacherGroupUuid === this.classroomStore.groupStore.currentSubRoom
     );
+  }
+
+  //是否是开启了学生端副屏宫格功能
+  @computed
+  get openExtendScreenGrid() {
+    return this.classroomStore.roomStore.flexProps['openExtendScreenGrid']
   }
 
   /**
@@ -868,7 +880,6 @@ export class NavigationBarUIStore extends EduUIStoreBase {
       this.classroomStore.groupStore.removeGroupUsers(currentRoomUuid, [userUuid]);
     }
   }
-
   onDestroy() {
     this._disposers.forEach((d) => d());
     this._disposers = [];
