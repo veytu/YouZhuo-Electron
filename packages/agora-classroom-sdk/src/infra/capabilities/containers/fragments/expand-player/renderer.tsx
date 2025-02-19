@@ -1,5 +1,8 @@
 import { CSSProperties, FC, useContext, useEffect, useRef } from 'react';
 import { RtcEngineContext } from './context';
+import { CameraPlaceholderType } from '@classroom/infra/stores/common/stream/struct';
+import { CameraPlaceHolder } from '@classroom/ui-kit';
+import { AgoraRteMediaPublishState, AgoraRteMediaSourceState } from 'agora-rte-sdk';
 /**
  *
  */
@@ -57,7 +60,22 @@ export const VideoRenderer: FC<{ uid: number; isLocal: boolean; isMirrorMode: bo
 }) => {
   return (
     <div className="fcr-w-full fcr-h-full fcr-relative">
-      {isLocal ? <LocalRenderer isMirrorMode={isMirrorMode} /> : <RemoteRenderer uid={uid} streamType={streamType}/>}
+      { isLocal ? <LocalRenderer isMirrorMode={isMirrorMode} /> : <RemoteRenderer uid={uid} streamType={streamType} />}
+    </div>
+  );
+};
+export const TeacherVideoRenderer: FC<{ uid: number; isLocal: boolean; isMirrorMode: boolean,streamType?:number,videoSourceState?:AgoraRteMediaSourceState }> = ({
+  uid,
+  isLocal,
+  isMirrorMode,
+  streamType,
+  videoSourceState,
+}) => {
+  const isOpenCamera = AgoraRteMediaSourceState.starting === videoSourceState || AgoraRteMediaSourceState.started === videoSourceState
+  return (
+    <div className="fcr-w-full fcr-h-full fcr-relative">
+      {isOpenCamera ? isLocal ? <LocalRenderer isMirrorMode={isMirrorMode} /> : <RemoteRenderer uid={uid} streamType={streamType} /> : <></>}
+      {!isOpenCamera && <CameraPlaceHolder style={{ position: 'absolute', top: 0 }} state={CameraPlaceholderType.notpresent} />}
     </div>
   );
 };

@@ -12,6 +12,7 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
   private _disposers: (() => void)[] = [];
   @observable
   private _isPlayerOpened = false;
+  private _openExtendScreenGrid = false;//是否开启宫格显示
   private _transmitUids: Set<number> = new Set();
   private showPageListInfo = {
     currentPage:0,//当前页
@@ -53,7 +54,15 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
       type: 'teacherStreamUpdated',
       payload: {
         streamUuid: stream?.streamUuid,
+        videoState: stream?.videoState,
         isLocal: stream?.isLocal,
+        isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
+      },
+    });
+    sendToRendererProcess(WindowID.ExpandPlayer, ChannelType.Message, {
+      type: 'teacherStreamUpdatedOrigin',
+      payload: {
+        ...stream,
         isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
       },
     });
@@ -62,67 +71,82 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
     //所有的数据列表
     const allStreamList = []
     //添加老师
-    if(this.getters.teacherCameraStream){
+    if (this.getters.teacherCameraStream) {
       allStreamList.push(this.getters.teacherCameraStream)
     }
-    //添加自己，如果学生里面有自己的话
-    const mySelftList = this.getters.studentCameraStreams.filter(item => item.isLocal)
-    if (mySelftList && mySelftList.length > 0) {
-      allStreamList.push(mySelftList[0])
-    }
-    //添加其他的人
-    const otherList = this.getters.studentCameraStreams.filter(item => !item.isLocal)
-    if (otherList && otherList.length > 0) {
-      allStreamList.push(...otherList)
-    }
-    //最大数量设置
-    // eslint-disable-next-line prefer-const
-    let { maxShowGridCount, currentPage, columns, rows,haveNext } = this.showPageListInfo;
-    //@ts-ignore
-    maxShowGridCount = Number(sessionStorage.getItem('maxGridCount'))
-    //根据最大数量做行列处理
-    if(currentPage === 0){
-      //当前数量
-      const allListSize = allStreamList.length;
-      //未达到最大数量做行列最大处理
-      if (columns * rows < maxShowGridCount) {
-        if (maxShowGridCount === 4) {
-          rows = 2;
-          columns = 2;
-        } else if (maxShowGridCount === 6) {
-          rows = 2;
-          columns = 3;
-        } else if (maxShowGridCount === 9) {
-          rows = 3;
-          columns = 3;
+    if (this._openExtendScreenGrid) {
+      //添加自己，如果学生里面有自己的话
+      const mySelftList = this.getters.studentCameraStreams.filter(item => item.isLocal)
+      if (mySelftList && mySelftList.length > 0) {
+        allStreamList.push(mySelftList[0])
+      }
+      //添加其他的人
+      const otherList = this.getters.studentCameraStreams.filter(item => !item.isLocal)
+      if (otherList && otherList.length > 0) {
+        allStreamList.push(...otherList)
+      }
+      //最大数量设置
+      // eslint-disable-next-line prefer-const
+      let { maxShowGridCount, currentPage, columns, rows, haveNext } = this.showPageListInfo;
+      //@ts-ignore
+      maxShowGridCount = Number(sessionStorage.getItem('maxGridCount'))
+      //根据最大数量做行列处理
+      if (currentPage === 0) {
+        //当前数量
+        const allListSize = allStreamList.length;
+        //未达到最大数量做行列最大处理
+        if (columns * rows < maxShowGridCount) {
+          if (maxShowGridCount === 4) {
+            rows = 2;
+            columns = 2;
+          } else if (maxShowGridCount === 6) {
+            rows = 2;
+            columns = 3;
+          } else if (maxShowGridCount === 9) {
+            rows = 3;
+            columns = 3;
+          }
+        }
+        if (allListSize < maxShowGridCount) {
+          if (allListSize <= 4) {
+            rows = 2;
+            columns = 2;
+          } else if (allListSize <= 6) {
+            rows = 2;
+            columns = 3;
+          } else {
+            rows = 3;
+            columns = 3;
+          }
         }
       }
-      if (allListSize < maxShowGridCount) {
-        if (allListSize <= 4) {
-          rows = 2;
-          columns = 2;
-        } else if (allListSize <= 6) {
-          rows = 2;
-          columns = 3;
-        } else {
-          rows = 3;
-          columns = 3;
-        }
+      if ((currentPage - 1) * columns * rows > allStreamList.length) {
+        currentPage = currentPage - 1;
       }
-    }
-    if((currentPage - 1) * columns * rows > allStreamList.length){
-      currentPage = currentPage - 1;
-    }
-    const currentList = allStreamList.slice(currentPage * columns * rows, Math.min((currentPage + 1) * columns * rows, allStreamList.length))
-    haveNext = currentPage * columns * rows >= allStreamList.length;
+      const currentList = allStreamList.slice(currentPage * columns * rows, Math.min((currentPage + 1) * columns * rows, allStreamList.length))
+      haveNext = currentPage * columns * rows >= allStreamList.length;
+      this.showPageListInfo = {
+        ...this.showPageListInfo, maxShowGridCount, currentPage, columns, rows, haveNext, showList: currentList.map(stream => {
+          return {
+            streamUuid: stream?.streamUuid,
+            role: stream?.fromUser?.role,
+            isLocal: stream?.isLocal,
+            isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
+          }
+        })
+      }
+    }else{
+
     this.showPageListInfo = {
-      ...this.showPageListInfo, maxShowGridCount, currentPage, columns, rows, haveNext, showList: currentList.map(stream => {
+      ...this.showPageListInfo, currentPage: 0, columns: 1, rows: 1, haveNext: false, showList: allStreamList.map(stream => {
         return {
           streamUuid: stream?.streamUuid,
+          role: stream?.fromUser?.role,
           isLocal: stream?.isLocal,
           isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
         }
       })
+    }
     }
 
     sendToRendererProcess(WindowID.ExpandPlayer, ChannelType.Message, {
@@ -209,6 +233,24 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
             });
             this._updatePlayerInfo();
             this._updateAllShowPlayerInfo();
+          },
+        ),
+      );
+      this._disposers.push(
+        reaction(
+          () => [this.getters.classroomUIStore.classroomStore.roomStore.flexProps],
+          () => {
+            const data = this.getters.classroomUIStore.classroomStore.roomStore.flexProps
+            const currentOpenState = data.openExtendScreenGrid || false
+            if(currentOpenState !== this._openExtendScreenGrid){
+              this._openExtendScreenGrid = currentOpenState;
+              sendToRendererProcess(WindowID.ExpandPlayer, ChannelType.Message, {
+                type: 'openExtendScreenGrid',
+                payload: currentOpenState
+              });
+              this._updatePlayerInfo();
+              this._updateAllShowPlayerInfo();
+            }
           },
         ),
       );
