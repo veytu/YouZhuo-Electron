@@ -135,23 +135,33 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
           }
         })
       }
-    }else{
-
-    this.showPageListInfo = {
-      ...this.showPageListInfo, currentPage: 0, columns: 1, rows: 1, haveNext: false, showList: allStreamList.map(stream => {
-        return {
-          streamUuid: stream?.streamUuid,
-          role: stream?.fromUser?.role,
-          isLocal: stream?.isLocal,
-          isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
-        }
-      })
-    }
+    } else {
+      this.showPageListInfo = {
+        ...this.showPageListInfo, currentPage: 0, columns: 1, rows: 1, haveNext: false, showList:[ {
+          streamUuid: this.getters.teacherCameraStream?.streamUuid,
+          role: this.getters.teacherCameraStream?.fromUser?.role,
+          isLocal: this.getters.teacherCameraStream?.isLocal,
+          isMirrorMode: this.getters.teacherCameraStream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
+        }]
+      }
     }
 
     sendToRendererProcess(WindowID.ExpandPlayer, ChannelType.Message, {
       type: 'allStreamUpdated',
       payload: JSON.stringify(this.showPageListInfo)
+    });
+    this._transmitUids.clear()
+    this.showPageListInfo.showList.forEach(stream => {
+      if (stream) {
+        //@ts-ignore
+        if (stream?.isLocal) {
+          this._transmitUids.add(0);
+          //@ts-ignore
+        } else if(stream?.streamUuid){
+          //@ts-ignore
+          this._transmitUids.add(+stream.streamUuid);
+        }
+      }
     });
   }
   onInstall() {
