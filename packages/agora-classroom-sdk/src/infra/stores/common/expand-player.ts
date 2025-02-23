@@ -5,7 +5,7 @@ import {
   transmitRTCRawData,
 } from '@classroom/infra/utils/ipc';
 import { ChannelType, IPCMessageType } from '@classroom/infra/utils/ipc-channels';
-import { EduRteEngineConfig, EduRteRuntimePlatform } from 'agora-edu-core';
+import { EduRteEngineConfig, EduRteRuntimePlatform, EduStream } from 'agora-edu-core';
 import { action, observable, reaction } from 'mobx';
 import { EduUIStoreBase } from './base';
 export class ExpandPlayerUIStore extends EduUIStoreBase {
@@ -14,11 +14,18 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
   private _isPlayerOpened = false;
   private _openExtendScreenGrid = false;//是否开启宫格显示
   private _transmitUids: Set<number> = new Set();
-  private showPageListInfo = {
+  private showPageListInfo:{
+    currentPage:number,//当前页
+    rows:number,//宫格行数
+    columns:number,//宫格列数
+    showList:any[],//当前显示数据的列表
+    maxShowGridCount:number,//最大显示的宫格数量
+    haveNext:boolean,//是否还有下一页
+  } = {
     currentPage:0,//当前页
     rows:2,//宫格行数
     columns:2,//宫格列数
-    showList:[{}],//当前显示数据的列表
+    showList:[],//当前显示数据的列表
     maxShowGridCount:4,//最大显示的宫格数量
     haveNext:false,//是否还有下一页
   };//当前页
@@ -69,7 +76,7 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
   }
   private _updateAllShowPlayerInfo() {
     //所有的数据列表
-    const allStreamList = []
+    const allStreamList:EduStream[] = []
     //添加老师
     if (this.getters.teacherCameraStream) {
       allStreamList.push(this.getters.teacherCameraStream)
@@ -125,22 +132,16 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
       }
       const currentList = allStreamList.slice(currentPage * columns * rows, Math.min((currentPage + 1) * columns * rows, allStreamList.length))
       haveNext = currentPage * columns * rows >= allStreamList.length;
-      this.showPageListInfo = {
-        ...this.showPageListInfo, maxShowGridCount, currentPage, columns, rows, haveNext, showList: currentList.map(stream => {
-          return {
-            streamUuid: stream?.streamUuid,
-            role: stream?.fromUser?.role,
-            isLocal: stream?.isLocal,
-            isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
-          }
-        })
-      }
+      this.showPageListInfo = {...this.showPageListInfo, maxShowGridCount, currentPage, columns, rows, haveNext, showList: currentList.map(stream=>{
+        return {
+          ...stream,
+          isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
+        }
+      })}
     } else {
       this.showPageListInfo = {
-        ...this.showPageListInfo, currentPage: 0, columns: 1, rows: 1, haveNext: false, showList:[ {
-          streamUuid: this.getters.teacherCameraStream?.streamUuid,
-          role: this.getters.teacherCameraStream?.fromUser?.role,
-          isLocal: this.getters.teacherCameraStream?.isLocal,
+        ...this.showPageListInfo, currentPage: 0, columns: 1, rows: 1, haveNext: false, showList: [{
+          ...this.getters.teacherCameraStream,
           isMirrorMode: this.getters.teacherCameraStream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
         }]
       }
@@ -216,7 +217,7 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
             this._updateAllShowPlayerInfo();
           }
           if (message.type === IPCMessageType.BrowserWindowClose) {
-            const { payload } = message as { payload: any };
+            const { payload } = message as { payload: unknown };
             if (payload === WindowID.ExpandPlayer) {
               this.closeWindow();
             }
@@ -227,20 +228,6 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
         reaction(
           () => [this.getters.teacherCameraStream,this.getters.studentCameraStreams],
           () => {
-            this._transmitUids.clear()
-            this._updateAllShowPlayerInfo()
-            this.showPageListInfo.showList.forEach(stream => {
-              if (stream) {
-                //@ts-ignore
-                if (stream?.isLocal) {
-                  this._transmitUids.add(0);
-                  //@ts-ignore
-                } else if(stream?.streamUuid){
-                  //@ts-ignore
-                  this._transmitUids.add(+stream.streamUuid);
-                }
-              }
-            });
             this._updatePlayerInfo();
             this._updateAllShowPlayerInfo();
           },

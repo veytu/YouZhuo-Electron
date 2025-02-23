@@ -3,6 +3,7 @@ import { RtcEngineContext } from './context';
 import { CameraPlaceholderType } from '@classroom/infra/stores/common/stream/struct';
 import { CameraPlaceHolder } from '@classroom/ui-kit';
 import { AgoraRteMediaPublishState, AgoraRteMediaSourceState } from 'agora-rte-sdk';
+import { ShowInfo } from '.';
 /**
  *
  */
@@ -52,30 +53,12 @@ export const RemoteRenderer: FC<{ uid: number; className?: string,streamType?:nu
     />
   );
 };
-export const VideoRenderer: FC<{ uid: number; isLocal: boolean; isMirrorMode: boolean,streamType?:number }> = ({
-  uid,
-  isLocal,
-  isMirrorMode,
-  streamType,
-}) => {
+export const VideoRenderer: FC<{ info: ShowInfo, streamType: number }> = ({ info, streamType }) => {
+  const isCameraMuted = AgoraRteMediaSourceState.started !== info?.videoSourceState  || AgoraRteMediaPublishState.Unpublished === info?.videoState
   return (
     <div className="fcr-w-full fcr-h-full fcr-relative">
-      { isLocal ? <LocalRenderer isMirrorMode={isMirrorMode} /> : <RemoteRenderer uid={uid} streamType={streamType} />}
-    </div>
-  );
-};
-export const TeacherVideoRenderer: FC<{ uid: number; isLocal: boolean; isMirrorMode: boolean,streamType?:number,videoSourceState?:AgoraRteMediaSourceState }> = ({
-  uid,
-  isLocal,
-  isMirrorMode,
-  streamType,
-  videoSourceState,
-}) => {
-  const isOpenCamera = AgoraRteMediaSourceState.starting === videoSourceState || AgoraRteMediaSourceState.started === videoSourceState
-  return (
-    <div className="fcr-w-full fcr-h-full fcr-relative">
-      {isOpenCamera ? isLocal ? <LocalRenderer isMirrorMode={isMirrorMode} /> : <RemoteRenderer uid={uid} streamType={streamType} /> : <></>}
-      {!isOpenCamera && <CameraPlaceHolder style={{ position: 'absolute', top: 0 }} state={CameraPlaceholderType.notpresent} />}
+      {!isCameraMuted ? info.isLocal ? <LocalRenderer isMirrorMode={info.isMirrorMode} /> : <RemoteRenderer uid={+(info?.streamUuid || 0)} streamType={streamType} /> : <></>}
+      {isCameraMuted && <CameraPlaceHolder style={{ position: 'absolute', top: 0 }} state={CameraPlaceholderType.muted} />}
     </div>
   );
 };
