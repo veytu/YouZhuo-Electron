@@ -44,7 +44,7 @@ export const RemoteRenderer: FC<{ uid: number; className?: string,streamType?:nu
         rtcEngine.destroyRender(uid, '');
       }
     };
-  }, [context.rtcEngine]);
+  }, [context.rtcEngine,uid]);
   return (
     <div
       className={className}
