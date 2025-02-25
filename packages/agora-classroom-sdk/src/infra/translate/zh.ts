@@ -392,6 +392,8 @@ export const zh = {
     start_record: '开启录制',
     stop_record: '停止录制',
     record_starting: '录制正在准备，请稍后',
+    showGridOpen: '宫格视图',
+    showGridClose: '主讲人视图',
   },
   message: '消息',
   quiz: '提问',

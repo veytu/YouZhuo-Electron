@@ -404,6 +404,8 @@ export const en = {
     start_record: 'Start Recording',
     stop_record: 'Stop Recording',
     record_starting: 'Recording is preparing, please wait',
+    showGridOpen: 'Grid View',
+    showGridClose: 'Master View',
   },
   nav: {
     delay: 'Delay: ',

@@ -11,7 +11,7 @@ export const WaveArmManagerContainer = observer(() => {
   const { handUpUIStore } = useStore();
   const { waveArmCount, hasWaveArmUser } = handUpUIStore;
   return (
-    <WaveArmManager hasWaveArmUser={hasWaveArmUser} waveArmCount={waveArmCount}>
+    <WaveArmManager hasWaveArmUser={hasWaveArmUser} waveArmCount={waveArmCount} width={0} height={0}>
       <WaveArmListContainer />
     </WaveArmManager>
   );

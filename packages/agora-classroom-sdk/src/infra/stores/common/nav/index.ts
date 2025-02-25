@@ -237,13 +237,14 @@ export class NavigationBarUIStore extends EduUIStoreBase {
       },
     ];
     if(EduRoomTypeEnum.RoomSmallClass === EduClassroomConfig.shared.sessionInfo.roomType){
-      teacherActions.push({id: 'OpenExtendScreenGrid',title: '',
+      teacherActions.push({id: 'OpenExtendScreenGrid',
+        title: this.openExtendScreenGrid ? transI18n('biz-header.showGridClose') : transI18n('biz-header.showGridOpen'),
         iconType: this.openExtendScreenGrid ? SvgIconEnum.OPEN_EXTEND_SCREEN_GRID_ACTIVE : SvgIconEnum.OPEN_EXTEND_SCREEN_GRID,
         onClick:()=> {
           this.classroomStore.roomStore.updateFlexProperties({ openExtendScreenGrid: !this.openExtendScreenGrid }, {type:'changeOpenExtendScreenGrid'})
         },
       })
-      teacherActions.push({id: 'HandUp',title: '',iconType: SvgIconEnum.HANDS_UP})
+      teacherActions.push({id: 'HandUp',title: transI18n('biz-header.handUp'),iconType: SvgIconEnum.HANDS_UP})
       // teacherActions.push( {id: 'Chat',title: '',iconType: SvgIconEnum.CHAT})
     }
 
@@ -399,7 +400,9 @@ export class NavigationBarUIStore extends EduUIStoreBase {
       }
       if(EduRoomTypeEnum.RoomSmallClass === EduClassroomConfig.shared.sessionInfo.roomType){
         // actions.unshift({id: 'Chat',title: '',iconType: SvgIconEnum.CHAT})
-        actions.unshift({id: 'HandUp',title: '',iconType: SvgIconEnum.HANDS_UP})
+        actions.unshift({id: 'HandUp',
+          title: transI18n('biz-header.handUp'),
+          iconType: SvgIconEnum.HANDS_UP})
       }
       if (isRecording)
         actions.unshift({
