@@ -54,9 +54,6 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
   };
   private _updatePlayerInfo() {
     const stream = this.getters.teacherCameraStream;
-    if(stream){
-      console.log(`alex-extend-update-${JSON.stringify(stream)}- isLocal - ${stream.isLocal}`);
-    }
     sendToRendererProcess(WindowID.ExpandPlayer, ChannelType.Message, {
       type: 'teacherStreamUpdated',
       payload: {
@@ -70,6 +67,7 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
       type: 'teacherStreamUpdatedOrigin',
       payload: {
         ...stream,
+        isLocal:stream?.isLocal,
         isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
       },
     });
@@ -135,6 +133,7 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
       this.showPageListInfo = {...this.showPageListInfo, maxShowGridCount, currentPage, columns, rows, haveNext, showList: currentList.map(stream=>{
         return {
           ...stream,
+          isLocal:stream?.isLocal,
           isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
         }
       })}
@@ -142,6 +141,7 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
       this.showPageListInfo = {
         ...this.showPageListInfo, currentPage: 0, columns: 1, rows: 1, haveNext: false, showList: [{
           ...this.getters.teacherCameraStream,
+          isLocal:this.getters.teacherCameraStream?.isLocal,
           isMirrorMode: this.getters.teacherCameraStream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
         }]
       }
@@ -228,6 +228,20 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
         reaction(
           () => [this.getters.teacherCameraStream,this.getters.studentCameraStreams],
           () => {
+            this._transmitUids.clear()
+            this._updateAllShowPlayerInfo()
+            this.showPageListInfo.showList.forEach(stream => {
+              if (stream) {
+                //@ts-ignore
+                if (stream?.isLocal) {
+                  this._transmitUids.add(0);
+                  //@ts-ignore
+                } else if(stream?.streamUuid){
+                  //@ts-ignore
+                  this._transmitUids.add(+stream.streamUuid);
+                }
+              }
+            });
             this._updatePlayerInfo();
             this._updateAllShowPlayerInfo();
           },

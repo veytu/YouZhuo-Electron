@@ -50,14 +50,9 @@ export const TeacherStream = visibilityControl(
       height:'100%'
     };
 
-    if (teacherCameraStream && checkScreen()) {
+    if (checkScreen()) {
       const { expandPlayerUIStore } = useStore();
       expandPlayerUIStore.openWindow();
-      console.log(
-        `alex-origin-teacher-stream-${JSON.stringify(teacherCameraStream.stream)}-isLocal-${
-          teacherCameraStream.stream.isLocal
-        }`,
-      );
     }
 
     const playerStyle = {
