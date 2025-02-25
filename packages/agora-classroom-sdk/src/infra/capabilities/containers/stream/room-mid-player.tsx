@@ -18,7 +18,13 @@ const checkScreen = () => {
 
 export const RoomMidStreamsContainer = observer(() => {
   const { streamUIStore } = useInteractiveUIStores() as EduInteractiveUIClassStore;
-  const { stageVisible } = streamUIStore;
+  const { stageVisible,teacherCameraStream,studentCameraStreams } = streamUIStore;
+
+  if ((teacherCameraStream || studentCameraStreams.length > 0) && checkScreen()) {
+    const { expandPlayerUIStore } = useStore();
+    expandPlayerUIStore.openWindow();
+  }
+
   return (
     <div
       id="stage-container"
@@ -49,11 +55,6 @@ export const TeacherStream = visibilityControl(
       width:'100%',
       height:'100%'
     };
-
-    if (checkScreen()) {
-      const { expandPlayerUIStore } = useStore();
-      expandPlayerUIStore.openWindow();
-    }
 
     const playerStyle = {
       width: videoStreamSize.width,

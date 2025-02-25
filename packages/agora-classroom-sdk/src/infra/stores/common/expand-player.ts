@@ -59,7 +59,7 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
       payload: {
         streamUuid: stream?.streamUuid,
         videoState: stream?.videoState,
-        isLocal: stream?.isLocal,
+        isLocal: this.classroomStore.streamStore.localCameraStreamUuid === stream?.streamUuid,
         isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
       },
     });
@@ -67,7 +67,7 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
       type: 'teacherStreamUpdatedOrigin',
       payload: {
         ...stream,
-        isLocal:stream?.isLocal,
+        isLocal: this.classroomStore.streamStore.localCameraStreamUuid === stream?.streamUuid,
         isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
       },
     });
@@ -131,18 +131,20 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
       const currentList = allStreamList.slice(currentPage * columns * rows, Math.min((currentPage + 1) * columns * rows, allStreamList.length))
       haveNext = currentPage * columns * rows >= allStreamList.length;
       this.showPageListInfo = {...this.showPageListInfo, maxShowGridCount, currentPage, columns, rows, haveNext, showList: currentList.map(stream=>{
+        const isLocal = this.classroomStore.streamStore.localCameraStreamUuid === stream?.streamUuid
         return {
           ...stream,
-          isLocal:stream?.isLocal,
-          isMirrorMode: stream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
+          isLocal:isLocal,
+          isMirrorMode: isLocal ? this.classroomStore.mediaStore.isMirror : false,
         }
       })}
     } else {
+      const isLocal = this.classroomStore.streamStore.localCameraStreamUuid === this.getters.teacherCameraStream?.streamUuid
       this.showPageListInfo = {
         ...this.showPageListInfo, currentPage: 0, columns: 1, rows: 1, haveNext: false, showList: [{
           ...this.getters.teacherCameraStream,
-          isLocal:this.getters.teacherCameraStream?.isLocal,
-          isMirrorMode: this.getters.teacherCameraStream?.isLocal ? this.classroomStore.mediaStore.isMirror : false,
+          isLocal:isLocal,
+          isMirrorMode: isLocal ? this.classroomStore.mediaStore.isMirror : false,
         }]
       }
     }
