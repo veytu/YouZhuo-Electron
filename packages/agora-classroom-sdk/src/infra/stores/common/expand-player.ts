@@ -95,19 +95,20 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
       let { maxShowGridCount, currentPage, columns, rows, haveNext } = this.showPageListInfo;
       //@ts-ignore
       maxShowGridCount = Number(sessionStorage.getItem('maxGridCount'))
+      // maxShowGridCount = 4
       //根据最大数量做行列处理
       if (currentPage === 0) {
         //当前数量
         const allListSize = allStreamList.length;
         //未达到最大数量做行列最大处理
         if (columns * rows < maxShowGridCount) {
-          if (maxShowGridCount === 4) {
+          if (maxShowGridCount <= 4) {
             rows = 2;
             columns = 2;
-          } else if (maxShowGridCount === 6) {
+          } else if (maxShowGridCount <= 6) {
             rows = 2;
             columns = 3;
-          } else if (maxShowGridCount === 9) {
+          } else {
             rows = 3;
             columns = 3;
           }
@@ -124,12 +125,29 @@ export class ExpandPlayerUIStore extends EduUIStoreBase {
             columns = 3;
           }
         }
+      }else{
+        if (maxShowGridCount <= 4) {
+            rows = 2;
+            columns = 2;
+          } else if (maxShowGridCount <= 6) {
+            rows = 2;
+            columns = 3;
+          } else {
+            rows = 3;
+            columns = 3;
+          }
       }
       if ((currentPage - 1) * columns * rows > allStreamList.length) {
         currentPage = currentPage - 1;
       }
-      const currentList = allStreamList.slice(currentPage * columns * rows, Math.min((currentPage + 1) * columns * rows, allStreamList.length))
-      haveNext = currentPage * columns * rows >= allStreamList.length;
+      let end = (currentPage + 1) * columns * rows;
+      let start = currentPage * columns * rows;
+      if (currentPage > 0 && end > allStreamList.length) {
+        end = allStreamList.length
+        start = end - columns * rows;
+      }
+      const currentList = allStreamList.slice(start, end)
+      haveNext = (currentPage + 1) * columns * rows < allStreamList.length;
       this.showPageListInfo = {...this.showPageListInfo, maxShowGridCount, currentPage, columns, rows, haveNext, showList: currentList.map(stream=>{
         const isLocal = this.classroomStore.streamStore.localCameraStreamUuid === stream?.streamUuid
         return {

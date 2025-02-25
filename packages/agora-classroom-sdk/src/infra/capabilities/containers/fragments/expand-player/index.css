@@ -27,12 +27,18 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  height: 5%;
+  aspect-ratio: 1;
+  background-color: #ecece9;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
 }
 
 .expand-play-go-last-page {
-  left: 0;
+  left: 15px;
 }
 
 .expand-play-go-next-page {
-  right: 0;
+  right: 15px;
 }

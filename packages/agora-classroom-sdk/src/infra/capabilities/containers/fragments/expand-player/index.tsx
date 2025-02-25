@@ -125,11 +125,11 @@ export const ExpandPlayerGrid: FC<Props> = () => {
                 )
               ))}
             </div>
-            <div className='expand-play-go-other-page expand-play-go-last-page' onClick={goLastPage} style={{ display: showPageData.currentPage > 0 ? 'unset' : 'none' }}>
-              <SvgImg type={SvgIconEnum.FCR_LEFT} />
+            <div className='expand-play-go-other-page expand-play-go-last-page' onClick={goLastPage} style={{ display: showPageData.currentPage > 0 ? 'flex' : 'none' }}>
+              <SvgImg type={SvgIconEnum.FCR_LEFT} size={32}/>
             </div>
-            <div className='expand-play-go-other-page expand-play-go-next-page' onClick={goNextPage} style={{ display: showPageData.haveNext ? 'unset' : 'none' }}>
-              <SvgImg type={SvgIconEnum.FCR_RIGHT} />
+            <div className='expand-play-go-other-page expand-play-go-next-page' onClick={goNextPage} style={{ display: showPageData.haveNext ? 'flex' : 'none' }}>
+              <SvgImg type={SvgIconEnum.FCR_RIGHT} size={32}/>
             </div>
           </>
         }
