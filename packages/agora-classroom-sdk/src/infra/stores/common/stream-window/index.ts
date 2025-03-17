@@ -867,19 +867,19 @@ export class StreamWindowUIStore extends EduUIStoreBase {
   @bound
   @Lodash.debounced(300)
   sendWidgetDataToServer(streamUuid?: string) {
-    const { role } = EduClassroomConfig.shared.sessionInfo;
-    if (role === EduRoleTypeEnum.teacher || role === EduRoleTypeEnum.assistant) {
-      const widgetsData = this._encodeWidgetRect();
-      if (streamUuid) {
-        const value = widgetsData.get(streamUuid);
-        this.classroomStore.widgetStore.updateWidgetProperties(`streamWindow-${streamUuid}`, value);
-        return;
-      }
-      widgetsData.forEach((value, streamUuid) => {
-        const widgetUuid = `streamWindow-${streamUuid}`;
-        this.classroomStore.widgetStore.updateWidgetProperties(widgetUuid, value);
-      });
-    }
+    // const { role } = EduClassroomConfig.shared.sessionInfo;
+    // if (role === EduRoleTypeEnum.teacher || role === EduRoleTypeEnum.assistant) {
+    //   const widgetsData = this._encodeWidgetRect();
+    //   if (streamUuid) {
+    //     const value = widgetsData.get(streamUuid);
+    //     this.classroomStore.widgetStore.updateWidgetProperties(`streamWindow-${streamUuid}`, value);
+    //     return;
+    //   }
+    //   widgetsData.forEach((value, streamUuid) => {
+    //     const widgetUuid = `streamWindow-${streamUuid}`;
+    //     this.classroomStore.widgetStore.updateWidgetProperties(widgetUuid, value);
+    //   });
+    // }
   }
 
   /**

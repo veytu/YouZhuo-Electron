@@ -49,15 +49,15 @@ export const MidClassScenario = () => {
               </div>
               {
                 EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.student && !checkScreen() ?
-                  <div style={{ display: 'flex', width: '100%', flexDirection: 'row' }}>
-                    <div style={{ width: '67%', textAlign: 'center' }}>
+                  <div style={{ display: 'flex', width: '100%', flexDirection: 'row',height:'100%',justifyContent:'center',alignItems:'center' }}>
+                    <div style={{ width: '60%', textAlign: 'center' }}>
                       <Whiteboard />
                     </div>
-                    <div style={{ display: EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.student ? 'unset' : 'none', width: '33%', height: '100%', position: 'relative' }}>
-                      {!teacherCameraStream && <div style={{ position: 'absolute', aspectRatio: '317/403', width: '100%', height: '100%' }}>
+                    <div style={{ display: EduClassroomConfig.shared.sessionInfo.role === EduRoleTypeEnum.student ? 'unset' : 'none', width: '40%', height: '100%', position: 'relative' }}>
+                      {!teacherCameraStream && <div style={{ position: 'absolute', width: '100%', height: '100%' }}>
                         <CameraPlaceHolder state={CameraPlaceholderType.disabled} text={''} />
                       </div>}
-                      <TeacherStream aspectRatio='317/403' highTeacherStream={true} />
+                      <TeacherStream aspectRatio='auto' highTeacherStream={true} />
                     </div>
                   </div> : <Whiteboard />
               }

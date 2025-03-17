@@ -4,7 +4,7 @@ import {
   EduStreamUI,
   VideoPlacement,
 } from '@classroom/infra/stores/common/stream/struct';
-import { EduRoleTypeEnum } from 'agora-edu-core';
+import { EduClassroomConfig, EduRoleTypeEnum, RteRole2EduRole } from 'agora-edu-core';
 import classnames from 'classnames';
 import { debounce, head } from 'lodash';
 import { observer } from 'mobx-react';
@@ -206,7 +206,7 @@ export const StreamPlayer: FC<{
   toolbarDisabled?: boolean;
   renderMode?: AGRenderMode;
 }> = observer(({ stream, style, renderAt, toolbarDisabled, renderMode }) => {
-  const { streamWindowUIStore } = useStore();
+  const { streamWindowUIStore,getters } = useStore();
   const { visibleStream } = streamWindowUIStore;
   const hasDetached = visibleStream(stream.stream.streamUuid);
   const isBarPlayer = renderAt === 'Bar';
@@ -227,7 +227,9 @@ export const StreamPlayer: FC<{
   const handleMouseLeave = () => {
     setToolbarVisible(false);
   };
-
+  const localUserIsTeacher = EduRoleTypeEnum.teacher === getters.classroomUIStore.classroomStore.userStore.localUser?.userRole;
+  const roomType = EduClassroomConfig.shared.sessionInfo.roomType;
+  const isTeacherStream = RteRole2EduRole(roomType, stream.fromUser.role) === EduRoleTypeEnum.teacher;
   return (
     <div
       className="fcr-stream-player-container"
@@ -243,6 +245,9 @@ export const StreamPlayer: FC<{
           )}
         </React.Fragment>
       )}
+      {!invisible && localUserIsTeacher && isTeacherStream && <div  className='fcr-stream-player-container-student-show-rang-container' >
+        <div className='fcr-stream-player-container-student-show-rang' />
+      </div>}
       <DragableContainer stream={stream} />
       <MeasuerContainer streamUuid={stream.stream.streamUuid} style={style} />
     </div>

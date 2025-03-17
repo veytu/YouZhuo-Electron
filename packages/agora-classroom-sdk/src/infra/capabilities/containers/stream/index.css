@@ -353,6 +353,21 @@
   height: 100%;
 }
 
+.fcr-stream-player-container-student-show-rang-container {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fcr-stream-player-container-student-show-rang {
+  height: 100%;
+  aspect-ratio: 1;
+  border: 2px dashed yellow;
+}
+
 .fcr-stream-player-container .camera-placeholder {
   @apply fcr-border fcr-border-solid fcr-border-divider;
   border-radius: 4px;
