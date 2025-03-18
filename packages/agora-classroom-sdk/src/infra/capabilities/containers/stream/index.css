@@ -364,7 +364,7 @@
 
 .fcr-stream-player-container-student-show-rang {
   height: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 0.78;
   border: 2px dashed yellow;
 }
 
